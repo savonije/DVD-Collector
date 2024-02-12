@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Add from '../components/Add.vue'
+import Add from '../components/AddTitle.vue'
 </script>
 
 <template>
