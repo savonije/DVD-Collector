@@ -12,6 +12,9 @@ const submitForm = () => {
     .catch(function (error) {
       console.log(error)
     })
+    .finally(() => {
+      title.value = ''
+    })
 }
 </script>
 
