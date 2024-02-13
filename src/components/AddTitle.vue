@@ -5,9 +5,13 @@ import axios from 'axios'
 const title = ref('')
 
 const submitForm = () => {
-  axios.post(import.meta.env.VITE_FIREBASE_URL, {
-    name: title.value
-  })
+  axios
+    .post(import.meta.env.VITE_FIREBASE_URL, {
+      name: title.value
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
 }
 </script>
 
