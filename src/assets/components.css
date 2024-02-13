@@ -1,0 +1,5 @@
+@layer components {
+  .button {
+    @apply bg-blue-800 text-white font-bold py-3 px-6 rounded-sm;
+  }
+}

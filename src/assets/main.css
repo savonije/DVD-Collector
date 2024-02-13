@@ -1,5 +1,16 @@
-@import './base.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'base';
+@import 'components';
+@import 'typography';
+
+html,
+body {
+  @apply overflow-x-clip bg-blue-50 p-6;
+}
+
+.container {
+  @apply mx-auto w-full max-w-[1440px] px-6 lg:px-10;
+}

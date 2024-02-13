@@ -17,10 +17,12 @@ const submitForm = () => {
 </script>
 
 <template>
-  <h1>DVD Database</h1>
-  <form @submit.prevent="submitForm">
-    <label for="name">Name:</label>
-    <input type="text" id="name" v-model="title" />
-    <button type="submit">Submit</button>
-  </form>
+  <div class="shadow p-6 bg-white mb-6">
+    <h2>Add a new DVD</h2>
+    <form @submit.prevent="submitForm">
+      <label for="name" class="block font-bold">Name:</label>
+      <input type="text" id="name" class="px-6 py-3 border" v-model="title" />
+      <button type="submit" class="button">Submit</button>
+    </form>
+  </div>
 </template>
