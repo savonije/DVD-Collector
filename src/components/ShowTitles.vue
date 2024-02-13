@@ -1,25 +1,20 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import MovieCard from './MovieCard.vue'
+import axios from 'axios'
 
 const items = ref([])
 
 const loadTitles = () => {
-  fetch(import.meta.env.VITE_FIREBASE_URL)
-    .then((response) => {
-      if (response.ok) {
-        return response.json()
-      }
-    })
-    .then((data) => {
-      for (const id in data) {
-        items.value.push({
-          id: id,
-          name: data[id].name,
-          rating: data[id].rating
-        })
-      }
-    })
+  axios.get(import.meta.env.VITE_FIREBASE_URL).then((response) => {
+    for (const id in response.data) {
+      items.value.push({
+        id: id,
+        name: response.data[id].name,
+        rating: response.data[id].rating
+      })
+    }
+  })
 }
 
 onMounted(() => {

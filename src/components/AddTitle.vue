@@ -1,17 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import axios from 'axios'
 
 const title = ref('')
 
 const submitForm = () => {
-  fetch(import.meta.env.VITE_FIREBASE_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: title.value
-    })
+  axios.post(import.meta.env.VITE_FIREBASE_URL, {
+    name: title.value
   })
 }
 </script>
