@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import MovieCard from './MovieCard.vue'
 import axios from 'axios'
 
-const items = ref([])
+const items: Ref<Array<T> | undefined> = ref([])
 
 const loadTitles = () => {
   axios.get(import.meta.env.VITE_FIREBASE_URL).then((response) => {
