@@ -6,6 +6,7 @@ import axios from 'axios'
 interface Movie {
   id: string
   name: string
+  rating: number
 }
 
 const items: Ref<Movie[] | undefined> = ref([])
@@ -17,7 +18,8 @@ const loadTitles = () => {
       for (const id in response.data) {
         items.value.push({
           id: id,
-          name: response.data[id].name
+          name: response.data[id].name,
+          rating: response.data[id].rating
         })
       }
     })
@@ -32,5 +34,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <MovieCard v-for="item in items" :key="item.id" :name="item.name" />
+  <MovieCard v-for="item in items" :key="item.id" :name="item.name" :rating="item.rating" />
 </template>
