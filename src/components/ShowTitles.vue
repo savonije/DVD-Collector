@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref, type Ref } from 'vue'
 import MovieCard from './MovieCard.vue'
-import axios from 'axios'
+import { db } from '@/firebase'
+import { collection, onSnapshot } from 'firebase/firestore'
 
 interface Movie {
   id: string
@@ -11,25 +12,18 @@ interface Movie {
 
 const items: Ref<Movie[] | undefined> = ref([])
 
-const loadTitles = () => {
-  axios
-    .get(import.meta.env.VITE_FIREBASE_URL)
-    .then((response) => {
-      for (const id in response.data) {
-        items.value.push({
-          id: id,
-          name: response.data[id].name,
-          rating: response.data[id].rating
-        })
-      }
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
-}
-
 onMounted(() => {
-  loadTitles()
+  onSnapshot(collection(db, 'dvds'), (querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      const dvds = {
+        id: doc.id,
+        name: doc.data().name,
+        rating: doc.data().rating
+      }
+
+      items.value.push(dvds)
+    })
+  })
 })
 </script>
 
