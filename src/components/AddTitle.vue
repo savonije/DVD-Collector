@@ -1,23 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import axios from 'axios'
+import { db } from '@/firebase'
+import { collection, addDoc } from 'firebase/firestore'
 
 const title = ref('')
 const rating = ref(0)
 
 const submitForm = () => {
-  axios
-    .post(import.meta.env.VITE_FIREBASE_URL, {
-      name: title.value,
-      rating: rating.value
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
-    .finally(() => {
-      title.value = ''
-      rating.value = 1
-    })
+  addDoc(collection(db, 'dvds'), {
+    name: title.value,
+    rating: rating.value
+  })
 }
 </script>
 
