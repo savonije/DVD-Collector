@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-defineProps<{
+import DeleteTitle from './DeleteTitle.vue'
+
+const props = defineProps<{
+  id: string
   name: string
   rating: number
 }>()
@@ -8,7 +11,9 @@ defineProps<{
 <template>
   <div class="bg-white shadow mb-3 p-3 flex gap-3">
     <img src="https://placehold.it/100x150" width="100" height="150" />
-    <h4>{{ name }}</h4>
-    <span>{{ rating }}</span>
+    <h4>{{ props.name }}</h4>
+    <span>{{ props.rating }}</span>
+
+    <DeleteTitle :id="props.id" />
   </div>
 </template>

@@ -28,5 +28,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <MovieCard v-for="item in items" :key="item.id" :name="item.name" :rating="item.rating" />
+  <MovieCard
+    v-for="item in items"
+    :key="item.id"
+    :id="item.id"
+    :name="item.name"
+    :rating="item.rating"
+  />
 </template>
