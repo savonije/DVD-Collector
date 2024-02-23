@@ -1,38 +1,13 @@
 <script setup lang="ts">
-import { onMounted, ref, type Ref } from 'vue'
-import MovieCard from './MovieCard.vue'
-import { db } from '@/firebase'
-import { collection, onSnapshot } from 'firebase/firestore'
+import MovieCard from '@/components/MovieCard.vue'
+import { useStoreDVDs } from '@/stores/storeDVDs'
 
-interface Movie {
-  id: string
-  name: string
-  rating: number
-}
-
-const items: Ref<Movie[] | undefined> = ref([])
-
-onMounted(() => {
-  onSnapshot(collection(db, 'dvds'), (querySnapshot) => {
-    let dvdsArray = []
-    querySnapshot.forEach((doc) => {
-      const dvds = {
-        id: doc.id,
-        name: doc.data().name,
-        rating: doc.data().rating
-      }
-
-      dvdsArray.push(dvds)
-    })
-
-    items.value = dvdsArray
-  })
-})
+const items = useStoreDVDs()
 </script>
 
 <template>
   <MovieCard
-    v-for="item in items"
+    v-for="item in items.DVDs"
     :key="item.id"
     :id="item.id"
     :name="item.name"
