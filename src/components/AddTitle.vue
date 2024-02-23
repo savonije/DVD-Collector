@@ -4,13 +4,16 @@ import { db } from '@/firebase'
 import { collection, addDoc } from 'firebase/firestore'
 
 const title = ref('')
-const rating = ref(0)
+const rating = ref(1)
 
 const submitForm = () => {
   addDoc(collection(db, 'dvds'), {
     name: title.value,
     rating: rating.value
   })
+
+  title.value = ''
+  rating.value = 1
 }
 </script>
 
