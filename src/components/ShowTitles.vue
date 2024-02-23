@@ -14,6 +14,7 @@ const items: Ref<Movie[] | undefined> = ref([])
 
 onMounted(() => {
   onSnapshot(collection(db, 'dvds'), (querySnapshot) => {
+    let dvdsArray = []
     querySnapshot.forEach((doc) => {
       const dvds = {
         id: doc.id,
@@ -21,8 +22,10 @@ onMounted(() => {
         rating: doc.data().rating
       }
 
-      items.value.push(dvds)
+      dvdsArray.push(dvds)
     })
+
+    items.value = dvdsArray
   })
 })
 </script>
