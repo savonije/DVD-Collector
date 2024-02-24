@@ -6,7 +6,7 @@ const items = useStoreDVDs()
 </script>
 
 <template>
-  <div v-if="items.DVDs.length > 0">
+  <div v-if="items.DVDs.length > 0" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
     <MovieCard
       v-for="item in items.DVDs"
       :key="item.id"
