@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Add from '../components/AddTitle.vue'
-import Show from '../components/ShowTitles.vue'
+import AddTitle from '@/components/AddTitle.vue'
+import ShowTitles from '@/components/ShowTitles.vue'
 </script>
 
 <template>
   <main class="container">
-    <Add />
-    <Show />
+    <AddTitle />
+    <ShowTitles />
   </main>
 </template>

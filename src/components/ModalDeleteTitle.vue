@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from '@/router'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 const StoreDVD = useStoreDVDs()
 
@@ -15,6 +16,8 @@ const emit = defineEmits(['update:modelValue'])
 
 const deleteTitle = () => {
   StoreDVD.deleteDVD(props.id)
+
+  router.push({ path: '/' })
 }
 
 const closeModal = () => {
