@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { db } from '@/firebase'
-import { collection, addDoc } from 'firebase/firestore'
+import { useStoreDVDs } from '@/stores/storeDVDs'
+
+const StoreDVD = useStoreDVDs()
 
 const title = ref('')
 const rating = ref(1)
 
 const submitForm = () => {
-  addDoc(collection(db, 'dvds'), {
-    name: title.value,
-    rating: rating.value
-  })
+  StoreDVD.addDVD(title.value, rating.value)
 
   title.value = ''
   rating.value = 1
