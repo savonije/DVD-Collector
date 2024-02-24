@@ -15,5 +15,10 @@ const props = defineProps<{
 <template>
   <button type="submit" class="button bg-red" @click="modals.deleteDVD = true">Delete</button>
 
-  <ModalDeleteTitle v-if="modals.deleteDVD" :id="props.id" :name="props.name" />
+  <ModalDeleteTitle
+    v-if="modals.deleteDVD"
+    v-model="modals.deleteDVD"
+    :id="props.id"
+    :name="props.name"
+  />
 </template>

@@ -5,10 +5,20 @@ const StoreDVD = useStoreDVDs()
 const props = defineProps<{
   id: string
   name: string
+  modelValue: {
+    type: Boolean
+    default: false
+  }
 }>()
+
+const emit = defineEmits(['update:modelValue'])
 
 const deleteTitle = () => {
   StoreDVD.deleteDVD(props.id)
+}
+
+const closeModal = () => {
+  emit('update:modelValue', false)
 }
 </script>
 
@@ -20,7 +30,9 @@ const deleteTitle = () => {
       <form>
         <h5>Are you sure you want to delete {{ name }} ?</h5>
         <div class="flex gap-3">
-          <button type="submit" class="button bg-black-300">Cancel</button>
+          <button type="submit" class="button bg-black-300" @click.prevent="closeModal">
+            Cancel
+          </button>
           <button type="submit" class="button bg-red" @click.prevent="deleteTitle">Delete</button>
         </div>
       </form>
