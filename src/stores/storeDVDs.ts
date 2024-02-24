@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { db } from '@/firebase'
-import { addDoc, collection, onSnapshot } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, onSnapshot } from 'firebase/firestore'
 
 const collectionRef = collection(db, 'dvds')
 
@@ -32,6 +32,9 @@ export const useStoreDVDs = defineStore('storeDVDs', {
         name: name,
         rating: parseRating
       })
+    },
+    deleteDVD(id: string) {
+      deleteDoc(doc(collectionRef, id))
     }
   }
 })

@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { db } from '@/firebase'
-import { collection, deleteDoc, doc } from 'firebase/firestore'
+import { useStoreDVDs } from '@/stores/storeDVDs'
+
+const StoreDVD = useStoreDVDs()
 
 const props = defineProps<{
   id: string
 }>()
 
 const submitForm = () => {
-  deleteDoc(doc(collection(db, 'dvds'), props.id))
+  StoreDVD.deleteDVD(props.id)
 }
 </script>
 
