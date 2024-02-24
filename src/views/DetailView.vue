@@ -33,9 +33,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container bg-white shadow p-6">
+  <div class="container !px-0">
     <h1>{{ $route.params.name }}</h1>
-
+  </div>
+  <div class="container bg-white shadow p-6">
     <div class="flex gap-6" v-if="movieDetails">
       <div>
         <figure class="flex-shrink-0" v-if="movieDetails.Poster">
