@@ -3,8 +3,6 @@ import MovieCard from '@/components/MovieCard.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 
 const items = useStoreDVDs()
-
-console.log(items.DVDs)
 </script>
 
 <template>
