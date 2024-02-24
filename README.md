@@ -1,6 +1,9 @@
-# dvds
+# Simple DVD Collection
 
-This template should help get you started developing with Vue 3 in Vite.
+This app is a simple Vue project to maintain a listing of your DVD collection.
+Create a Firebase database and fill all your credentials in the `.env` file.
+
+This app also makes use of [OMDB](https://www.omdbapi.com/) open API for movie details, so you need an API key from them.
 
 ## Recommended IDE Setup
 
