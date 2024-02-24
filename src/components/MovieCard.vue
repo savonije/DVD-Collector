@@ -14,6 +14,8 @@ const getRatingBgColor = (rating: number) => {
     ratingColor.value = 'bg-red'
   } else if (rating < 7) {
     ratingColor.value = 'bg-orange-600'
+  } else if (rating < 8) {
+    ratingColor.value = 'bg-green-500'
   } else {
     ratingColor.value = 'bg-green-600'
   }

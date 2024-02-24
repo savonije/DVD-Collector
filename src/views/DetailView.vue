@@ -45,36 +45,38 @@ onMounted(() => {
       </div>
 
       <div>
-        <div>
+        <div class="mb-1">
           <span class="font-bold">Title: </span>
           <span>{{ movieDetails.Title }}</span>
         </div>
-        <div>
+        <div class="mb-1">
           <span class="font-bold">Year: </span>
           <span>{{ movieDetails.Year }}</span>
         </div>
-        <div>
+        <div class="mb-1">
           <span class="font-bold">Genre: </span>
           <span>{{ movieDetails.Genre }}</span>
         </div>
-        <div>
+        <div class="mb-1">
           <span class="font-bold">Awards: </span>
           <span>{{ movieDetails.Awards }}</span>
         </div>
-        <div>
+        <div class="mb-1">
           <span class="font-bold">Actors: </span>
           <span>{{ movieDetails.Actors }}</span>
         </div>
-        <div>
+        <div class="mb-3">
           <span class="font-bold">Director: </span>
           <span>{{ movieDetails.Director }}</span>
         </div>
-        <div>
+
+        <div class="flex items-center gap-3">
           <div
-            class="h-8 w-8 bg-green-600 flex items-center justify-center text-lg font-bold text-white"
+            class="h-8 w-8 bg-gray-800 flex items-center justify-center text-lg font-bold text-white"
           >
             {{ movieDetails.Metascore }}
           </div>
+          metascore
         </div>
       </div>
     </div>
