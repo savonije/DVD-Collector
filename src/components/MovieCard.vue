@@ -14,6 +14,6 @@ const props = defineProps<{
     <h4>{{ props.name }}</h4>
     <span>{{ props.rating }}</span>
 
-    <DeleteTitle :id="props.id" />
+    <DeleteTitle :id="props.id" :name="props.name" />
   </div>
 </template>
