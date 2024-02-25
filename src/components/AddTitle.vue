@@ -8,7 +8,8 @@ const title = ref('')
 const rating = ref(1)
 
 const submitForm = () => {
-  StoreDVD.addDVD(title.value, rating.value)
+  const parseRating = parseInt(rating.value)
+  StoreDVD.addDVD(title.value, parseRating)
 
   title.value = ''
   rating.value = 1
