@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { db } from '@/firebase'
 import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore'
 
-const collectionRef = collection(db, 'dvds')
+const collectionRef = collection(db, import.meta.env.VITE_FIREBASE_DB_NAME)
 const collectionQuery = query(collectionRef, orderBy('name', 'asc'))
 
 export const useStoreDVDs = defineStore('storeDVDs', {
