@@ -14,7 +14,6 @@ const queryName = name.split(' ').join('+')
 const movieDetails = ref(null)
 
 const getInfo = () => {
-  // Make a request for a user with a given ID
   axios
     .get(`http://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`)
     .then(function (response) {
@@ -23,7 +22,7 @@ const getInfo = () => {
       }
     })
     .catch(function (error) {
-      console.log(error)
+      console.error(error)
     })
 }
 
@@ -39,7 +38,7 @@ onMounted(() => {
   <div class="container bg-white shadow p-6">
     <div class="flex gap-6" v-if="movieDetails">
       <div>
-        <figure class="flex-shrink-0" v-if="movieDetails.Poster">
+        <figure class="flex-shrink-0 border-2" v-if="movieDetails.Poster">
           <img :src="movieDetails.Poster" :alt="$route.params.name" width="300" height="441" />
         </figure>
       </div>
@@ -86,7 +85,7 @@ onMounted(() => {
   </div>
   <div class="container !px-0 py-6">
     <div class="flex justify-between">
-      <RouterLink to="/" class="button"> Back to overview </RouterLink>
+      <RouterLink to="/" class="button">Back to overview</RouterLink>
       <DeleteTitle :id="id" :name="name" />
     </div>
   </div>
