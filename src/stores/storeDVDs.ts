@@ -1,27 +1,19 @@
 import { defineStore } from 'pinia'
 import { db } from '@/firebase'
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  limit,
-  onSnapshot,
-  orderBy,
-  query
-} from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore'
 
 const collectionRef = collection(db, 'dvds')
 const collectionQuery = query(collectionRef, orderBy('name', 'asc'))
 
 export const useStoreDVDs = defineStore('storeDVDs', {
   state: () => {
-    return { DVDs: [] }
+    return { DVDs: [], DVDsLoaded: false }
   },
   actions: {
     getDVDs() {
       onSnapshot(collectionQuery, (querySnapshot) => {
-        const dvdsArray = []
+        this.DVDsLoaded = false
+        let dvdsArray = []
         querySnapshot.forEach((doc) => {
           const dvds = {
             id: doc.id,
@@ -33,6 +25,8 @@ export const useStoreDVDs = defineStore('storeDVDs', {
         })
 
         this.DVDs = dvdsArray
+
+        this.DVDsLoaded = true
       })
     },
     addDVD(name: string, rating: number) {
