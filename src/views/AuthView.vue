@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
+import { useStoreAuth } from '@/stores/storeAuth'
+import PageHeader from '@/components/PageHeader.vue'
+
+const storeAuth = useStoreAuth()
 
 const credentials = reactive({
   email: '',
@@ -7,13 +11,16 @@ const credentials = reactive({
 })
 
 const submitForm = () => {
-  if (!credentials.email || credentials.password) {
+  if (!credentials.email || !credentials.password) {
     alert('Please enter a email address and password')
+  } else {
+    storeAuth.loginUser(credentials)
   }
 }
 </script>
 
 <template>
+  <PageHeader />
   <div class="container">
     <div class="bg-white p-6 shadow mx-auto max-w-[500px] rounded">
       <h1>Login</h1>

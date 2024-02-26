@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { useStoreDVDs } from '@/stores/storeDVDs'
+import { useStoreAuth } from '@/stores/storeAuth'
 import { onMounted } from 'vue'
 
-const storeDVDs = useStoreDVDs()
+const storeAuth = useStoreAuth()
 
 onMounted(() => {
-  storeDVDs.getDVDs()
+  storeAuth.init()
 })
 </script>
 
