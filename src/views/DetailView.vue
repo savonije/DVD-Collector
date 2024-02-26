@@ -3,6 +3,7 @@ import DeleteTitle from '@/components/DeleteTitle.vue'
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import PageHeader from '@/components/PageHeader.vue'
 
 const route = useRoute()
 
@@ -32,6 +33,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <PageHeader />
   <div class="container !px-0">
     <h1>{{ $route.params.name }}</h1>
   </div>

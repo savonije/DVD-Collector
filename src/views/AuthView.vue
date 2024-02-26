@@ -29,7 +29,7 @@ const submitForm = () => {
           <label class="block font-bold">Email:</label>
           <input
             type="email"
-            class="shadow border rounded w-full h-12"
+            class="shadow border rounded w-full h-12 p-3"
             v-model="credentials.email"
           />
         </fieldset>
@@ -38,7 +38,7 @@ const submitForm = () => {
           <label class="block font-bold">Password:</label>
           <input
             type="password"
-            class="shadow border rounded w-full h-12"
+            class="shadow border rounded w-full h-12 p-3"
             v-model="credentials.password"
           />
         </fieldset>
