@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import DetailView from '@/views/DetailView.vue'
+import AuthView from '@/views/AuthView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: '/movie/:name/:id',
       name: 'detail',
       component: DetailView
+    },
+    {
+      path: '/login',
+      name: 'auth',
+      component: AuthView
     }
   ]
 })
