@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import ModalDeleteTitle from './ModalDeleteTitle.vue'
+import type { Movie } from '@/types'
 
 const isModalVisibile = ref(false)
 
-const props = defineProps<{
-  id: string
-  name: string
-}>()
+const props = defineProps<Movie>()
 </script>
 
 <template>
@@ -18,5 +16,6 @@ const props = defineProps<{
     v-model="isModalVisibile"
     :id="props.id"
     :name="props.name"
+    :rating="props.rating"
   />
 </template>

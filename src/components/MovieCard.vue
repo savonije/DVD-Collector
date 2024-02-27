@@ -1,11 +1,8 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
+import type { Movie } from '@/types'
 
-const props = defineProps<{
-  id: string
-  name: string
-  rating: number
-}>()
+const props = defineProps<Movie>()
 
 const ratingColor = ref('')
 

@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import router from '@/router'
+import type { Movie } from '@/types'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 const StoreDVD = useStoreDVDs()
 
-const props = defineProps<{
-  id: string
-  name: string
-}>()
+const props = defineProps<Movie>()
 
 const model = defineModel()
 
