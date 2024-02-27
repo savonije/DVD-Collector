@@ -5,14 +5,13 @@ import { useStoreDVDs } from '@/stores/storeDVDs'
 const StoreDVD = useStoreDVDs()
 
 const title = ref('')
-const rating = ref(1)
+const rating = ref('1')
 
 const submitForm = () => {
-  const parseRating = parseInt(rating.value)
-  StoreDVD.addDVD(title.value, parseRating)
+  StoreDVD.addDVD(title.value, +rating.value)
 
   title.value = ''
-  rating.value = 1
+  rating.value = '1'
 }
 </script>
 
@@ -24,16 +23,16 @@ const submitForm = () => {
       <input type="text" id="name" class="px-6 py-3 border" v-model="title" />
       <label for="rating" class="block font-bold">Rating:</label>
       <select id="rating" class="px-6 py-3 border" v-model="rating">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
       </select>
       <button type="submit" class="button">Submit</button>
     </form>

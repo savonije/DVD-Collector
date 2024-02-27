@@ -3,27 +3,29 @@ import { auth } from '@/firebase'
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
 export const useStoreAuth = defineStore('storeAuth', {
-  state: () => {
+  state: (): { user: { id: string; email: string | null } | null } => {
     return {
-      user: {}
+      user: null
     }
   },
   actions: {
     init() {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          this.user.id = user.uid
-          this.user.email = user.email
+          this.user = {
+            id: user.uid,
+            email: user.email
+          }
 
           this.router.push('/')
         } else {
-          this.user = {}
+          this.user = null
 
           this.router.replace('/login')
         }
       })
     },
-    loginUser(credentials) {
+    loginUser(credentials: { email: string; password: string }) {
       signInWithEmailAndPassword(auth, credentials.email, credentials.password)
         .then((userCredential) => {
           const user = userCredential.user
