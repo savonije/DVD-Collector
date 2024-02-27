@@ -3,8 +3,3 @@ export interface Movie {
   name: string
   rating?: number
 }
-
-export interface User {
-  email: string
-  password: string
-}

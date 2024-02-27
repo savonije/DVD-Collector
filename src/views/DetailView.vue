@@ -28,12 +28,12 @@ const movieDetails: Ref<Details | null> = ref(null)
 const getInfo = () => {
   axios
     .get(`http://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`)
-    .then(function (response) {
+    .then((response) => {
       if (response.data.Error === undefined) {
         movieDetails.value = response.data
       }
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.error(error)
     })
 }
