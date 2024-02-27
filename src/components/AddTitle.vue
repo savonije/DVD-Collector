@@ -8,10 +8,12 @@ const title = ref('')
 const rating = ref('1')
 
 const submitForm = () => {
-  StoreDVD.addDVD(title.value, +rating.value)
+  if (title.value !== '') {
+    StoreDVD.addDVD(title.value, +rating.value)
 
-  title.value = ''
-  rating.value = '1'
+    title.value = ''
+    rating.value = '1'
+  }
 }
 </script>
 
