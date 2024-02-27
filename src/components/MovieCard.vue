@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import type { Movie } from '@/types'
+import axios from 'axios'
 
 const props = defineProps<Movie>()
 
@@ -18,16 +19,39 @@ const getRatingBgColor = (rating: number) => {
   }
 }
 
+const poster = ref('')
+
+const queryName = props.name.split(' ').join('+')
+
+const getInfo = () => {
+  axios
+    .get(`http://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`)
+    .then((response) => {
+      if (response.data.Error === undefined) {
+        poster.value = response.data.Poster
+      }
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
+
 onMounted(() => {
   if (props.rating) {
     getRatingBgColor(props.rating)
   }
+
+  getInfo()
 })
 </script>
 
 <template>
-  <RouterLink :to="`/movie/${name}/${id}`" class="movie-card">
-    <h4>{{ props.name }}</h4>
+  <RouterLink
+    :to="`/movie/${name}/${id}`"
+    class="movie-card"
+    :style="`background-image: url('${poster}')`"
+  >
+    <h4 class="text-white z-10">{{ props.name }}</h4>
     <span :class="`rating ${ratingColor}`">
       {{ props.rating }}
     </span>
@@ -36,10 +60,10 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .movie-card {
-  @apply relative bg-white shadow hover:shadow-md transition-shadow mb-3 p-3 flex gap-3 justify-end md:h-[250px] lg:h-[350px] rounded-lg flex-col aspect-3/4 flex-shrink-0;
+  @apply relative bg-white shadow hover:shadow-md transition-shadow mb-3 p-3 flex gap-3 justify-end md:h-[250px] lg:h-[350px] rounded-lg flex-col aspect-3/4 flex-shrink-0 bg-cover;
 
   &:before {
-    @apply absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/5 content-[''] rounded-lg;
+    @apply absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/75 content-[''] rounded-lg to-75% to-white/25;
   }
 
   .rating {
