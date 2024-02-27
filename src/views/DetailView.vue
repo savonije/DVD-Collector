@@ -36,7 +36,7 @@ onMounted(() => {
 <template>
   <PageHeader />
   <div class="container">
-    <h1>{{ name }}</h1>
+    <h1 class="capitalize">{{ name }}</h1>
   </div>
   <div class="container">
     <div class="bg-white shadow p-6">

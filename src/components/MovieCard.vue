@@ -51,7 +51,7 @@ onMounted(() => {
     class="movie-card"
     :style="`background-image: url('${poster}')`"
   >
-    <h4 class="text-white z-10">{{ props.name }}</h4>
+    <h4 class="text-white z-10 capitalize">{{ props.name }}</h4>
     <span :class="`rating ${ratingColor}`">
       {{ props.rating }}
     </span>
