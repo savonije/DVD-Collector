@@ -63,11 +63,11 @@ onMounted(() => {
   @apply relative bg-white shadow hover:shadow-md transition-shadow mb-3 p-3 flex gap-3 justify-end md:h-[250px] lg:h-[350px] rounded-lg flex-col aspect-3/4 flex-shrink-0 bg-cover;
 
   &:before {
-    @apply absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/75 content-[''] rounded-lg to-75% to-white/25;
+    @apply absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/75 content-[''] rounded-lg to-75% to-white/50 hover:to-white/25 transition;
   }
 
   .rating {
-    @apply absolute right-3 top-3 w-7 h-7 text-white font-bold flex items-center justify-center;
+    @apply absolute right-3 top-3 w-9 h-9 text-white font-bold flex items-center justify-center;
   }
 }
 </style>
