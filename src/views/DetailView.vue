@@ -4,26 +4,16 @@ import axios from 'axios'
 import { onMounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 import PageHeader from '@/components/PageHeader.vue'
+import type { MovieDetails } from '@/types'
 
 const route = useRoute()
-
-interface Details {
-  Poster: string
-  Title: string
-  Year: string
-  Genre: string
-  Awards: string
-  Actors: string
-  Director: string
-  Metascore: string
-}
 
 const id = route.params.id as string
 const name = route.params.name as string
 
 const queryName = name.split(' ').join('+')
 
-const movieDetails: Ref<Details | null> = ref(null)
+const movieDetails: Ref<MovieDetails | null> = ref(null)
 
 const getInfo = () => {
   axios

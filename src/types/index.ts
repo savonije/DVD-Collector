@@ -3,3 +3,14 @@ export interface Movie {
   name: string
   rating?: number
 }
+
+export interface MovieDetails {
+  Poster: string
+  Title: string
+  Year: string
+  Genre: string
+  Awards: string
+  Actors: string
+  Director: string
+  Metascore: string
+}
