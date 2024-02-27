@@ -1,7 +1,7 @@
 export interface Movie {
   id: string
   name: string
-  rating: number
+  rating?: number
 }
 
 export interface User {

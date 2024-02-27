@@ -1,18 +1,29 @@
 <script setup lang="ts">
 import DeleteTitle from '@/components/DeleteTitle.vue'
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 import PageHeader from '@/components/PageHeader.vue'
 
 const route = useRoute()
 
-const id = route.params.id
-const name = route.params.name
+interface Details {
+  Poster: string
+  Title: string
+  Year: string
+  Genre: string
+  Awards: string
+  Actors: string
+  Director: string
+  Metascore: string
+}
+
+const id = route.params.id as string
+const name = route.params.name as string
 
 const queryName = name.split(' ').join('+')
 
-const movieDetails = ref(null)
+const movieDetails: Ref<Details | null> = ref(null)
 
 const getInfo = () => {
   axios
@@ -35,14 +46,14 @@ onMounted(() => {
 <template>
   <PageHeader />
   <div class="container">
-    <h1>{{ $route.params.name }}</h1>
+    <h1>{{ name }}</h1>
   </div>
   <div class="container">
     <div class="bg-white shadow p-6">
       <div class="flex gap-6" v-if="movieDetails">
         <div>
           <figure class="flex-shrink-0 border-2" v-if="movieDetails.Poster">
-            <img :src="movieDetails.Poster" :alt="$route.params.name" width="300" height="441" />
+            <img :src="movieDetails.Poster" :alt="name" width="300" height="441" />
           </figure>
         </div>
 
