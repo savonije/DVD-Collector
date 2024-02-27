@@ -6,13 +6,9 @@ const StoreDVD = useStoreDVDs()
 const props = defineProps<{
   id: string
   name: string
-  modelValue: {
-    type: Boolean
-    default: false
-  }
 }>()
 
-const emit = defineEmits(['update:modelValue'])
+const model = defineModel<boolean>()
 
 const deleteTitle = () => {
   StoreDVD.deleteDVD(props.id)
@@ -21,7 +17,8 @@ const deleteTitle = () => {
 }
 
 const closeModal = () => {
-  emit('update:modelValue', false)
+  //   emit('update:modelValue', false)
+  model.value = false
 }
 </script>
 

@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import ModalDeleteTitle from './ModalDeleteTitle.vue'
 
-const modals = reactive({
-  deleteDVD: false
-})
+const isModalVisibile = ref(false)
 
 const props = defineProps<{
   id: string
@@ -13,11 +11,11 @@ const props = defineProps<{
 </script>
 
 <template>
-  <button type="submit" class="button bg-red" @click="modals.deleteDVD = true">Delete</button>
+  <button type="submit" class="button bg-red" @click="isModalVisibile = true">Delete</button>
 
   <ModalDeleteTitle
-    v-if="modals.deleteDVD"
-    v-model="modals.deleteDVD"
+    v-if="isModalVisibile"
+    v-model="isModalVisibile"
     :id="props.id"
     :name="props.name"
   />
