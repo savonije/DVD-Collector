@@ -19,7 +19,9 @@ const getRatingBgColor = (rating: number) => {
 }
 
 onMounted(() => {
-  getRatingBgColor(props.rating)
+  if (props.rating) {
+    getRatingBgColor(props.rating)
+  }
 })
 </script>
 
