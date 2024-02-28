@@ -20,9 +20,9 @@ const submitForm = () => {
 <template>
   <div class="shadow p-6 bg-white mb-6">
     <h2>Add a new DVD</h2>
-    <form @submit.prevent="submitForm" class="flex gap-3 items-center">
+    <form @submit.prevent="submitForm" class="flex flex-wrap gap-3 items-center">
       <label for="name" class="block font-bold">Name:</label>
-      <input type="text" id="name" class="px-6 py-3 border" v-model="title" />
+      <input type="text" id="name" class="px-6 py-3 border min-w-[400px]" v-model="title" />
       <label for="rating" class="block font-bold">Rating:</label>
       <select id="rating" class="px-6 py-3 border" v-model="rating">
         <option value="1">1</option>
