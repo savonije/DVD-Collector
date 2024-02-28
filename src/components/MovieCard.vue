@@ -23,7 +23,7 @@ const poster = ref('')
 
 const queryName = props.name.split(' ').join('+')
 
-const getInfo = () => {
+const getPosters = () => {
   axios
     .get(`http://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`)
     .then((response) => {
@@ -41,7 +41,7 @@ onMounted(() => {
     getRatingBgColor(props.rating)
   }
 
-  getInfo()
+  getPosters()
 })
 </script>
 
