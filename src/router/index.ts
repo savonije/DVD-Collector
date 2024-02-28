@@ -32,6 +32,10 @@ router.beforeEach(async (to) => {
   if (!userId && to.name !== 'auth') {
     return { name: 'auth' }
   }
+
+  if (userId && to.name === 'auth') {
+    return false
+  }
 })
 
 export default router
