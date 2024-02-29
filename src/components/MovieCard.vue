@@ -66,21 +66,23 @@ onMounted(() => {
 <template>
   <RouterLink :to="`/movie/${name}/${id}`">
     <div class="movie-card">
-      <div class="flex-grow p-3">
+      <div class="relative flex-grow p-3">
         <h4 class="mb-0">{{ movieDetails?.Title }}</h4>
+
         <span class="text-gray-400 text-xs">
           {{ movieDetails?.Year }}, {{ movieDetails?.Director }}
         </span>
+
         <span :class="`rating ${ratingColor}`">
           {{ props.rating }}
         </span>
 
         <div>
-          <!-- {{ truncate(movieDetails?.Plot, 150) }} -->
           {{ plot }}
         </div>
       </div>
-      <div class="shrink-0">
+
+      <div class="shrink-0 movie-poster">
         <img :src="movieDetails?.Poster" />
       </div>
     </div>
@@ -94,10 +96,18 @@ img {
   max-height: 300px;
 }
 .movie-card {
-  @apply flex bg-white shadow hover:shadow-md transition-shadow gap-3 rounded-lg flex-row;
+  @apply relative flex bg-white shadow hover:shadow-md transition-shadow gap-3 rounded-lg flex-row;
 
   .rating {
-    @apply absolute right-3 top-3 w-9 h-9 text-white font-bold flex items-center justify-center;
+    @apply absolute bottom-3 left-3 w-9 h-9 text-white font-bold flex items-center justify-center;
+  }
+}
+
+.movie-poster {
+  @apply relative;
+
+  &:before {
+    @apply absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white content-[''];
   }
 }
 </style>
