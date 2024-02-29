@@ -77,6 +77,9 @@ onMounted(() => {
             <span class="font-bold">Director: </span>
             <span>{{ movieDetails.Director }}</span>
           </div>
+          <div class="mb-3">
+            <span>{{ movieDetails.Plot }}</span>
+          </div>
 
           <div class="flex items-center gap-3">
             <div

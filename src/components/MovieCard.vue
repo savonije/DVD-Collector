@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import type { Movie } from '@/types'
+import { onMounted, ref, type Ref } from 'vue'
+import type { Movie, MovieDetails } from '@/types'
 import axios from 'axios'
 
 const props = defineProps<Movie>()
@@ -19,17 +19,35 @@ const getRatingBgColor = (rating: number) => {
   }
 }
 
-const poster = ref('')
-
 const queryName = props.name.split(' ').join('+')
 
-const getPosters = () => {
+const movieDetails: Ref<MovieDetails | null> = ref(null)
+
+const plot = ref('')
+
+const getMovies = () => {
   axios
     .get(`http://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`)
     .then((response) => {
+      console.log(response)
       if (response.data.Error === undefined) {
-        poster.value = response.data.Poster
+        movieDetails.value = response.data
       }
+    })
+    .then(() => {
+      if (!movieDetails.value?.Plot) {
+        return
+      }
+
+      plot.value = movieDetails.value?.Plot
+
+      if (plot.value.length > 100) {
+        plot.value = plot.value.substring(0, 100) + '...'
+      } else {
+        plot.value
+      }
+
+      console.log(plot)
     })
     .catch((error) => {
       console.error(error)
@@ -41,30 +59,42 @@ onMounted(() => {
     getRatingBgColor(props.rating)
   }
 
-  getPosters()
+  getMovies()
 })
 </script>
 
 <template>
-  <RouterLink
-    :to="`/movie/${name}/${id}`"
-    class="movie-card"
-    :style="`background-image: url('${poster}')`"
-  >
-    <h4 class="text-white z-10 capitalize">{{ props.name }}</h4>
-    <span :class="`rating ${ratingColor}`">
-      {{ props.rating }}
-    </span>
+  <RouterLink :to="`/movie/${name}/${id}`">
+    <div class="movie-card">
+      <div class="flex-grow p-3">
+        <h4 class="mb-0">{{ movieDetails?.Title }}</h4>
+        <span class="text-gray-400 text-xs">
+          {{ movieDetails?.Year }}, {{ movieDetails?.Director }}
+        </span>
+        <span :class="`rating ${ratingColor}`">
+          {{ props.rating }}
+        </span>
+
+        <div>
+          <!-- {{ truncate(movieDetails?.Plot, 150) }} -->
+          {{ plot }}
+        </div>
+      </div>
+      <div class="shrink-0">
+        <img :src="movieDetails?.Poster" />
+      </div>
+    </div>
   </RouterLink>
 </template>
 
 <style lang="scss" scoped>
+img {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+}
 .movie-card {
-  @apply relative bg-white shadow hover:shadow-md transition-shadow mb-3 p-3 flex gap-3 justify-end md:h-[250px] lg:h-[350px] rounded-lg flex-col aspect-3/4 flex-shrink-0 bg-cover;
-
-  &:before {
-    @apply absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/75 content-[''] rounded-lg to-75% to-white/50 hover:to-white/25 transition;
-  }
+  @apply flex bg-white shadow hover:shadow-md transition-shadow gap-3 rounded-lg flex-row;
 
   .rating {
     @apply absolute right-3 top-3 w-9 h-9 text-white font-bold flex items-center justify-center;

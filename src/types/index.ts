@@ -13,4 +13,5 @@ export interface MovieDetails {
   Actors: string
   Director: string
   Metascore: string
+  Plot: string
 }
