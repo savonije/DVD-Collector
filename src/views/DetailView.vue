@@ -40,10 +40,6 @@ onMounted(() => {
 <template>
   <PageHeader />
   <div class="container">
-    <h1 class="capitalize">{{ name }}</h1>
-  </div>
-
-  <div class="container">
     <div class="bg-white shadow p-6">
       <div class="flex gap-6" v-if="!isLoading && movieDetails">
         <div>
@@ -54,8 +50,7 @@ onMounted(() => {
 
         <div>
           <div class="mb-1">
-            <span class="font-bold">Title: </span>
-            <span>{{ movieDetails.Title }}</span>
+            <h2 class="mb-2">{{ movieDetails.Title }}</h2>
           </div>
           <div class="mb-1">
             <span class="font-bold">Year: </span>
