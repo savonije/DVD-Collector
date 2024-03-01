@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
-import { toast } from 'vue3-toastify'
+import { toast, type ToastOptions } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 
 const StoreDVD = useStoreDVDs()
@@ -15,7 +15,7 @@ const submitForm = () => {
 
     toast.success(`${title.value} has been added!`, {
       autoClose: 3000
-    })
+    } as ToastOptions)
 
     title.value = ''
     rating.value = '1'
