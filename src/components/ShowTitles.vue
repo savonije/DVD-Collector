@@ -11,6 +11,10 @@ const items = useStoreDVDs()
     <isLoading />
   </template>
   <template v-else>
+    <div class="mb-3">
+      Currently there are <span class="font-bold">{{ items.DVDs.length }}</span> titles in the
+      database.
+    </div>
     <div class="grid grid-cols-2 xl:grid-cols-3 gap-6">
       <MovieCard
         v-for="item in items.DVDs"
