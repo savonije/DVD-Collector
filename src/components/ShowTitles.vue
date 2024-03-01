@@ -11,7 +11,7 @@ const items = useStoreDVDs()
     <isLoading />
   </template>
   <template v-else>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-2 xl:grid-cols-3 gap-6">
       <MovieCard
         v-for="item in items.DVDs"
         :key="item.id"

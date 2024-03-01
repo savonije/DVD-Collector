@@ -29,7 +29,6 @@ const getMovies = () => {
   axios
     .get(`http://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`)
     .then((response) => {
-      console.log(response)
       if (response.data.Error === undefined) {
         movieDetails.value = response.data
       }
@@ -46,8 +45,6 @@ const getMovies = () => {
       } else {
         plot.value
       }
-
-      console.log(plot)
     })
     .catch((error) => {
       console.error(error)
@@ -90,13 +87,12 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-img {
-  max-width: 100%;
-  height: auto;
-  max-height: 300px;
-}
 .movie-card {
   @apply relative flex bg-white shadow hover:shadow-md transition-shadow gap-3 rounded-lg flex-row;
+
+  &:hover img {
+    @apply scale-[115%];
+  }
 
   .rating {
     @apply absolute bottom-3 left-3 w-9 h-9 text-white font-bold flex items-center justify-center;
@@ -104,10 +100,14 @@ img {
 }
 
 .movie-poster {
-  @apply relative;
+  @apply relative overflow-hidden;
 
-  &:before {
-    @apply absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white content-[''];
+  img {
+    @apply relative max-w-full h-auto max-h-[300px] transform scale-[110%] transition;
+
+    &:after {
+      @apply absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white content-[''] z-10;
+    }
   }
 }
 </style>
