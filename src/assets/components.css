@@ -10,4 +10,8 @@
   .button-neutral {
     @apply text-white bg-black-400 hover:bg-black-300;
   }
+
+  .button-transparent {
+    @apply bg-transparent hover:bg-none;
+  }
 }

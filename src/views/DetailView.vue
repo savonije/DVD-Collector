@@ -39,61 +39,56 @@ onMounted(() => {
 
 <template>
   <DefaultLayout>
-    <div class="container">
-      <div class="bg-white shadow p-6">
-        <div class="flex gap-6" v-if="!isLoading && movieDetails">
-          <div>
-            <figure class="flex-shrink-0 border-2" v-if="movieDetails.Poster">
-              <img :src="movieDetails.Poster" :alt="name" width="300" height="441" />
-            </figure>
-          </div>
-
-          <div>
-            <div class="mb-1">
-              <h2 class="mb-2">{{ movieDetails.Title }}</h2>
-            </div>
-            <div class="mb-1">
-              <span class="font-bold">Year: </span>
-              <span>{{ movieDetails.Year }}</span>
-            </div>
-            <div class="mb-1">
-              <span class="font-bold">Genre: </span>
-              <span>{{ movieDetails.Genre }}</span>
-            </div>
-            <div class="mb-1">
-              <span class="font-bold">Awards: </span>
-              <span>{{ movieDetails.Awards }}</span>
-            </div>
-            <div class="mb-1">
-              <span class="font-bold">Actors: </span>
-              <span>{{ movieDetails.Actors }}</span>
-            </div>
-            <div class="mb-3">
-              <span class="font-bold">Director: </span>
-              <span>{{ movieDetails.Director }}</span>
-            </div>
-            <div class="mb-3">
-              <span>{{ movieDetails.Plot }}</span>
-            </div>
-
-            <div class="flex items-center gap-3">
-              <div
-                class="h-8 w-8 bg-gray-800 flex items-center justify-center text-lg font-bold text-white"
-              >
-                {{ movieDetails.Metascore }}
-              </div>
-              metascore
-            </div>
-          </div>
+    <div class="max-w-[800px] mx-auto">
+      <div class="bg-white shadow">
+        <div class="bg-teal p-6">
+          <h2 class="text-3xl text-shark mb-0 text-right">{{ name }}</h2>
         </div>
+        <div class="p-6">
+          <div class="flex gap-6" v-if="!isLoading && movieDetails">
+            <div>
+              <figure class="flex-shrink-0 border-2 -mt-12" v-if="movieDetails.Poster">
+                <img :src="movieDetails.Poster" :alt="name" width="300" height="441" />
+              </figure>
+            </div>
 
-        <div v-else>
-          <p>No movie information found in database...</p>
+            <div>
+              <div class="mb-1">
+                <div class="text-gray-400 text-xs mb-3">
+                  {{ movieDetails?.Year }} | {{ movieDetails?.Director }} | {{ movieDetails.Genre }}
+                </div>
+              </div>
+              <div class="mb-1">
+                <span class="font-bold">Awards: </span>
+                <span>{{ movieDetails.Awards }}</span>
+              </div>
+              <div class="mb-1">
+                <span class="font-bold">Actors: </span>
+                <span>{{ movieDetails.Actors }}</span>
+              </div>
+              <div class="mb-3">
+                <span>{{ movieDetails.Plot }}</span>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div
+                  class="h-8 w-8 bg-gray-800 flex items-center justify-center text-lg font-bold text-white"
+                >
+                  {{ movieDetails.Metascore }}
+                </div>
+                metascore
+              </div>
+            </div>
+          </div>
+
+          <div v-else>
+            <p>No movie information found in database...</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="container py-6">
+    <div class="max-w-[800px] mx-auto py-6">
       <div class="flex justify-between">
         <RouterLink to="/" class="button button-neutral">Back to overview</RouterLink>
         <DeleteTitle :id="id" :name="name" />

@@ -14,7 +14,7 @@ const storeAuth = useStoreAuth()
       <button
         type="button"
         aria-label="Logout user"
-        class="button"
+        class="button button-transparent text-white"
         @click="storeAuth.logoutUser"
         v-if="storeAuth.user?.id"
       >
