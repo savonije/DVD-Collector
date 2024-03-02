@@ -1,5 +1,9 @@
 @layer components {
   .button {
-    @apply bg-blue-800 text-white font-bold py-3 px-6 rounded-sm;
+    @apply bg-teal text-shark font-bold py-3 px-6 rounded-sm transition hover:bg-teal-400;
+  }
+
+  .button-danger {
+    @apply text-white bg-red hover:bg-red-600;
   }
 }

@@ -47,7 +47,7 @@ onMounted(() => {
   <RouterLink :to="`/movie/${name}/${id}`">
     <div class="movie-card">
       <div class="relative flex-grow p-3">
-        <h4 class="mb-0">{{ props.name }}</h4>
+        <h3 class="mb-0">{{ props.name }}</h3>
 
         <span class="text-gray-400 text-xs">
           {{ movieDetails?.Year }}, {{ movieDetails?.Director }}

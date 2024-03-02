@@ -74,6 +74,10 @@ export default {
           900: '#0e5153',
           950: '#012e32'
         }
+      },
+      fontFamily: {
+        body: '"Roboto", sans-serif',
+        heading: '"Josefin Sans", sans-serif'
       }
     }
   },

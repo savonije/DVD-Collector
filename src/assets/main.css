@@ -8,7 +8,7 @@
 
 html,
 body {
-  @apply overflow-x-clip bg-blue-50 p-6;
+  @apply overflow-x-clip bg-gray p-6 font-body;
 }
 
 .container {
