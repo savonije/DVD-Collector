@@ -34,6 +34,6 @@ onMounted(() => {
 
 <style scoped>
 .rating {
-  @apply w-9 h-9 text-white font-bold flex items-center justify-center;
+  @apply w-9 h-9 text-white font-bold flex items-center justify-center shadow;
 }
 </style>
