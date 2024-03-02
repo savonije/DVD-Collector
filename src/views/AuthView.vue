@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { useStoreAuth } from '@/stores/storeAuth'
-import PageHeader from '@/components/PageHeader.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const storeAuth = useStoreAuth()

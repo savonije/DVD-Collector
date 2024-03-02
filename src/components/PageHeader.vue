@@ -1,7 +1,15 @@
 <script setup lang="ts">
+import router from '@/router'
 import { useStoreAuth } from '@/stores/storeAuth'
+import { ref } from 'vue'
 
 const storeAuth = useStoreAuth()
+
+const searchInput = ref('')
+
+const submitForm = () => {
+  router.push({ path: '/search', query: { query: searchInput.value } })
+}
 </script>
 
 <template>
@@ -9,6 +17,17 @@ const storeAuth = useStoreAuth()
     <RouterLink to="/">
       <span class="text-2xl font-bold font-heading">Mescie's DVD collection</span>
     </RouterLink>
+
+    <form @submit.prevent="submitForm()">
+      <input
+        v-model="searchInput"
+        type="text"
+        placeholder="search..."
+        class="p-2 min-w-[200px] rounded-l-sm text-shark"
+      />
+      <button type="submit" class="bg-teal p-2 rounded-r-sm text-shark font-bold">search</button>
+    </form>
+
     <button
       type="button"
       aria-label="Logout user"

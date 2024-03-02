@@ -3,7 +3,6 @@ import DeleteTitle from '@/components/DeleteTitle.vue'
 import axios from 'axios'
 import { onMounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
-import PageHeader from '@/components/PageHeader.vue'
 import type { MovieDetails } from '@/types'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 

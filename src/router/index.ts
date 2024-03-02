@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import DetailView from '@/views/DetailView.vue'
 import AuthView from '@/views/AuthView.vue'
+import SearchView from '@/views/SearchView.vue'
 import { useStoreAuth } from '@/stores/storeAuth'
 
 const router = createRouter({
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/login',
       name: 'auth',
       component: AuthView
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchView
     }
   ]
 })
