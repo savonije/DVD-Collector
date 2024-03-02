@@ -68,9 +68,9 @@ onMounted(() => {
         >
           ?
         </div>
-      </div>
 
-      <PersonalRating :rating="props.rating" />
+        <PersonalRating :rating="props.rating" />
+      </div>
     </div>
   </RouterLink>
 </template>
@@ -88,11 +88,15 @@ onMounted(() => {
   @apply relative overflow-hidden;
 
   img {
-    @apply relative max-w-full h-auto max-h-[300px] transform scale-[110%] transition;
+    @apply relative max-w-full h-auto max-h-[300px] transform scale-[110%] transition duration-500;
 
     &:after {
       @apply absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white content-[''] z-10;
     }
+  }
+
+  .rating {
+    @apply absolute top-3 right-3;
   }
 }
 </style>
