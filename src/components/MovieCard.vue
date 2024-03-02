@@ -6,8 +6,6 @@ import axios from 'axios'
 
 const props = defineProps<Movie>()
 
-const ratingColor = ref('')
-
 const queryName = props.name.split(' ').join('+')
 
 const movieDetails: Ref<MovieDetails | null> = ref(null)
@@ -49,7 +47,7 @@ onMounted(() => {
   <RouterLink :to="`/movie/${name}/${id}`">
     <div class="movie-card">
       <div class="relative flex-grow p-3">
-        <h4 class="mb-0">{{ movieDetails?.Title }}</h4>
+        <h4 class="mb-0">{{ props.name }}</h4>
 
         <span class="text-gray-400 text-xs">
           {{ movieDetails?.Year }}, {{ movieDetails?.Director }}
@@ -63,7 +61,15 @@ onMounted(() => {
       </div>
 
       <div class="shrink-0 movie-poster">
-        <img :src="movieDetails?.Poster" />
+        <div v-if="movieDetails?.Poster">
+          <img :src="movieDetails?.Poster" />
+        </div>
+        <div
+          v-else
+          class="bg-gray-400 w-[200px] h-[300px] max-h-full max-w-full flex items-center justify-center text-7xl text-gray-500"
+        >
+          ?
+        </div>
       </div>
     </div>
   </RouterLink>
