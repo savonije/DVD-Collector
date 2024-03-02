@@ -6,8 +6,11 @@ import { useRoute } from 'vue-router'
 import type { MovieDetails } from '@/types'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import isLoading from '@/components/isLoading.vue'
+import { useStoreDVDs } from '@/stores/storeDVDs'
+import router from '@/router'
 
 const route = useRoute()
+const StoreDVD = useStoreDVDs()
 
 const id = route.params.id as string
 const name = route.params.name as string
@@ -16,6 +19,8 @@ const queryName = name.split(' ').join('+')
 
 const movieDetails: Ref<MovieDetails | null> = ref(null)
 const isDataLoading = ref(true)
+const showEdit = ref(false)
+const titleInput = ref(name)
 
 const getInfo = () => {
   axios
@@ -23,7 +28,6 @@ const getInfo = () => {
     .then((response) => {
       if (response.data.Error === undefined) {
         movieDetails.value = response.data
-        console.log(movieDetails.value)
       }
     })
     .catch((error) => {
@@ -32,6 +36,19 @@ const getInfo = () => {
     .finally(() => {
       isDataLoading.value = false
     })
+}
+
+const toggleEdit = () => {
+  showEdit.value = !showEdit.value
+}
+
+const submitForm = () => {
+  if (name !== titleInput.value) {
+    StoreDVD.updateDVD(id, titleInput.value)
+    router.push({ path: `/` })
+  }
+
+  showEdit.value = false
 }
 
 onMounted(() => {
@@ -44,7 +61,19 @@ onMounted(() => {
     <div class="max-w-[800px] mx-auto">
       <div class="bg-white shadow">
         <div class="bg-teal p-6">
-          <h2 class="text-3xl text-shark mb-0 text-right capitalize">{{ name }}</h2>
+          <div class="flex justify-end">
+            <h2 class="text-3xl text-shark mb-0 capitalize" v-if="!showEdit" @click="toggleEdit()">
+              {{ name }}
+            </h2>
+            <form v-else @submit.prevent="submitForm">
+              <input
+                type="text"
+                class="p-3 bg-teal text-right text-3xl text-shark capitalize font-heading font-bold"
+                v-model="titleInput"
+              />
+              <button type="submit" class="button button-neutral">Save</button>
+            </form>
+          </div>
           <div class="text-xs text-right text-shark" v-if="movieDetails">
             {{ movieDetails?.Rated }} | {{ movieDetails?.Runtime }} | {{ movieDetails?.Genre }}
           </div>

@@ -1,6 +1,15 @@
 import { defineStore } from 'pinia'
 import { db } from '@/firebase'
-import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore'
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+  updateDoc
+} from 'firebase/firestore'
 import type { Movie } from '@/types'
 
 const collectionRef = collection(db, import.meta.env.VITE_FIREBASE_DB_NAME)
@@ -32,6 +41,11 @@ export const useStoreDVDs = defineStore('storeDVDs', {
     },
     deleteDVD(id: string) {
       deleteDoc(doc(collectionRef, id))
+    },
+    updateDVD(id: string, name: string) {
+      updateDoc(doc(db, import.meta.env.VITE_FIREBASE_DB_NAME, id), {
+        name: name
+      })
     }
   }
 })
