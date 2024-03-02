@@ -15,7 +15,7 @@ const items = useStoreDVDs()
       Currently there are <span class="font-bold">{{ items.DVDs.length }}</span> titles in the
       database.
     </div>
-    <div class="grid grid-cols-2 xl:grid-cols-3 gap-6">
+    <div class="grid grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
       <MovieCard
         v-for="item in items.DVDs"
         :key="item.id"
