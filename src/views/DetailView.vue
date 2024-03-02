@@ -22,7 +22,6 @@ const getInfo = () => {
     .then((response) => {
       if (response.data.Error === undefined) {
         movieDetails.value = response.data
-        console.log(movieDetails.value)
       }
     })
     .catch((error) => {
