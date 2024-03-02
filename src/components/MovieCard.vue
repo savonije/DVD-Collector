@@ -49,13 +49,11 @@ onMounted(() => {
       <div class="relative flex-grow p-3">
         <h3 class="mb-0">{{ props.name }}</h3>
 
-        <span class="text-gray-400 text-xs">
-          {{ movieDetails?.Year }}, {{ movieDetails?.Director }}
-        </span>
+        <div class="text-gray-400 text-xs mb-3">
+          {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
+        </div>
 
-        <PersonalRating :rating="props.rating" />
-
-        <div>
+        <div class="text-black-600 text-sm">
           {{ plot }}
         </div>
       </div>
@@ -71,6 +69,8 @@ onMounted(() => {
           ?
         </div>
       </div>
+
+      <PersonalRating :rating="props.rating" />
     </div>
   </RouterLink>
 </template>
