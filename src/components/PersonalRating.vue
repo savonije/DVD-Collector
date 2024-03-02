@@ -1,0 +1,35 @@
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue'
+
+const props = defineProps({ rating: Number })
+
+const ratingColor = ref('')
+
+const getRatingBgColor = (rating: number) => {
+  if (props.rating && props.rating < 5) {
+    ratingColor.value = 'bg-red'
+  } else if (rating < 7) {
+    ratingColor.value = 'bg-orange-600'
+  } else if (rating < 8) {
+    ratingColor.value = 'bg-green-500'
+  } else {
+    ratingColor.value = 'bg-green-600'
+  }
+}
+
+onMounted(() => {
+  getRatingBgColor
+})
+</script>
+
+<template>
+  <span :class="`rating ${ratingColor}`">
+    {{ props.rating }}
+  </span>
+</template>
+
+<style scoped>
+.rating {
+  @apply absolute bottom-3 left-3 w-9 h-9 text-white font-bold flex items-center justify-center;
+}
+</style>

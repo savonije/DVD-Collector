@@ -1,23 +1,12 @@
 <script lang="ts" setup>
 import { onMounted, ref, type Ref } from 'vue'
 import type { Movie, MovieDetails } from '@/types'
+import PersonalRating from '@/components/PersonalRating.vue'
 import axios from 'axios'
 
 const props = defineProps<Movie>()
 
 const ratingColor = ref('')
-
-const getRatingBgColor = (rating: number) => {
-  if (rating < 5) {
-    ratingColor.value = 'bg-red'
-  } else if (rating < 7) {
-    ratingColor.value = 'bg-orange-600'
-  } else if (rating < 8) {
-    ratingColor.value = 'bg-green-500'
-  } else {
-    ratingColor.value = 'bg-green-600'
-  }
-}
 
 const queryName = props.name.split(' ').join('+')
 
@@ -25,7 +14,7 @@ const movieDetails: Ref<MovieDetails | null> = ref(null)
 
 const plot = ref('')
 
-const getMovies = () => {
+const getMovieData = () => {
   axios
     .get(`http://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`)
     .then((response) => {
@@ -52,11 +41,7 @@ const getMovies = () => {
 }
 
 onMounted(() => {
-  if (props.rating) {
-    getRatingBgColor(props.rating)
-  }
-
-  getMovies()
+  getMovieData()
 })
 </script>
 
@@ -70,9 +55,7 @@ onMounted(() => {
           {{ movieDetails?.Year }}, {{ movieDetails?.Director }}
         </span>
 
-        <span :class="`rating ${ratingColor}`">
-          {{ props.rating }}
-        </span>
+        <PersonalRating :rating="props.rating" />
 
         <div>
           {{ plot }}
@@ -92,10 +75,6 @@ onMounted(() => {
 
   &:hover img {
     @apply scale-[115%];
-  }
-
-  .rating {
-    @apply absolute bottom-3 left-3 w-9 h-9 text-white font-bold flex items-center justify-center;
   }
 }
 
