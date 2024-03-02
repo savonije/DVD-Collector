@@ -14,7 +14,7 @@ const plot = ref('')
 
 const getMovieData = () => {
   axios
-    .get(`http://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`)
+    .get(`https://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`)
     .then((response) => {
       if (response.data.Error === undefined) {
         movieDetails.value = response.data
