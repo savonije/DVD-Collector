@@ -27,10 +27,12 @@ const closeModal = () => {
       <form>
         <h5>Are you sure you want to delete {{ name }} ?</h5>
         <div class="flex gap-3">
-          <button type="submit" class="button bg-black-300" @click.prevent="closeModal">
+          <button type="submit" class="button button-neutral" @click.prevent="closeModal">
             Cancel
           </button>
-          <button type="submit" class="button bg-red" @click.prevent="deleteTitle">Delete</button>
+          <button type="submit" class="button button-danger" @click.prevent="deleteTitle">
+            Delete
+          </button>
         </div>
       </form>
     </div>

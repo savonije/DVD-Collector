@@ -95,7 +95,7 @@ onMounted(() => {
 
     <div class="container py-6">
       <div class="flex justify-between">
-        <RouterLink to="/" class="button">Back to overview</RouterLink>
+        <RouterLink to="/" class="button button-neutral">Back to overview</RouterLink>
         <DeleteTitle :id="id" :name="name" />
       </div>
     </div>
