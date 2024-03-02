@@ -5,8 +5,12 @@ const props = defineProps({ rating: Number })
 
 const ratingColor = ref('')
 
-const getRatingBgColor = (rating: number) => {
-  if (props.rating && props.rating < 5) {
+const getRatingBgColor = (rating: number | undefined) => {
+  if (!rating) {
+    return
+  }
+
+  if (rating < 5) {
     ratingColor.value = 'bg-red'
   } else if (rating < 7) {
     ratingColor.value = 'bg-orange-600'
@@ -18,7 +22,7 @@ const getRatingBgColor = (rating: number) => {
 }
 
 onMounted(() => {
-  getRatingBgColor
+  getRatingBgColor(props.rating)
 })
 </script>
 
