@@ -5,6 +5,7 @@ import { onMounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 import type { MovieDetails } from '@/types'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import isLoading from '@/components/isLoading.vue'
 
 const route = useRoute()
 
@@ -14,7 +15,7 @@ const name = route.params.name as string
 const queryName = name.split(' ').join('+')
 
 const movieDetails: Ref<MovieDetails | null> = ref(null)
-const isLoading = ref(true)
+const isDataLoading = ref(true)
 
 const getInfo = () => {
   axios
@@ -28,7 +29,7 @@ const getInfo = () => {
       console.error(error)
     })
     .finally(() => {
-      isLoading.value = false
+      isDataLoading.value = false
     })
 }
 
@@ -48,7 +49,7 @@ onMounted(() => {
           </div>
         </div>
         <div class="p-6">
-          <div class="flex gap-6" v-if="!isLoading && movieDetails">
+          <div class="flex gap-6" v-if="!isDataLoading && movieDetails">
             <div>
               <figure class="flex-shrink-0 border-2 -mt-12" v-if="movieDetails.Poster">
                 <img :src="movieDetails.Poster" :alt="name" width="300" height="441" />
@@ -89,6 +90,10 @@ onMounted(() => {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div v-else-if="isDataLoading">
+            <isLoading />
           </div>
 
           <div v-else>
