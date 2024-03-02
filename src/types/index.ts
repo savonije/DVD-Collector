@@ -17,4 +17,5 @@ export interface MovieDetails {
   Rated: string
   Runtime: string
   imdbRating: string
+  imdbID: string
 }

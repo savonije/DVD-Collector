@@ -23,6 +23,7 @@ const getInfo = () => {
     .then((response) => {
       if (response.data.Error === undefined) {
         movieDetails.value = response.data
+        console.log(movieDetails.value)
       }
     })
     .catch((error) => {
@@ -88,6 +89,17 @@ onMounted(() => {
                   </div>
                   <span class="text-xs text-black-700">IMDB</span>
                 </div>
+              </div>
+
+              <div v-if="movieDetails.imdbID" class="mt-3">
+                <a
+                  :href="`https://www.imdb.com/title/${movieDetails.imdbID}`"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-gray-200 text-xs"
+                >
+                  See IMDB page
+                </a>
               </div>
             </div>
           </div>
