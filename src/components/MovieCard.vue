@@ -58,7 +58,7 @@ onMounted(() => {
         </div>
       </div>
 
-      <div class="shrink-0 movie-poster">
+      <div class="shrink-0 movie-poster rounded-r">
         <div v-if="movieDetails?.Poster">
           <img :src="movieDetails?.Poster" />
         </div>
@@ -80,7 +80,7 @@ onMounted(() => {
   @apply relative flex bg-white shadow hover:shadow-md transition-shadow gap-3 rounded-lg flex-row;
 
   &:hover img {
-    @apply scale-[115%];
+    @apply scale-[110%];
   }
 }
 
@@ -88,7 +88,7 @@ onMounted(() => {
   @apply relative overflow-hidden;
 
   img {
-    @apply relative max-w-full h-auto max-h-[300px] transform scale-[110%] transition duration-500;
+    @apply relative max-w-full h-auto max-h-[300px] transform transition duration-500;
 
     &:after {
       @apply absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white content-[''] z-10;
