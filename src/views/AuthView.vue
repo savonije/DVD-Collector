@@ -2,6 +2,7 @@
 import { reactive } from 'vue'
 import { useStoreAuth } from '@/stores/storeAuth'
 import PageHeader from '@/components/PageHeader.vue'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const storeAuth = useStoreAuth()
 
@@ -20,33 +21,34 @@ const submitForm = () => {
 </script>
 
 <template>
-  <PageHeader />
-  <div class="container">
-    <div class="bg-white p-6 shadow mx-auto max-w-[500px] rounded">
-      <h1>Login</h1>
-      <form @submit.prevent="submitForm">
-        <fieldset class="mb-3">
-          <label class="block font-bold">Email:</label>
-          <input
-            type="email"
-            class="shadow border rounded w-full h-12 p-3"
-            v-model="credentials.email"
-          />
-        </fieldset>
+  <DefaultLayout>
+    <div class="container">
+      <div class="bg-white p-6 shadow mx-auto max-w-[500px] rounded">
+        <h1>Login</h1>
+        <form @submit.prevent="submitForm">
+          <fieldset class="mb-3">
+            <label class="block font-bold">Email:</label>
+            <input
+              type="email"
+              class="shadow border rounded w-full h-12 p-3"
+              v-model="credentials.email"
+            />
+          </fieldset>
 
-        <fieldset class="mb-3">
-          <label class="block font-bold">Password:</label>
-          <input
-            type="password"
-            class="shadow border rounded w-full h-12 p-3"
-            v-model="credentials.password"
-          />
-        </fieldset>
+          <fieldset class="mb-3">
+            <label class="block font-bold">Password:</label>
+            <input
+              type="password"
+              class="shadow border rounded w-full h-12 p-3"
+              v-model="credentials.password"
+            />
+          </fieldset>
 
-        <div class="text-right mt-6">
-          <button type="submit" class="button">Login</button>
-        </div>
-      </form>
+          <div class="text-right mt-6">
+            <button type="submit" class="button">Login</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+  </DefaultLayout>
 </template>

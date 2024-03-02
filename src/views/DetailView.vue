@@ -5,6 +5,7 @@ import { onMounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 import PageHeader from '@/components/PageHeader.vue'
 import type { MovieDetails } from '@/types'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const route = useRoute()
 
@@ -38,65 +39,66 @@ onMounted(() => {
 </script>
 
 <template>
-  <PageHeader />
-  <div class="container">
-    <div class="bg-white shadow p-6">
-      <div class="flex gap-6" v-if="!isLoading && movieDetails">
-        <div>
-          <figure class="flex-shrink-0 border-2" v-if="movieDetails.Poster">
-            <img :src="movieDetails.Poster" :alt="name" width="300" height="441" />
-          </figure>
-        </div>
-
-        <div>
-          <div class="mb-1">
-            <h2 class="mb-2">{{ movieDetails.Title }}</h2>
-          </div>
-          <div class="mb-1">
-            <span class="font-bold">Year: </span>
-            <span>{{ movieDetails.Year }}</span>
-          </div>
-          <div class="mb-1">
-            <span class="font-bold">Genre: </span>
-            <span>{{ movieDetails.Genre }}</span>
-          </div>
-          <div class="mb-1">
-            <span class="font-bold">Awards: </span>
-            <span>{{ movieDetails.Awards }}</span>
-          </div>
-          <div class="mb-1">
-            <span class="font-bold">Actors: </span>
-            <span>{{ movieDetails.Actors }}</span>
-          </div>
-          <div class="mb-3">
-            <span class="font-bold">Director: </span>
-            <span>{{ movieDetails.Director }}</span>
-          </div>
-          <div class="mb-3">
-            <span>{{ movieDetails.Plot }}</span>
+  <DefaultLayout>
+    <div class="container">
+      <div class="bg-white shadow p-6">
+        <div class="flex gap-6" v-if="!isLoading && movieDetails">
+          <div>
+            <figure class="flex-shrink-0 border-2" v-if="movieDetails.Poster">
+              <img :src="movieDetails.Poster" :alt="name" width="300" height="441" />
+            </figure>
           </div>
 
-          <div class="flex items-center gap-3">
-            <div
-              class="h-8 w-8 bg-gray-800 flex items-center justify-center text-lg font-bold text-white"
-            >
-              {{ movieDetails.Metascore }}
+          <div>
+            <div class="mb-1">
+              <h2 class="mb-2">{{ movieDetails.Title }}</h2>
             </div>
-            metascore
+            <div class="mb-1">
+              <span class="font-bold">Year: </span>
+              <span>{{ movieDetails.Year }}</span>
+            </div>
+            <div class="mb-1">
+              <span class="font-bold">Genre: </span>
+              <span>{{ movieDetails.Genre }}</span>
+            </div>
+            <div class="mb-1">
+              <span class="font-bold">Awards: </span>
+              <span>{{ movieDetails.Awards }}</span>
+            </div>
+            <div class="mb-1">
+              <span class="font-bold">Actors: </span>
+              <span>{{ movieDetails.Actors }}</span>
+            </div>
+            <div class="mb-3">
+              <span class="font-bold">Director: </span>
+              <span>{{ movieDetails.Director }}</span>
+            </div>
+            <div class="mb-3">
+              <span>{{ movieDetails.Plot }}</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <div
+                class="h-8 w-8 bg-gray-800 flex items-center justify-center text-lg font-bold text-white"
+              >
+                {{ movieDetails.Metascore }}
+              </div>
+              metascore
+            </div>
           </div>
         </div>
-      </div>
 
-      <div v-else>
-        <p>No movie information found in database...</p>
+        <div v-else>
+          <p>No movie information found in database...</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="container py-6">
-    <div class="flex justify-between">
-      <RouterLink to="/" class="button">Back to overview</RouterLink>
-      <DeleteTitle :id="id" :name="name" />
+    <div class="container py-6">
+      <div class="flex justify-between">
+        <RouterLink to="/" class="button">Back to overview</RouterLink>
+        <DeleteTitle :id="id" :name="name" />
+      </div>
     </div>
-  </div>
+  </DefaultLayout>
 </template>

@@ -3,7 +3,7 @@ import AddTitle from '@/components/AddTitle.vue'
 import ShowTitles from '@/components/ShowTitles.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 import { onMounted } from 'vue'
-import PageHeader from '@/components/PageHeader.vue'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const storeDVDs = useStoreDVDs()
 
@@ -13,9 +13,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <PageHeader />
-  <main class="container">
+  <DefaultLayout>
     <AddTitle />
     <ShowTitles />
-  </main>
+  </DefaultLayout>
 </template>
