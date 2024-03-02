@@ -23,10 +23,14 @@ const closeModal = () => {
   <div
     class="fixed z-10 w-full h-full bg-black-700/75 flex items-center justify-center left-0 top-0"
   >
-    <div class="rounded shadow bg-white p-6">
+    <div class="rounded shadow bg-white p-9 max-w-[500px]">
       <form>
-        <h5>Are you sure you want to delete {{ name }} ?</h5>
-        <div class="flex gap-3">
+        <div class="mb-6">
+          <h2 class="mb-3 text-center">Are you sure?</h2>
+          This will delete the movie <span class="font-bold">{{ name }}</span> from the database.
+          This action cannot be undone.
+        </div>
+        <div class="flex justify-between gap-3">
           <button type="submit" class="button button-neutral" @click.prevent="closeModal">
             Cancel
           </button>
