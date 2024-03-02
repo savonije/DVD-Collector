@@ -14,4 +14,7 @@ export interface MovieDetails {
   Director: string
   Metascore: string
   Plot: string
+  Rated: string
+  Runtime: string
+  imdbRating: string
 }

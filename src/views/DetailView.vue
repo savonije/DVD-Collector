@@ -22,6 +22,7 @@ const getInfo = () => {
     .then((response) => {
       if (response.data.Error === undefined) {
         movieDetails.value = response.data
+        console.log(movieDetails.value)
       }
     })
     .catch((error) => {
@@ -43,6 +44,9 @@ onMounted(() => {
       <div class="bg-white shadow">
         <div class="bg-teal p-6">
           <h2 class="text-3xl text-shark mb-0 text-right">{{ name }}</h2>
+          <div class="text-xs text-right text-shark">
+            {{ movieDetails?.Rated }} | {{ movieDetails?.Runtime }} | {{ movieDetails?.Genre }}
+          </div>
         </div>
         <div class="p-6">
           <div class="flex gap-6" v-if="!isLoading && movieDetails">
@@ -53,30 +57,37 @@ onMounted(() => {
             </div>
 
             <div>
-              <div class="mb-1">
-                <div class="text-gray-400 text-xs mb-3">
-                  {{ movieDetails?.Year }} | {{ movieDetails?.Director }} | {{ movieDetails.Genre }}
-                </div>
-              </div>
-              <div class="mb-1">
-                <span class="font-bold">Awards: </span>
-                <span>{{ movieDetails.Awards }}</span>
-              </div>
-              <div class="mb-1">
-                <span class="font-bold">Actors: </span>
-                <span>{{ movieDetails.Actors }}</span>
-              </div>
-              <div class="mb-3">
-                <span>{{ movieDetails.Plot }}</span>
+              <div class="text-gray-400 text-xs mb-1">
+                {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
               </div>
 
-              <div class="flex items-center gap-3">
-                <div
-                  class="h-8 w-8 bg-gray-800 flex items-center justify-center text-lg font-bold text-white"
-                >
-                  {{ movieDetails.Metascore }}
+              <div class="text-xs text-gray-400">
+                <span>{{ movieDetails.Awards }}</span>
+              </div>
+
+              <div class="mt-6">
+                <div class="font-heading font-bold text-xs uppercase">Summary</div>
+                <div class="text-sm text-black-700">{{ movieDetails.Plot }}</div>
+              </div>
+
+              <div class="italic text-xs text-black-700 mt-3">
+                {{ movieDetails.Actors }}
+              </div>
+
+              <div class="flex justify-center gap-3 flex-col mt-6">
+                <div class="flex items-center gap-3">
+                  <div class="score">
+                    {{ movieDetails.Metascore }}
+                  </div>
+                  <span class="text-xs text-black-700">Metascore</span>
                 </div>
-                metascore
+
+                <div class="flex items-center gap-3">
+                  <div class="score">
+                    {{ movieDetails.imdbRating }}
+                  </div>
+                  <span class="text-xs text-black-700">IMDB</span>
+                </div>
               </div>
             </div>
           </div>
@@ -96,3 +107,9 @@ onMounted(() => {
     </div>
   </DefaultLayout>
 </template>
+
+<style lang="scss" scoped>
+.score {
+  @apply h-8 w-8 bg-gray-800 flex items-center justify-center text-lg font-bold text-white;
+}
+</style>
