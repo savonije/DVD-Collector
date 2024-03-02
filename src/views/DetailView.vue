@@ -44,7 +44,7 @@ onMounted(() => {
       <div class="bg-white shadow">
         <div class="bg-teal p-6">
           <h2 class="text-3xl text-shark mb-0 text-right">{{ name }}</h2>
-          <div class="text-xs text-right text-shark">
+          <div class="text-xs text-right text-shark" v-if="movieDetails">
             {{ movieDetails?.Rated }} | {{ movieDetails?.Runtime }} | {{ movieDetails?.Genre }}
           </div>
         </div>
@@ -57,7 +57,7 @@ onMounted(() => {
             </div>
 
             <div>
-              <div class="text-gray-400 text-xs mb-1">
+              <div class="text-gray-400 text-xs font-bold mb-1">
                 {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
               </div>
 
