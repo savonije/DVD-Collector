@@ -8,7 +8,7 @@ const storeAuth = useStoreAuth()
 const searchInput = ref('')
 
 const submitForm = () => {
-  router.push({ path: '/search', query: { query: searchInput.value } })
+  router.push({ path: '/search', query: { q: searchInput.value } })
 }
 </script>
 
