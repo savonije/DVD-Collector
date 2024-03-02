@@ -47,7 +47,7 @@ onMounted(() => {
   <RouterLink :to="`/movie/${name}/${id}`">
     <div class="movie-card">
       <div class="relative flex-grow p-3">
-        <h3 class="mb-0">{{ props.name }}</h3>
+        <h3 class="mb-0 capitalize">{{ props.name }}</h3>
 
         <div class="text-gray-400 text-xs mb-3" v-if="movieDetails?.Year || movieDetails?.Director">
           {{ movieDetails?.Year }} | {{ movieDetails?.Director }}

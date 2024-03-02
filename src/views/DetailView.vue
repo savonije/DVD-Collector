@@ -44,7 +44,7 @@ onMounted(() => {
     <div class="max-w-[800px] mx-auto">
       <div class="bg-white shadow">
         <div class="bg-teal p-6">
-          <h2 class="text-3xl text-shark mb-0 text-right">{{ name }}</h2>
+          <h2 class="text-3xl text-shark mb-0 text-right capitalize">{{ name }}</h2>
           <div class="text-xs text-right text-shark" v-if="movieDetails">
             {{ movieDetails?.Rated }} | {{ movieDetails?.Runtime }} | {{ movieDetails?.Genre }}
           </div>
@@ -117,7 +117,9 @@ onMounted(() => {
 
     <div class="max-w-[800px] mx-auto py-6">
       <div class="flex justify-between">
-        <RouterLink to="/" class="button button-neutral">Back to overview</RouterLink>
+        <span @click="$router.back()" class="button button-neutral cursor-pointer"
+          >Back to overview</span
+        >
         <DeleteTitle :id="id" :name="name" />
       </div>
     </div>
