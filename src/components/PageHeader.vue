@@ -5,8 +5,8 @@ const storeAuth = useStoreAuth()
 </script>
 
 <template>
-  <header class="bg-shark text-white flex justify-between p-3 items-center mb-6">
-    <div class="container">
+  <header class="bg-shark text-white p-3 mb-6">
+    <div class="container flex justify-between items-center">
       <RouterLink to="/">
         <span class="text-2xl font-bold font-heading">Mescie's DVD collection</span>
       </RouterLink>
