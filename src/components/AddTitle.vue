@@ -13,8 +13,10 @@ const submitForm = () => {
   if (title.value !== '') {
     StoreDVD.addDVD(title.value, +rating.value)
 
-    toast.success(`${title.value} has been added!`, {
-      autoClose: 3000
+    toast.success(`<strong>${title.value}</strong> has been added!`, {
+      autoClose: 3000,
+      theme: 'dark',
+      dangerouslyHTMLString: true
     } as ToastOptions)
 
     title.value = ''
