@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AddTitle from '@/components/AddTitle.vue'
+import ModalAddTitle from '@/components/ModalAddTitle.vue'
 import ShowTitles from '@/components/ShowTitles.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 import { onMounted } from 'vue'
@@ -14,7 +14,6 @@ onMounted(() => {
 
 <template>
   <DefaultLayout>
-    <AddTitle />
     <ShowTitles />
   </DefaultLayout>
 </template>

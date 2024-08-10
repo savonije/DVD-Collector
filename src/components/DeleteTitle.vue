@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import ModalDeleteTitle from './ModalDeleteTitle.vue'
 import type { Movie } from '@/types'
 
-const isModalVisibile = ref(false)
+const isModalVisible = ref(false)
 
 const props = defineProps<Movie>()
 </script>
@@ -12,14 +12,14 @@ const props = defineProps<Movie>()
   <button
     type="submit"
     class="text-red font-bold opacity-50 hover:underline underline-offset-2"
-    @click="isModalVisibile = true"
+    @click="isModalVisible = true"
   >
     Delete
   </button>
 
   <ModalDeleteTitle
-    v-if="isModalVisibile"
-    v-model="isModalVisibile"
+    v-if="isModalVisible"
+    v-model="isModalVisible"
     :id="props.id"
     :name="props.name"
     :rating="props.rating"
