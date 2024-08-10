@@ -146,10 +146,14 @@ onMounted(() => {
 
     <div class="max-w-[800px] mx-auto py-6">
       <div class="flex justify-between">
-        <span @click="$router.back()" class="button button-neutral cursor-pointer"
-          >Back to overview</span
-        >
-        <DeleteTitle :id="id" :name="name" />
+        <div>
+          <span @click="$router.back()" class="button button-neutral cursor-pointer">
+            Back to overview
+          </span>
+        </div>
+        <div>
+          <DeleteTitle :id="id" :name="name" />
+        </div>
       </div>
     </div>
   </DefaultLayout>

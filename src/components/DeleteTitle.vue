@@ -9,7 +9,13 @@ const props = defineProps<Movie>()
 </script>
 
 <template>
-  <button type="submit" class="button button-danger" @click="isModalVisibile = true">Delete</button>
+  <button
+    type="submit"
+    class="text-red font-bold opacity-50 hover:underline underline-offset-2"
+    @click="isModalVisibile = true"
+  >
+    Delete
+  </button>
 
   <ModalDeleteTitle
     v-if="isModalVisibile"
