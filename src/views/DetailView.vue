@@ -124,7 +124,6 @@ onMounted(() => {
                 <a
                   :href="`https://www.imdb.com/title/${movieDetails.imdbID}`"
                   target="_blank"
-                  rel="noopener"
                   class="text-gray-200 text-xs"
                 >
                   See IMDB page
@@ -159,7 +158,7 @@ onMounted(() => {
   </DefaultLayout>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .score {
   @apply h-8 w-8 bg-gray-800 flex items-center justify-center text-lg font-bold text-white;
 }

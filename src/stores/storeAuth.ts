@@ -40,7 +40,7 @@ export const useStoreAuth = defineStore('storeAuth', {
           console.log('Logout user')
         })
         .catch((error) => {
-          console.log('Logout error')
+          console.log('Logout error ' + error)
         })
     }
   }

@@ -10,7 +10,7 @@ const props = defineProps<Movie>()
 
 <template>
   <button
-    type="submit"
+    type="button"
     class="text-red font-bold opacity-50 hover:underline underline-offset-2"
     @click="isModalVisible = true"
   >
