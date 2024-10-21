@@ -28,6 +28,8 @@ const submitForm = () => {
 
     title.value = ''
     rating.value = '1'
+
+    closeModal()
   }
 }
 </script>
