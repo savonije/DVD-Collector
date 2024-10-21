@@ -8,9 +8,11 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import isLoading from '@/components/isLoading.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 import router from '@/router'
+import { useStoreAuth } from '@/stores/storeAuth'
 
 const route = useRoute()
 const StoreDVD = useStoreDVDs()
+const storeAuth = useStoreAuth()
 
 const id = route.params.id as string
 const name = route.params.name as string
@@ -150,7 +152,7 @@ onMounted(() => {
             Back to overview
           </span>
         </div>
-        <div>
+        <div v-if="storeAuth.user?.id">
           <DeleteTitle :id="id" :name="name" />
         </div>
       </div>

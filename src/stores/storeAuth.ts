@@ -20,8 +20,6 @@ export const useStoreAuth = defineStore('storeAuth', {
           this.router.push('/')
         } else {
           this.user = null
-
-          this.router.replace('/login')
         }
       })
     },

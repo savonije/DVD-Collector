@@ -24,6 +24,7 @@ const storeAuth = useStoreAuth()
         >
           Logout
         </button>
+        <RouterLink class="button text-white" to="/login" v-else> Login </RouterLink>
       </div>
     </div>
   </header>

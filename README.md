@@ -5,10 +5,27 @@ Create a Firebase database and fill all your credentials in the `.env` file.
 
 This app also makes use of [OMDB](https://www.omdbapi.com/) open API for movie details, so you need an API key from them.
 
-## Deployment
+## Firebase
 
 The app is using Firebase hosting.
-After installing the [Firebase CLI](https://firebase.google.com/docs/cli) you can deploy a new version with `firebase deploy`
+After installing the [Firebase CLI](https://firebase.google.com/docs/cli) you can deploy a new version with `firebase deploy`.
+
+Make sure to have your permissions set correctly in Firebase and to have created a user to be able to login.
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      // Allow anyone to read the data
+      allow read: if true;
+
+      // Allow write only if the user is authenticated
+      allow write: if request.auth != null;
+    }
+  }
+}
+```
 
 ## Recommended IDE Setup
 
