@@ -32,13 +32,4 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(async (to) => {
-  const storeAuth = useStoreAuth()
-  const userId = storeAuth.user?.id
-
-  if (userId && to.name === 'auth') {
-    return false
-  }
-})
-
 export default router
