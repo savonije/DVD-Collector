@@ -1,18 +1,31 @@
 # Simple DVD Collection
 
-This app is a simple Vue project to maintain a listing of your DVD collection.
-Create a Firebase database and fill all your credentials in the `.env` file.
+This project is a lightweight Vue.js application designed to help you manage and maintain a listing of your DVD collection. It integrates with Firebase for hosting and data storage, and utilizes the [OMDB](https://www.omdbapi.com/) API to fetch movie details.
 
-This app also makes use of [OMDB](https://www.omdbapi.com/) open API for movie details, so you need an API key from them.
+## Getting Started
 
-## Firebase
+### 1. OMDB API
 
-The app is using Firebase hosting.
-After installing the [Firebase CLI](https://firebase.google.com/docs/cli) you can deploy a new version with `firebase deploy`.
+The app fetches movie information from the OMDB API. To use this feature, you’ll need to sign up and obtain an API key from [OMDB](https://www.omdbapi.com/).
 
-Make sure to have your permissions set correctly in Firebase and to have created a user to be able to login.
+### 2. Firebase Setup
 
-```
+To store your data, you’ll need to configure a Firebase database. Ensure you have a Firebase project set up and add your credentials to the `.env` file.
+
+#### Firebase Hosting
+
+This app is deployed using Firebase Hosting. To deploy updates:
+
+1. Install the [Firebase CLI](https://firebase.google.com/docs/cli).
+2. Run `firebase deploy` to push the latest version.
+
+Make sure your Firebase authentication and permissions are properly configured. You’ll need to create a user account for logging in.
+
+### Firebase Security Rules
+
+Ensure your Firestore database rules are set to the following:
+
+```javascript
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -26,6 +39,8 @@ service cloud.firestore {
   }
 }
 ```
+
+This configuration allows anyone to read the data, but only authenticated users can write to the database.
 
 ## Recommended IDE Setup
 
