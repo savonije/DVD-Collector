@@ -1,6 +1,8 @@
-# Simple DVD Collection
+# DVD Collector
 
-This project is a lightweight Vue.js application designed to help you manage and maintain a listing of your DVD collection. It integrates with Firebase for hosting and data storage, and utilizes the [OMDB](https://www.omdbapi.com/) API to fetch movie details.
+![DVD Collector](./public/images/screenshot.png)
+
+This project is a lightweight Vue.js application designed to help you manage and maintain a listing of your personal DVD collection. It integrates with Firebase for hosting and data storage, and utilizes the [OMDB](https://www.omdbapi.com/) API to fetch movie details. It fetches IMDB ratings but you can also add your own personal rating to titles. Managing your DVDs is behind a login that you can setup in Firebase.
 
 ## Getting Started
 
