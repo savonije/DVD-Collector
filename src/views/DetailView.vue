@@ -41,6 +41,7 @@ const getInfo = () => {
 }
 
 const toggleEdit = () => {
+  if (!storeAuth.user?.id) return
   showEdit.value = !showEdit.value
 }
 
