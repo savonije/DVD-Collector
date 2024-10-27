@@ -13,5 +13,5 @@ const isModalVisible = ref(false)
     Add movie
   </button>
 
-  <ModalAddTitle v-if="isModalVisible" v-model="isModalVisible" />
+  <ModalAddTitle v-model="isModalVisible" />
 </template>

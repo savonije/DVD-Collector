@@ -1,19 +1,32 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineProps, defineEmits, watch } from 'vue'
 import ModalLayout from '@/layouts/ModalLayout.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 import { toast, type ToastOptions } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 
+const props = defineProps({
+  modelValue: Boolean
+})
+const emit = defineEmits(['update:modelValue'])
+
 const StoreDVD = useStoreDVDs()
 
-const model = defineModel()
+const model = ref(props.modelValue)
+
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    model.value = newValue
+  }
+)
 
 const title = ref('')
 const rating = ref('1')
 
 const closeModal = () => {
   model.value = false
+  emit('update:modelValue', false)
 }
 
 const submitForm = () => {
@@ -35,7 +48,7 @@ const submitForm = () => {
 </script>
 
 <template>
-  <ModalLayout>
+  <ModalLayout :showModal="model" @close="closeModal">
     <h2 class="mb-0">Add a new DVD</h2>
     <form @submit.prevent="submitForm">
       <div class="mb-3">
@@ -60,10 +73,8 @@ const submitForm = () => {
       </div>
 
       <div class="flex justify-between">
-        <button type="submit" class="button button-neutral" @click.prevent="closeModal">
-          Cancel
-        </button>
-        <button type="submit" class="button" @click.prevent="submitForm">Submit</button>
+        <button type="button" class="button button-neutral" @click="closeModal">Cancel</button>
+        <button type="submit" class="button">Submit</button>
       </div>
     </form>
   </ModalLayout>
