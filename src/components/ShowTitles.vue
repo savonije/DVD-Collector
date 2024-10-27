@@ -46,12 +46,21 @@ const filteredDVDs = computed(() => {
   </template>
   <template v-else>
     <div class="flex justify-center">
-      <input
-        type="text"
-        v-model="searchQuery"
-        placeholder="Search for a DVD..."
-        class="w-full p-6 mb-3 rounded max-w-[450px]"
-      />
+      <div class="relative max-w-[450px] w-full">
+        <input
+          type="text"
+          v-model="searchQuery"
+          placeholder="Search for a DVD..."
+          class="w-full p-6 mb-3 rounded"
+        />
+        <button
+          @click="searchQuery = ''"
+          v-if="searchQuery"
+          class="absolute right-0 top-0 p-6 text-xl leading-none"
+        >
+          &times;
+        </button>
+      </div>
     </div>
 
     <div class="flex items-center justify-between mb-9">
