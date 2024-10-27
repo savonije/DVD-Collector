@@ -28,7 +28,7 @@ const getMovieData = () => {
       plot.value = movieDetails.value?.Plot
 
       if (plot.value.length > 100) {
-        plot.value = plot.value.substring(0, 100) + '...'
+        plot.value = plot.value.substring(0, 150) + '...'
       } else {
         plot.value
       }
@@ -53,7 +53,7 @@ onMounted(() => {
           {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
         </div>
 
-        <div class="text-black-600 text-sm">
+        <div class="text-black-600 text-sm leading-loose">
           {{ plot }}
         </div>
       </div>
