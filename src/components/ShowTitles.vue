@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import MovieCard from '@/components/MovieCard.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 import isLoading from '@/components/isLoading.vue'
@@ -9,9 +9,30 @@ const items = useStoreDVDs()
 const searchQuery = ref('')
 const sortOrder = ref('name')
 
+const debouncedSearchQuery = ref(searchQuery.value)
+
+function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
+  func: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let timeout: ReturnType<typeof setTimeout>
+
+  return (...args: Parameters<T>): void => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => func(...args), delay)
+  }
+}
+
+watch(
+  searchQuery,
+  debounce((newQuery: string) => {
+    debouncedSearchQuery.value = newQuery
+  }, 500)
+)
+
 const filteredDVDs = computed(() => {
   let filtered = items.DVDs.filter((dvd) =>
-    dvd.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    dvd.name.toLowerCase().includes(debouncedSearchQuery.value.toLowerCase())
   )
 
   filtered.sort((a, b) => {
@@ -42,12 +63,12 @@ const filteredDVDs = computed(() => {
     <isLoading />
   </template>
   <template v-else>
-    <div>
+    <div class="flex justify-center">
       <input
         type="text"
         v-model="searchQuery"
         placeholder="Search for a DVD..."
-        class="w-full p-4 mb-3 rounded"
+        class="w-full p-6 mb-3 rounded max-w-[450px]"
       />
     </div>
 
