@@ -2,30 +2,27 @@
 import { defineProps, defineEmits } from 'vue'
 import router from '@/router'
 import ModalLayout from '@/layouts/ModalLayout.vue'
-import type { Movie } from '@/types'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 
 const props = defineProps({
   id: String,
   name: String,
   rating: Number,
-  modelValue: Boolean // Use this as `v-model` binding
+  modelValue: Boolean
 })
 const emit = defineEmits(['update:modelValue'])
 
 const StoreDVD = useStoreDVDs()
 
-// Close the modal by emitting `update:modelValue` as `false`
 const closeModal = () => {
   emit('update:modelValue', false)
 }
 
-// Delete the title and close the modal afterward
 const deleteTitle = () => {
   if (!props.id) return
   StoreDVD.deleteDVD(props.id)
   router.push({ path: '/' })
-  closeModal() // Close the modal after deletion
+  closeModal()
 }
 </script>
 
