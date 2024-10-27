@@ -19,7 +19,8 @@ To store your data, you’ll need to configure a Firebase database. Ensure you h
 This app is deployed using Firebase Hosting. To deploy updates:
 
 1. Install the [Firebase CLI](https://firebase.google.com/docs/cli).
-2. Run `firebase deploy` to push the latest version.
+2. Run `npm run build` to build your app.
+3. Run `firebase deploy` to push the latest version.
 
 Make sure your Firebase authentication and permissions are properly configured. You’ll need to create a user account for logging in.
 
