@@ -18,7 +18,6 @@ const props = defineProps<Movie>()
   </button>
 
   <ModalDeleteTitle
-    v-if="isModalVisible"
     v-model="isModalVisible"
     :id="props.id"
     :name="props.name"
