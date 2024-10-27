@@ -7,11 +7,33 @@ import isLoading from '@/components/isLoading.vue'
 const items = useStoreDVDs()
 
 const searchQuery = ref('')
+const sortOrder = ref('name')
 
 const filteredDVDs = computed(() => {
-  return items.DVDs.filter((dvd) =>
+  let filtered = items.DVDs.filter((dvd) =>
     dvd.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
+
+  filtered.sort((a, b) => {
+    if (sortOrder.value === 'asc') {
+      return a.name.localeCompare(b.name)
+    }
+
+    if (sortOrder.value === 'des') {
+      return b.name.localeCompare(a.name)
+    }
+
+    if (sortOrder.value === 'rating') {
+      const ratingA = a.rating ?? 0
+      const ratingB = b.rating ?? 0
+
+      return ratingB - ratingA
+    }
+
+    return 0
+  })
+
+  return filtered
 })
 </script>
 
@@ -29,13 +51,23 @@ const filteredDVDs = computed(() => {
       />
     </div>
 
-    <div class="mb-3" v-if="searchQuery">
-      Filtered <span class="font-bold">{{ filteredDVDs.length }}</span> out of
-      <span class="font-bold">{{ items.DVDs.length }}</span> results
-    </div>
-    <div class="mb-3" v-else>
-      Currently there are a total of <span class="font-bold">{{ items.DVDs.length }}</span> titles
-      in the database.
+    <div class="flex items-center justify-between mb-9">
+      <div v-if="searchQuery">
+        Filtered <span class="font-bold">{{ filteredDVDs.length }}</span> out of
+        <span class="font-bold">{{ items.DVDs.length }}</span> results
+      </div>
+      <div v-else>
+        Currently there are a total of <span class="font-bold">{{ items.DVDs.length }}</span> titles
+        in the database.
+      </div>
+
+      <div>
+        <select class="p-3 rounded font-bold" v-model="sortOrder">
+          <option value="asc" selected>Asc</option>
+          <option value="des">Des</option>
+          <option value="rating">Rating</option>
+        </select>
+      </div>
     </div>
 
     <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
