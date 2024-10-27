@@ -3,13 +3,14 @@ import { defineProps, defineEmits } from 'vue'
 import router from '@/router'
 import ModalLayout from '@/layouts/ModalLayout.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
+import type { Movie } from '@/types'
 
-const props = defineProps({
-  id: String,
-  name: String,
-  rating: Number,
-  modelValue: Boolean
-})
+const props = defineProps<
+  Movie & {
+    modelValue: boolean
+  }
+>()
+
 const emit = defineEmits(['update:modelValue'])
 
 const StoreDVD = useStoreDVDs()
