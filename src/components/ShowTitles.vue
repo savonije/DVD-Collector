@@ -1,34 +1,16 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import MovieCard from '@/components/MovieCard.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 import isLoading from '@/components/isLoading.vue'
+import { useDebounce } from '@/composables/useDebounce'
 
 const items = useStoreDVDs()
 
 const searchQuery = ref('')
 const sortOrder = ref('name')
 
-const debouncedSearchQuery = ref(searchQuery.value)
-
-function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
-  func: T,
-  delay: number
-): (...args: Parameters<T>) => void {
-  let timeout: ReturnType<typeof setTimeout>
-
-  return (...args: Parameters<T>): void => {
-    clearTimeout(timeout)
-    timeout = setTimeout(() => func(...args), delay)
-  }
-}
-
-watch(
-  searchQuery,
-  debounce((newQuery: string) => {
-    debouncedSearchQuery.value = newQuery
-  }, 500)
-)
+const debouncedSearchQuery = useDebounce(searchQuery, 500)
 
 const filteredDVDs = computed(() => {
   let filtered = items.DVDs.filter((dvd) =>
