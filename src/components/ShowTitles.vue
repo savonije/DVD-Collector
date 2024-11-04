@@ -13,7 +13,7 @@ const sortOrder = ref('name')
 const debouncedSearchQuery = useDebounce(searchQuery, 500)
 
 const filteredDVDs = computed(() => {
-  let filtered = items.DVDs.filter((dvd) =>
+  const filtered = items.DVDs.filter((dvd) =>
     dvd.name.toLowerCase().includes(debouncedSearchQuery.value.toLowerCase())
   )
 
