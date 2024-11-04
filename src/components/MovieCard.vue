@@ -29,8 +29,6 @@ const getMovieData = () => {
 
       if (plot.value.length > 100) {
         plot.value = plot.value.substring(0, 150) + '...'
-      } else {
-        plot.value
       }
     })
     .catch((error) => {

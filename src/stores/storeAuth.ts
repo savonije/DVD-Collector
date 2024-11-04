@@ -26,6 +26,7 @@ export const useStoreAuth = defineStore('storeAuth', {
     loginUser(credentials: { email: string; password: string }) {
       signInWithEmailAndPassword(auth, credentials.email, credentials.password)
         .then((userCredential) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const user = userCredential.user
         })
         .catch((error) => {
