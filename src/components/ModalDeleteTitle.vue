@@ -25,13 +25,10 @@ const deleteTitle = async () => {
   if (!props.id) return
   StoreDVD.deleteDVD(props.id)
 
-  // Redirect to homepage first
   await router.push({ path: '/' })
 
-  // Wait for the DOM to update after the navigation
   await nextTick()
 
-  // Show the toast notification
   toast.success(`<strong>${props.name}</strong> has been deleted!`, {
     autoClose: 3000,
     theme: 'dark',
