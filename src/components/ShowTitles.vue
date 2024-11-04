@@ -75,9 +75,9 @@ const filteredDVDs = computed(() => {
 
       <div>
         <select class="p-3 rounded font-bold" v-model="sortOrder">
-          <option value="asc" selected>Asc</option>
-          <option value="des">Des</option>
-          <option value="rating">Rating</option>
+          <option value="asc" selected>A-Z</option>
+          <option value="des">Z-A</option>
+          <option value="rating">Rating High - Low</option>
         </select>
       </div>
     </div>
