@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, nextTick } from 'vue'
 import router from '@/router'
 import ModalLayout from '@/layouts/ModalLayout.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 import type { Movie } from '@/types'
+import { toast, type ToastOptions } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 const props = defineProps<
   Movie & {
@@ -19,10 +21,23 @@ const closeModal = () => {
   emit('update:modelValue', false)
 }
 
-const deleteTitle = () => {
+const deleteTitle = async () => {
   if (!props.id) return
   StoreDVD.deleteDVD(props.id)
-  router.push({ path: '/' })
+
+  // Redirect to homepage first
+  await router.push({ path: '/' })
+
+  // Wait for the DOM to update after the navigation
+  await nextTick()
+
+  // Show the toast notification
+  toast.success(`<strong>${props.name}</strong> has been deleted!`, {
+    autoClose: 3000,
+    theme: 'dark',
+    dangerouslyHTMLString: true
+  } as ToastOptions)
+
   closeModal()
 }
 </script>
