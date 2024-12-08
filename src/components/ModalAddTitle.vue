@@ -53,7 +53,12 @@ const submitForm = () => {
     <form @submit.prevent="submitForm">
       <div class="mb-3">
         <label for="name" class="block font-bold">Name:</label>
-        <input type="text" id="name" class="px-6 py-3 border min-w-[400px]" v-model="title" />
+        <input
+          type="text"
+          id="name"
+          class="px-6 py-3 border w-full sm:min-w-[400px]"
+          v-model="title"
+        />
       </div>
 
       <div class="mb-3">
