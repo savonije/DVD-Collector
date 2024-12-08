@@ -83,13 +83,13 @@ onMounted(() => {
         </div>
         <div class="p-6">
           <div class="flex gap-6" v-if="!isDataLoading && movieDetails">
-            <div>
+            <div class="w-1/3">
               <figure class="flex-shrink-0 border-2 -mt-12" v-if="movieDetails.Poster">
                 <img :src="movieDetails.Poster" :alt="name" width="300" height="441" />
               </figure>
             </div>
 
-            <div>
+            <div class="w-2/3">
               <div class="text-gray-400 text-xs font-bold mb-1">
                 {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
               </div>
