@@ -45,7 +45,7 @@ const filteredDVDs = computed(() => {
     <isLoading />
   </template>
   <template v-else>
-    <div class="flex justify-center">
+    <div class="flex justify-center mb-3">
       <div class="relative max-w-[450px] w-full">
         <input
           type="text"
@@ -73,8 +73,11 @@ const filteredDVDs = computed(() => {
         in the database.
       </div>
 
-      <div>
-        <select class="p-3 rounded font-bold bg-white text-black" v-model="sortOrder">
+      <div class="w-full mt-6 sm:mt-0">
+        <select
+          class="p-3 rounded font-bold bg-white text-black w-full sm:w-auto"
+          v-model="sortOrder"
+        >
           <option value="asc" selected>A-Z</option>
           <option value="des">Z-A</option>
           <option value="rating">Rating High - Low</option>
