@@ -28,7 +28,7 @@ const getMovieData = () => {
       plot.value = movieDetails.value?.Plot
 
       if (plot.value.length > 100) {
-        plot.value = plot.value.substring(0, 150) + '...'
+        plot.value = plot.value.substring(0, 100) + '...'
       }
     })
     .catch((error) => {
@@ -57,7 +57,7 @@ onMounted(() => {
       </div>
 
       <div class="shrink-0 movie-poster rounded-r">
-        <div v-if="movieDetails?.Poster">
+        <div v-if="movieDetails?.Poster" class="h-full">
           <img :src="movieDetails?.Poster" />
         </div>
         <div
@@ -86,7 +86,7 @@ onMounted(() => {
   @apply relative overflow-hidden;
 
   img {
-    @apply relative max-w-full transform transition duration-500 w-[200px] h-[300px] object-cover;
+    @apply relative max-w-full transform transition duration-500 h-full w-[150px] sm:w-[200px] object-fill;
 
     &:after {
       @apply absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white content-[''] z-10;

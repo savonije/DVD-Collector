@@ -63,7 +63,7 @@ const filteredDVDs = computed(() => {
       </div>
     </div>
 
-    <div class="flex items-center justify-between mb-9">
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-9">
       <div v-if="searchQuery">
         Filtered <span class="font-bold">{{ filteredDVDs.length }}</span> out of
         <span class="font-bold">{{ items.DVDs.length }}</span> results
