@@ -8,7 +8,7 @@ import { useDebounce } from '@/composables/useDebounce'
 const items = useStoreDVDs()
 
 const searchQuery = ref('')
-const sortOrder = ref('name')
+const sortOrder = ref('asc')
 
 const debouncedSearchQuery = useDebounce(searchQuery, 500)
 
@@ -74,7 +74,7 @@ const filteredDVDs = computed(() => {
       </div>
 
       <div>
-        <select class="p-3 rounded font-bold" v-model="sortOrder">
+        <select class="p-3 rounded font-bold bg-white text-black" v-model="sortOrder">
           <option value="asc" selected>A-Z</option>
           <option value="des">Z-A</option>
           <option value="rating">Rating High - Low</option>
