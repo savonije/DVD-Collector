@@ -10,7 +10,7 @@ const username = import.meta.env.VITE_USERNAME
 <template>
   <header class="bg-shark text-teal p-3 mb-6">
     <div
-      class="sm:container flex justify-center sm:justify-between sm:items-center flex-col sm:flex-row gap-6"
+      class="container flex justify-center sm:justify-between sm:items-center flex-col sm:flex-row gap-6"
     >
       <RouterLink to="/">
         <span class="text-2xl font-bold font-heading"> {{ username }}'s DVD collection </span>
