@@ -86,7 +86,7 @@ onMounted(() => {
   @apply relative overflow-hidden;
 
   img {
-    @apply relative max-w-full transform transition duration-500 h-full w-[150px] sm:w-[200px] object-fill;
+    @apply relative max-w-full transform transition duration-500 h-full sm:h-[300px] w-[150px] sm:w-[200px] object-cover;
 
     &:after {
       @apply absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white content-[''] z-10;
