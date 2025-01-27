@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onClickOutside } from '@vueuse/core'
-import { ref, defineProps, defineEmits, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 defineProps({
   showModal: Boolean

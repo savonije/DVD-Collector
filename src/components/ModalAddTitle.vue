@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, watch } from 'vue'
+import { ref, watch } from 'vue'
 import ModalLayout from '@/layouts/ModalLayout.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
 import { toast, type ToastOptions } from 'vue3-toastify'

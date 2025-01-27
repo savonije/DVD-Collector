@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, nextTick } from 'vue'
+import { nextTick } from 'vue'
 import router from '@/router'
 import ModalLayout from '@/layouts/ModalLayout.vue'
 import { useStoreDVDs } from '@/stores/storeDVDs'
