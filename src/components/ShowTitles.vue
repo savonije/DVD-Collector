@@ -51,7 +51,7 @@ const filteredDVDs = computed(() => {
           type="text"
           v-model="searchQuery"
           placeholder="Search for a DVD..."
-          class="w-full p-6 mb-3 rounded"
+          class="w-full p-6 mb-3 rounded-sm bg-white"
         />
         <button
           @click="searchQuery = ''"
@@ -75,7 +75,7 @@ const filteredDVDs = computed(() => {
 
       <div class="w-full mt-6 sm:mt-0 flex justify-end">
         <select
-          class="p-3 rounded font-bold bg-white text-black w-full sm:w-auto"
+          class="p-3 rounded-sm font-bold bg-white text-black w-full sm:w-auto"
           v-model="sortOrder"
         >
           <option value="asc" selected>A-Z</option>

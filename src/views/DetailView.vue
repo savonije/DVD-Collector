@@ -62,7 +62,7 @@ onMounted(() => {
 <template>
   <DefaultLayout>
     <div class="max-w-[800px] mx-auto">
-      <div class="bg-white shadow">
+      <div class="bg-white shadow-sm">
         <div class="bg-teal p-6">
           <div class="flex justify-end">
             <h2 class="text-3xl text-shark mb-0 capitalize" v-if="!showEdit" @click="toggleEdit()">
@@ -84,7 +84,7 @@ onMounted(() => {
         <div class="p-6">
           <div class="flex gap-6" v-if="!isDataLoading && movieDetails">
             <div class="w-1/3">
-              <figure class="flex-shrink-0 border-2 -mt-12" v-if="movieDetails.Poster">
+              <figure class="shrink-0 border-2 -mt-12" v-if="movieDetails.Poster">
                 <img :src="movieDetails.Poster" :alt="name" width="300" height="441" />
               </figure>
             </div>
@@ -162,6 +162,8 @@ onMounted(() => {
 </template>
 
 <style scoped>
+@reference "tailwindcss";
+
 .score {
   @apply h-8 w-8 bg-gray-800 flex items-center justify-center text-lg font-bold text-white;
 }

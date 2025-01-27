@@ -32,7 +32,7 @@ onBeforeUnmount(() => {
     v-if="showModal"
     class="fixed z-10 w-full h-full bg-black-700/75 flex items-center justify-center left-0 top-0"
   >
-    <div class="rounded shadow bg-white p-9 w-[95%] sm:max-w-[500px] text-black" ref="modalRef">
+    <div class="rounded-sm shadow-sm bg-white p-9 w-[95%] sm:max-w-[500px] text-black" ref="modalRef">
       <slot />
     </div>
   </div>

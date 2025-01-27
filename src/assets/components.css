@@ -1,17 +1,15 @@
-@layer components {
-  .button {
-    @apply bg-teal text-shark font-bold py-3 px-6 rounded-sm transition hover:bg-teal-400;
-  }
+@utility button {
+  @apply bg-teal text-shark font-bold py-3 px-6 rounded-xs transition hover:bg-teal-400;
+}
 
-  .button-danger {
-    @apply text-white bg-red hover:bg-red-600;
-  }
+@utility button-danger {
+  @apply text-white bg-red hover:bg-red-600;
+}
 
-  .button-neutral {
-    @apply text-white bg-black-400 hover:bg-black-300;
-  }
+@utility button-neutral {
+  @apply text-white bg-black-400 hover:bg-black-300;
+}
 
-  .button-transparent {
-    @apply bg-transparent hover:bg-none;
-  }
+@utility button-transparent {
+  @apply bg-transparent hover:bg-none;
 }

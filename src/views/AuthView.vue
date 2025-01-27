@@ -22,14 +22,14 @@ const submitForm = () => {
 <template>
   <DefaultLayout>
     <div class="container">
-      <div class="bg-white p-6 shadow mx-auto max-w-[500px] rounded">
+      <div class="bg-white p-6 shadow-sm mx-auto max-w-[500px] rounded-sm">
         <h1>Login</h1>
         <form @submit.prevent="submitForm">
           <fieldset class="mb-3">
             <label class="block font-bold">Email:</label>
             <input
               type="email"
-              class="shadow border rounded w-full h-12 p-3"
+              class="shadow-sm border rounded-sm w-full h-12 p-3"
               v-model="credentials.email"
             />
           </fieldset>
@@ -38,7 +38,7 @@ const submitForm = () => {
             <label class="block font-bold">Password:</label>
             <input
               type="password"
-              class="shadow border rounded w-full h-12 p-3"
+              class="shadow-sm border rounded-sm w-full h-12 p-3"
               v-model="credentials.password"
             />
           </fieldset>

@@ -5,7 +5,7 @@ import PageFooter from '@/components/PageFooter.vue'
 
 <template>
   <PageHeader />
-  <main class="container flex-grow">
+  <main class="container grow">
     <slot />
   </main>
   <PageFooter />
