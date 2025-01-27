@@ -73,7 +73,7 @@ const filteredDVDs = computed(() => {
         in the database.
       </div>
 
-      <div class="w-full mt-6 sm:mt-0">
+      <div class="w-full mt-6 sm:mt-0 flex justify-end">
         <select
           class="p-3 rounded font-bold bg-white text-black w-full sm:w-auto"
           v-model="sortOrder"
