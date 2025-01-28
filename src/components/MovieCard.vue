@@ -45,7 +45,7 @@ onMounted(() => {
   <RouterLink :to="`/movie/${name}/${id}`">
     <div class="movie-card">
       <div class="relative grow p-4">
-        <h3 class="mb-0 capitalize">{{ props.name }}</h3>
+        <h3 class="mb-0 capitalize font-bold">{{ props.name }}</h3>
 
         <div class="text-gray-400 text-xs mb-3" v-if="movieDetails?.Year || movieDetails?.Director">
           {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
@@ -74,7 +74,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@reference "tailwindcss";
+@reference "@/assets/main.css";
 
 .movie-card {
   @apply relative flex bg-white shadow hover:shadow-md transition-shadow gap-3 rounded-lg flex-row;

@@ -162,7 +162,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@reference "tailwindcss";
+@reference "@/assets/main.css";
 
 .score {
   @apply h-8 w-8 bg-gray-800 flex items-center justify-center text-lg font-bold text-white;
