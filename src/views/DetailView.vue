@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import axios from 'axios';
-    import { onMounted, ref, type Ref } from 'vue';
+    import { nextTick, onMounted, ref, type Ref } from 'vue';
     import { useRoute } from 'vue-router';
 
     import DeleteTitle from '@/components/DeleteTitle.vue';
@@ -25,6 +25,7 @@
     const isDataLoading = ref(true);
     const showEdit = ref(false);
     const titleInput = ref(name);
+    const inputRef = ref<HTMLInputElement | null>(null);
 
     const getInfo = () => {
         axios
@@ -44,9 +45,14 @@
             });
     };
 
-    const toggleEdit = () => {
+    const toggleEdit = async () => {
         if (!storeAuth.user?.id) return;
         showEdit.value = !showEdit.value;
+
+        await nextTick();
+        if (showEdit.value && inputRef.value) {
+            inputRef.value.focus();
+        }
     };
 
     const submitForm = () => {
@@ -71,20 +77,18 @@
                     <div class="flex justify-end">
                         <h2
                             v-if="!showEdit"
-                            class="text-shark mb-0 text-3xl capitalize"
+                            class="text-shark mb-0 text-3xl font-bold capitalize"
                             @click="toggleEdit()"
                         >
                             {{ name }}
                         </h2>
                         <form v-else @submit.prevent="submitForm">
                             <input
+                                ref="inputRef"
                                 v-model="titleInput"
                                 class="bg-teal text-shark font-heading p-3 text-right text-3xl font-bold capitalize"
                                 type="text"
                             />
-                            <button class="button button-neutral" type="submit">
-                                Save
-                            </button>
                         </form>
                     </div>
                     <div
