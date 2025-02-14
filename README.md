@@ -12,7 +12,7 @@ The app fetches movie information from the OMDB API. To use this feature, you’
 
 ### 2. Firebase Setup
 
-To store your data, you’ll need to configure a Firebase database. Ensure you have a Firebase project set up and add your credentials to the `.env` file.
+To store your data, you’ll need to configure a Firebase database. Ensure you have a Firebase project set up and add your credentials to the `.env` file. Also setup the `.firebaserc` with the correct database.
 
 #### Firebase Hosting
 
