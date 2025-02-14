@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
-import { useStoreAuth } from '@/stores/storeAuth'
-import { onMounted } from 'vue'
+    import { onMounted } from 'vue';
+    import { RouterView } from 'vue-router';
 
-const storeAuth = useStoreAuth()
+    import { useStoreAuth } from '@/stores/storeAuth';
 
-onMounted(() => {
-  storeAuth.init()
-})
+    const storeAuth = useStoreAuth();
+
+    onMounted(() => {
+        storeAuth.init();
+    });
 </script>
 
 <template>
-  <RouterView />
+    <RouterView />
 </template>

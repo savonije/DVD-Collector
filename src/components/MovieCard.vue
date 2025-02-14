@@ -1,102 +1,109 @@
 <script lang="ts" setup>
-import { onMounted, ref, type Ref } from 'vue'
-import type { Movie, MovieDetails } from '@/types'
-import PersonalRating from '@/components/PersonalRating.vue'
-import axios from 'axios'
+    import axios from 'axios';
+    import { onMounted, ref, type Ref } from 'vue';
 
-const props = defineProps<Movie>()
+    import PersonalRating from '@/components/PersonalRating.vue';
 
-const queryName = props.name.split(' ').join('+')
+    import type { Movie, MovieDetails } from '@/types';
 
-const movieDetails: Ref<MovieDetails | null> = ref(null)
+    const props = defineProps<Movie>();
 
-const plot = ref('')
+    const queryName = props.name.split(' ').join('+');
 
-const getMovieData = () => {
-  axios
-    .get(`https://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`)
-    .then((response) => {
-      if (response.data.Error === undefined) {
-        movieDetails.value = response.data
-      }
-    })
-    .then(() => {
-      if (!movieDetails.value?.Plot) {
-        return
-      }
+    const movieDetails: Ref<MovieDetails | null> = ref(null);
 
-      plot.value = movieDetails.value?.Plot
+    const plot = ref('');
 
-      if (plot.value.length > 100) {
-        plot.value = plot.value.substring(0, 100) + '...'
-      }
-    })
-    .catch((error) => {
-      console.error(error)
-    })
-}
+    const getMovieData = () => {
+        axios
+            .get(
+                `https://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
+            )
+            .then((response) => {
+                if (response.data.Error === undefined) {
+                    movieDetails.value = response.data;
+                }
+            })
+            .then(() => {
+                if (!movieDetails.value?.Plot) {
+                    return;
+                }
 
-onMounted(() => {
-  getMovieData()
-})
+                plot.value = movieDetails.value?.Plot;
+
+                if (plot.value.length > 100) {
+                    plot.value = plot.value.substring(0, 100) + '...';
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+    onMounted(() => {
+        getMovieData();
+    });
 </script>
 
 <template>
-  <RouterLink :to="`/movie/${name}/${id}`">
-    <div class="movie-card">
-      <div class="relative grow p-4">
-        <h3 class="mb-0 capitalize font-bold">{{ props.name }}</h3>
+    <RouterLink :to="`/movie/${name}/${id}`">
+        <div class="movie-card">
+            <div class="relative grow p-4">
+                <h3 class="mb-0 font-bold capitalize">{{ props.name }}</h3>
 
-        <div class="text-gray-400 text-xs mb-3" v-if="movieDetails?.Year || movieDetails?.Director">
-          {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
-        </div>
+                <div
+                    v-if="movieDetails?.Year || movieDetails?.Director"
+                    class="mb-3 text-xs text-gray-400"
+                >
+                    {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
+                </div>
 
-        <div class="text-black-600 text-sm leading-loose">
-          {{ plot }}
-        </div>
-      </div>
+                <div class="text-black-600 text-sm leading-loose">
+                    {{ plot }}
+                </div>
+            </div>
 
-      <div class="shrink-0 movie-poster rounded-r">
-        <div v-if="movieDetails?.Poster" class="h-full">
-          <img :src="movieDetails?.Poster" />
-        </div>
-        <div
-          v-else
-          class="bg-gray-400 w-[200px] h-[300px] max-h-full max-w-full flex items-center justify-center text-7xl text-gray-500"
-        >
-          ?
-        </div>
+            <div class="movie-poster shrink-0 rounded-r">
+                <div v-if="movieDetails?.Poster" class="h-full">
+                    <img :src="movieDetails?.Poster" />
+                </div>
+                <div
+                    v-else
+                    class="flex h-[300px] max-h-full w-[200px] max-w-full items-center justify-center bg-gray-400 text-7xl text-gray-500"
+                >
+                    ?
+                </div>
 
-        <PersonalRating :rating="props.rating" />
-      </div>
-    </div>
-  </RouterLink>
+                <PersonalRating :rating="props.rating" />
+            </div>
+        </div>
+    </RouterLink>
 </template>
 
 <style scoped>
-@reference "@/assets/main.css";
+    @reference "@/assets/main.css";
 
-.movie-card {
-  @apply relative flex bg-white shadow hover:shadow-md transition-shadow gap-3 rounded-lg flex-row;
+    .movie-card {
+        @apply relative flex flex-row gap-3 rounded-lg bg-white shadow transition-shadow hover:shadow-md;
 
-  &:hover img {
-    @apply scale-[110%];
-  }
-}
-
-.movie-poster {
-  @apply relative overflow-hidden;
-
-  img {
-    @apply relative max-w-full transform transition duration-500 h-full sm:h-[300px] w-[150px] sm:w-[200px] object-cover;
-
-    &:after {
-      @apply absolute top-0 left-0 w-full h-full bg-linear-to-r from-white content-[''] z-10;
+        &:hover img {
+            @apply scale-[110%];
+        }
     }
-  }
 
-  .rating {
-    @apply absolute top-3 right-3;
-  }
-}
+    .movie-poster {
+        @apply relative overflow-hidden;
+
+        img {
+            @apply relative h-full w-[150px] max-w-full transform object-cover transition duration-500 sm:h-[300px] sm:w-[200px];
+
+            &:after {
+                @apply absolute top-0 left-0 z-10 h-full w-full bg-linear-to-r from-white content-[''];
+            }
+        }
+
+        .rating {
+            @apply absolute top-3 right-3;
+        }
+    }
 </style>

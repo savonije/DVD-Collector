@@ -1,26 +1,27 @@
-import './assets/main.css'
+import './assets/main.css';
 
-import { createApp, markRaw } from 'vue'
-import App from './App.vue'
-import router from './router'
-import { createPinia } from 'pinia'
-import type { Router } from 'vue-router'
+import router from './router';
+import { createPinia } from 'pinia';
+import { createApp, markRaw } from 'vue';
+import type { Router } from 'vue-router';
+
+import App from './App.vue';
 
 declare module 'pinia' {
-  export interface PiniaCustomProperties {
-    router: Router
-  }
+    export interface PiniaCustomProperties {
+        router: Router;
+    }
 }
 
-const pinia = createPinia()
+const pinia = createPinia();
 
-const app = createApp(App)
+const app = createApp(App);
 
 pinia.use(({ store }) => {
-  store.router = markRaw(router)
-})
+    store.router = markRaw(router);
+});
 
-app.use(router)
-app.use(pinia)
+app.use(router);
+app.use(pinia);
 
-app.mount('#app')
+app.mount('#app');

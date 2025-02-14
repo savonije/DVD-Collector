@@ -1,15 +1,15 @@
 @utility button {
-  @apply bg-teal text-shark font-bold py-3 px-6 rounded-xs transition hover:bg-teal-400;
+    @apply bg-teal text-shark rounded-xs px-6 py-3 font-bold transition hover:bg-teal-400;
 }
 
 @utility button-danger {
-  @apply text-white bg-red hover:bg-red-600;
+    @apply bg-red text-white hover:bg-red-600;
 }
 
 @utility button-neutral {
-  @apply text-white bg-black-400 hover:bg-black-300;
+    @apply bg-black-400 hover:bg-black-300 text-white;
 }
 
 @utility button-transparent {
-  @apply bg-transparent hover:bg-none;
+    @apply bg-transparent hover:bg-none;
 }

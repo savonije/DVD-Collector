@@ -1,17 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import ModalAddTitle from './ModalAddTitle.vue'
-import { useStoreAuth } from '@/stores/storeAuth'
+    import { ref } from 'vue';
 
-const storeAuth = useStoreAuth()
+    import { useStoreAuth } from '@/stores/storeAuth';
 
-const isModalVisible = ref(false)
+    import ModalAddTitle from './ModalAddTitle.vue';
+
+    const storeAuth = useStoreAuth();
+
+    const isModalVisible = ref(false);
 </script>
 
 <template>
-  <button type="button" class="button" @click="isModalVisible = true" v-if="storeAuth.user?.id">
-    Add movie
-  </button>
+    <button
+        v-if="storeAuth.user?.id"
+        class="button"
+        type="button"
+        @click="isModalVisible = true"
+    >
+        Add movie
+    </button>
 
-  <ModalAddTitle v-model="isModalVisible" />
+    <ModalAddTitle v-model="isModalVisible" />
 </template>

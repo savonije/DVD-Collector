@@ -1,26 +1,28 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import ModalDeleteTitle from './ModalDeleteTitle.vue'
-import type { Movie } from '@/types'
+    import { ref } from 'vue';
 
-const isModalVisible = ref(false)
+    import type { Movie } from '@/types';
 
-const props = defineProps<Movie>()
+    import ModalDeleteTitle from './ModalDeleteTitle.vue';
+
+    const isModalVisible = ref(false);
+
+    const props = defineProps<Movie>();
 </script>
 
 <template>
-  <button
-    type="button"
-    class="text-red font-bold opacity-50 hover:underline underline-offset-2"
-    @click="isModalVisible = true"
-  >
-    Delete
-  </button>
+    <button
+        class="text-red font-bold underline-offset-2 opacity-50 hover:underline"
+        type="button"
+        @click="isModalVisible = true"
+    >
+        Delete
+    </button>
 
-  <ModalDeleteTitle
-    v-model="isModalVisible"
-    :id="props.id"
-    :name="props.name"
-    :rating="props.rating"
-  />
+    <ModalDeleteTitle
+        :id="props.id"
+        v-model="isModalVisible"
+        :name="props.name"
+        :rating="props.rating"
+    />
 </template>

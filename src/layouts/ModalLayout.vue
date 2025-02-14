@@ -1,39 +1,42 @@
 <script lang="ts" setup>
-import { onClickOutside } from '@vueuse/core'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+    import { onClickOutside } from '@vueuse/core';
+    import { onBeforeUnmount, onMounted, ref } from 'vue';
 
-defineProps({
-  showModal: Boolean
-})
-const emit = defineEmits(['close'])
+    defineProps({
+        showModal: Boolean,
+    });
+    const emit = defineEmits(['close']);
 
-const modalRef = ref(null)
+    const modalRef = ref(null);
 
-onClickOutside(modalRef, () => {
-  emit('close')
-})
+    onClickOutside(modalRef, () => {
+        emit('close');
+    });
 
-const handleEscape = (event: KeyboardEvent) => {
-  if (event.key === 'Escape') {
-    emit('close')
-  }
-}
+    const handleEscape = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+            emit('close');
+        }
+    };
 
-onMounted(() => {
-  window.addEventListener('keydown', handleEscape)
-})
-onBeforeUnmount(() => {
-  window.removeEventListener('keydown', handleEscape)
-})
+    onMounted(() => {
+        window.addEventListener('keydown', handleEscape);
+    });
+    onBeforeUnmount(() => {
+        window.removeEventListener('keydown', handleEscape);
+    });
 </script>
 
 <template>
-  <div
-    v-if="showModal"
-    class="fixed z-10 w-full h-full bg-black-700/75 flex items-center justify-center left-0 top-0"
-  >
-    <div class="rounded-sm shadow-sm bg-white p-9 w-[95%] sm:max-w-[500px] text-black" ref="modalRef">
-      <slot />
+    <div
+        v-if="showModal"
+        class="bg-black-700/75 fixed top-0 left-0 z-10 flex h-full w-full items-center justify-center"
+    >
+        <div
+            ref="modalRef"
+            class="w-[95%] rounded-sm bg-white p-9 text-black shadow-sm sm:max-w-[500px]"
+        >
+            <slot />
+        </div>
     </div>
-  </div>
 </template>

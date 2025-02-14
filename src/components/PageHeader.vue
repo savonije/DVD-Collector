@@ -1,35 +1,40 @@
 <script setup lang="ts">
-import { useStoreAuth } from '@/stores/storeAuth'
-import AddTitle from '@/components/AddTitle.vue'
+    import AddTitle from '@/components/AddTitle.vue';
 
-const storeAuth = useStoreAuth()
+    import { useStoreAuth } from '@/stores/storeAuth';
 
-const username = import.meta.env.VITE_USERNAME
+    const storeAuth = useStoreAuth();
+
+    const username = import.meta.env.VITE_USERNAME;
 </script>
 
 <template>
-  <header class="bg-shark text-teal p-3 mb-6">
-    <div
-      class="container flex justify-center sm:justify-between sm:items-center flex-col sm:flex-row gap-6"
-    >
-      <RouterLink to="/">
-        <span class="text-2xl font-bold font-heading"> {{ username }}'s DVD collection </span>
-      </RouterLink>
-
-      <div class="flex gap-3 justify-end">
-        <AddTitle />
-
-        <button
-          type="button"
-          aria-label="Logout user"
-          class="button button-transparent text-white"
-          @click="storeAuth.logoutUser"
-          v-if="storeAuth.user?.id"
+    <header class="bg-shark text-teal mb-6 p-3">
+        <div
+            class="container flex flex-col justify-center gap-6 sm:flex-row sm:items-center sm:justify-between"
         >
-          Logout
-        </button>
-        <RouterLink class="button text-white" to="/login" v-else> Login </RouterLink>
-      </div>
-    </div>
-  </header>
+            <RouterLink to="/">
+                <span class="font-heading text-2xl font-bold">
+                    {{ username }}'s DVD collection
+                </span>
+            </RouterLink>
+
+            <div class="flex justify-end gap-3">
+                <AddTitle />
+
+                <button
+                    v-if="storeAuth.user?.id"
+                    class="button button-transparent text-white"
+                    type="button"
+                    aria-label="Logout user"
+                    @click="storeAuth.logoutUser"
+                >
+                    Logout
+                </button>
+                <RouterLink v-else class="button text-white" to="/login">
+                    Login
+                </RouterLink>
+            </div>
+        </div>
+    </header>
 </template>

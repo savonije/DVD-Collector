@@ -1,102 +1,110 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import MovieCard from '@/components/MovieCard.vue'
-import { useStoreDVDs } from '@/stores/storeDVDs'
-import isLoading from '@/components/isLoading.vue'
-import { useDebounce } from '@/composables/useDebounce'
+    import { computed, ref } from 'vue';
 
-const items = useStoreDVDs()
+    import isLoading from '@/components/isLoading.vue';
+    import MovieCard from '@/components/MovieCard.vue';
 
-const searchQuery = ref('')
-const sortOrder = ref('asc')
+    import { useDebounce } from '@/composables/useDebounce';
+    import { useStoreDVDs } from '@/stores/storeDVDs';
 
-const debouncedSearchQuery = useDebounce(searchQuery, 500)
+    const items = useStoreDVDs();
 
-const filteredDVDs = computed(() => {
-  const filtered = items.DVDs.filter((dvd) =>
-    dvd.name.toLowerCase().includes(debouncedSearchQuery.value.toLowerCase())
-  )
+    const searchQuery = ref('');
+    const sortOrder = ref('asc');
 
-  filtered.sort((a, b) => {
-    if (sortOrder.value === 'asc') {
-      return a.name.localeCompare(b.name)
-    }
+    const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
-    if (sortOrder.value === 'des') {
-      return b.name.localeCompare(a.name)
-    }
+    const filteredDVDs = computed(() => {
+        const filtered = items.DVDs.filter((dvd) =>
+            dvd.name
+                .toLowerCase()
+                .includes(debouncedSearchQuery.value.toLowerCase()),
+        );
 
-    if (sortOrder.value === 'rating') {
-      const ratingA = a.rating ?? 0
-      const ratingB = b.rating ?? 0
+        filtered.sort((a, b) => {
+            if (sortOrder.value === 'asc') {
+                return a.name.localeCompare(b.name);
+            }
 
-      return ratingB - ratingA
-    }
+            if (sortOrder.value === 'des') {
+                return b.name.localeCompare(a.name);
+            }
 
-    return 0
-  })
+            if (sortOrder.value === 'rating') {
+                const ratingA = a.rating ?? 0;
+                const ratingB = b.rating ?? 0;
 
-  return filtered
-})
+                return ratingB - ratingA;
+            }
+
+            return 0;
+        });
+
+        return filtered;
+    });
 </script>
 
 <template>
-  <template v-if="!items.DVDsLoaded">
-    <isLoading />
-  </template>
-  <template v-else>
-    <div class="flex justify-center mb-3">
-      <div class="relative max-w-[450px] w-full">
-        <input
-          type="text"
-          v-model="searchQuery"
-          placeholder="Search for a DVD..."
-          class="w-full p-6 mb-3 rounded-sm bg-white"
-        />
-        <button
-          @click="searchQuery = ''"
-          v-if="searchQuery"
-          class="absolute right-0 top-0 p-6 text-xl leading-none"
+    <template v-if="!items.DVDsLoaded">
+        <isLoading />
+    </template>
+    <template v-else>
+        <div class="mb-3 flex justify-center">
+            <div class="relative w-full max-w-[450px]">
+                <input
+                    v-model="searchQuery"
+                    class="mb-3 w-full rounded-sm bg-white p-6"
+                    type="text"
+                    placeholder="Search for a DVD..."
+                />
+                <button
+                    v-if="searchQuery"
+                    class="absolute top-0 right-0 p-6 text-xl leading-none"
+                    @click="searchQuery = ''"
+                >
+                    &times;
+                </button>
+            </div>
+        </div>
+
+        <div
+            class="mb-9 flex flex-col items-center justify-between sm:flex-row"
         >
-          &times;
-        </button>
-      </div>
-    </div>
+            <div v-if="searchQuery">
+                Filtered
+                <span class="font-bold">{{ filteredDVDs.length }}</span> out of
+                <span class="font-bold">{{ items.DVDs.length }}</span> results
+            </div>
+            <div v-else>
+                Currently there are a total of
+                <span class="font-bold">{{ items.DVDs.length }}</span> titles in
+                the database.
+            </div>
 
-    <div class="flex flex-col sm:flex-row items-center justify-between mb-9">
-      <div v-if="searchQuery">
-        Filtered <span class="font-bold">{{ filteredDVDs.length }}</span> out of
-        <span class="font-bold">{{ items.DVDs.length }}</span> results
-      </div>
-      <div v-else>
-        Currently there are a total of <span class="font-bold">{{ items.DVDs.length }}</span> titles
-        in the database.
-      </div>
+            <div class="mt-6 flex w-full justify-end sm:mt-0">
+                <select
+                    v-model="sortOrder"
+                    class="w-full rounded-sm bg-white p-3 font-bold text-black sm:w-auto"
+                >
+                    <option value="asc" selected>A-Z</option>
+                    <option value="des">Z-A</option>
+                    <option value="rating">Rating High - Low</option>
+                </select>
+            </div>
+        </div>
 
-      <div class="w-full mt-6 sm:mt-0 flex justify-end">
-        <select
-          class="p-3 rounded-sm font-bold bg-white text-black w-full sm:w-auto"
-          v-model="sortOrder"
-        >
-          <option value="asc" selected>A-Z</option>
-          <option value="des">Z-A</option>
-          <option value="rating">Rating High - Low</option>
-        </select>
-      </div>
-    </div>
+        <div class="mb-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <MovieCard
+                v-for="item in filteredDVDs"
+                :id="item.id"
+                :key="item.id"
+                :name="item.name"
+                :rating="item.rating"
+            />
+        </div>
 
-    <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
-      <MovieCard
-        v-for="item in filteredDVDs"
-        :key="item.id"
-        :id="item.id"
-        :name="item.name"
-        :rating="item.rating"
-      />
-    </div>
-
-    <div v-if="!filteredDVDs.length">
-      <h1>No DVDs found...</h1>
-    </div>
-  </template>
+        <div v-if="!filteredDVDs.length">
+            <h1>No DVDs found...</h1>
+        </div>
+    </template>
 </template>

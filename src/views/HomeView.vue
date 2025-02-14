@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import ShowTitles from '@/components/ShowTitles.vue'
-import { useStoreDVDs } from '@/stores/storeDVDs'
-import { onMounted } from 'vue'
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
+    import { onMounted } from 'vue';
 
-const storeDVDs = useStoreDVDs()
+    import ShowTitles from '@/components/ShowTitles.vue';
+    import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
-onMounted(() => {
-  storeDVDs.getDVDs()
-})
+    import { useStoreDVDs } from '@/stores/storeDVDs';
+
+    const storeDVDs = useStoreDVDs();
+
+    onMounted(() => {
+        storeDVDs.getDVDs();
+    });
 </script>
 
 <template>
-  <DefaultLayout>
-    <ShowTitles />
-  </DefaultLayout>
+    <DefaultLayout>
+        <ShowTitles />
+    </DefaultLayout>
 </template>

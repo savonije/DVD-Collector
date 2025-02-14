@@ -1,86 +1,95 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import ModalLayout from '@/layouts/ModalLayout.vue'
-import { useStoreDVDs } from '@/stores/storeDVDs'
-import { toast, type ToastOptions } from 'vue3-toastify'
-import 'vue3-toastify/dist/index.css'
+    import { ref, watch } from 'vue';
+    import { toast, type ToastOptions } from 'vue3-toastify';
 
-const props = defineProps({
-  modelValue: Boolean
-})
-const emit = defineEmits(['update:modelValue'])
+    import ModalLayout from '@/layouts/ModalLayout.vue';
 
-const StoreDVD = useStoreDVDs()
+    import { useStoreDVDs } from '@/stores/storeDVDs';
 
-const model = ref(props.modelValue)
+    import 'vue3-toastify/dist/index.css';
 
-watch(
-  () => props.modelValue,
-  (newValue) => {
-    model.value = newValue
-  }
-)
+    const props = defineProps({
+        modelValue: Boolean,
+    });
+    const emit = defineEmits(['update:modelValue']);
 
-const title = ref('')
-const rating = ref('1')
+    const StoreDVD = useStoreDVDs();
 
-const closeModal = () => {
-  model.value = false
-  emit('update:modelValue', false)
-}
+    const model = ref(props.modelValue);
 
-const submitForm = () => {
-  if (title.value !== '') {
-    StoreDVD.addDVD(title.value, +rating.value)
+    watch(
+        () => props.modelValue,
+        (newValue) => {
+            model.value = newValue;
+        },
+    );
 
-    toast.success(`<strong>${title.value}</strong> has been added!`, {
-      autoClose: 3000,
-      theme: 'dark',
-      dangerouslyHTMLString: true
-    } as ToastOptions)
+    const title = ref('');
+    const rating = ref('1');
 
-    title.value = ''
-    rating.value = '1'
+    const closeModal = () => {
+        model.value = false;
+        emit('update:modelValue', false);
+    };
 
-    closeModal()
-  }
-}
+    const submitForm = () => {
+        if (title.value !== '') {
+            StoreDVD.addDVD(title.value, +rating.value);
+
+            toast.success(`<strong>${title.value}</strong> has been added!`, {
+                autoClose: 3000,
+                theme: 'dark',
+                dangerouslyHTMLString: true,
+            } as ToastOptions);
+
+            title.value = '';
+            rating.value = '1';
+
+            closeModal();
+        }
+    };
 </script>
 
 <template>
-  <ModalLayout :showModal="model" @close="closeModal">
-    <h2 class="mb-0">Add a new DVD</h2>
-    <form @submit.prevent="submitForm">
-      <div class="mb-3">
-        <label for="name" class="block font-bold">Name:</label>
-        <input
-          type="text"
-          id="name"
-          class="px-6 py-3 border w-full sm:min-w-[400px]"
-          v-model="title"
-        />
-      </div>
+    <ModalLayout :showModal="model" @close="closeModal">
+        <h2 class="mb-0">Add a new DVD</h2>
+        <form @submit.prevent="submitForm">
+            <div class="mb-3">
+                <label class="block font-bold" for="name">Name:</label>
+                <input
+                    id="name"
+                    v-model="title"
+                    class="w-full border px-6 py-3 sm:min-w-[400px]"
+                    type="text"
+                />
+            </div>
 
-      <div class="mb-3">
-        <label for="rating" class="block font-bold">Rating:</label>
-        <select id="rating" class="px-6 py-3 border" v-model="rating">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-      </div>
+            <div class="mb-3">
+                <label class="block font-bold" for="rating">Rating:</label>
+                <select id="rating" v-model="rating" class="border px-6 py-3">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
 
-      <div class="flex justify-between">
-        <button type="button" class="button button-neutral" @click="closeModal">Cancel</button>
-        <button type="submit" class="button">Submit</button>
-      </div>
-    </form>
-  </ModalLayout>
+            <div class="flex justify-between">
+                <button
+                    class="button button-neutral"
+                    type="button"
+                    @click="closeModal"
+                >
+                    Cancel
+                </button>
+                <button class="button" type="submit">Submit</button>
+            </div>
+        </form>
+    </ModalLayout>
 </template>
