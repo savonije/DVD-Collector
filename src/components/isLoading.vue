@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n();
+</script>
+
 <template>
     <div class="flex h-full w-full items-center justify-center" role="status">
         <svg
@@ -16,6 +22,6 @@
                 fill="currentFill"
             />
         </svg>
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only">{{ t('common.loading') }}...</span>
     </div>
 </template>

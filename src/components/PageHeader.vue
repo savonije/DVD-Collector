@@ -1,4 +1,6 @@
 <script setup lang="ts">
+    import { useI18n } from 'vue-i18n';
+
     import AddTitle from '@/components/AddTitle.vue';
 
     import { useStoreAuth } from '@/stores/storeAuth';
@@ -6,6 +8,8 @@
     const storeAuth = useStoreAuth();
 
     const username = import.meta.env.VITE_USERNAME;
+
+    const { t } = useI18n();
 </script>
 
 <template>
@@ -15,7 +19,7 @@
         >
             <RouterLink to="/">
                 <span class="font-heading text-2xl font-bold">
-                    {{ username }}'s DVD collection
+                    {{ t('common.siteTitle', { name: username }) }}
                 </span>
             </RouterLink>
 
@@ -32,7 +36,7 @@
                     Logout
                 </button>
                 <RouterLink v-else class="button text-white" to="/login">
-                    Login
+                    {{ t('common.login') }}
                 </RouterLink>
             </div>
         </div>

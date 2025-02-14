@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { defineAsyncComponent, ref } from 'vue';
+    import { useI18n } from 'vue-i18n';
 
     import isLoading from '@/components/isLoading.vue';
 
@@ -8,6 +9,8 @@
     const ModalAddTitle = defineAsyncComponent(
         () => import('./ModalAddTitle.vue'),
     );
+
+    const { t } = useI18n();
 
     const storeAuth = useStoreAuth();
     const isModalVisible = ref(false);
@@ -20,7 +23,7 @@
         type="button"
         @click="isModalVisible = true"
     >
-        Add movie
+        {{ t('dvd.addMovie') }}
     </button>
 
     <Suspense>

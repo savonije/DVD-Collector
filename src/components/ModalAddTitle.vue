@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { ref, watch } from 'vue';
+    import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
 
     import ModalLayout from '@/layouts/ModalLayout.vue';
@@ -7,6 +8,8 @@
     import { useStoreDVDs } from '@/stores/storeDVDs';
 
     import 'vue3-toastify/dist/index.css';
+
+    const { t } = useI18n();
 
     const props = defineProps({
         modelValue: Boolean,
@@ -52,10 +55,14 @@
 
 <template>
     <ModalLayout :showModal="model" @close="closeModal">
-        <h2 class="mb-0">Add a new DVD</h2>
+        <h2 class="mb-0">
+            {{ t('dvd.addNewDvd') }}
+        </h2>
         <form @submit.prevent="submitForm">
             <div class="mb-3">
-                <label class="block font-bold" for="name">Name:</label>
+                <label class="block font-bold" for="name">
+                    {{ t('dvd.title') }}:
+                </label>
                 <input
                     id="name"
                     v-model="title"
@@ -65,7 +72,9 @@
             </div>
 
             <div class="mb-3">
-                <label class="block font-bold" for="rating">Rating:</label>
+                <label class="block font-bold" for="rating">
+                    {{ t('dvd.rating') }}:
+                </label>
                 <select id="rating" v-model="rating" class="border px-6 py-3">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -86,9 +95,11 @@
                     type="button"
                     @click="closeModal"
                 >
-                    Cancel
+                    {{ t('common.cancel') }}
                 </button>
-                <button class="button" type="submit">Submit</button>
+                <button class="button" type="submit">
+                    {{ t('common.save') }}
+                </button>
             </div>
         </form>
     </ModalLayout>

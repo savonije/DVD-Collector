@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { nextTick } from 'vue';
+    import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
 
     import ModalLayout from '@/layouts/ModalLayout.vue';
@@ -9,6 +10,8 @@
     import type { Movie } from '@/types';
 
     import 'vue3-toastify/dist/index.css';
+
+    const { t } = useI18n();
 
     const props = defineProps<
         Movie & {
@@ -46,10 +49,8 @@
     <ModalLayout :showModal="props.modelValue" @close="closeModal">
         <form>
             <div class="mb-6">
-                <h2 class="mb-3 text-center">Are you sure?</h2>
-                This will delete the movie
-                <span class="font-bold">{{ props.name }}</span> from the
-                database. This action cannot be undone.
+                <h2 class="mb-3 text-center">{{ t('common.areYouSure') }}</h2>
+                {{ t('dvd.deleteWarning', { name: props.name }) }}
             </div>
             <div class="flex justify-between gap-3">
                 <button
@@ -57,14 +58,14 @@
                     type="button"
                     @click.prevent="closeModal"
                 >
-                    Cancel
+                    {{ t('common.cancel') }}
                 </button>
                 <button
                     class="button button-danger"
                     type="button"
                     @click.prevent="deleteTitle"
                 >
-                    Delete
+                    {{ t('common.delete') }}
                 </button>
             </div>
         </form>

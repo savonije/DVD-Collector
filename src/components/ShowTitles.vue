@@ -1,11 +1,14 @@
 <script setup lang="ts">
     import { computed, ref } from 'vue';
+    import { useI18n } from 'vue-i18n';
 
     import isLoading from '@/components/isLoading.vue';
     import MovieCard from '@/components/MovieCard.vue';
 
     import { useDebounce } from '@/composables/useDebounce';
     import { useStoreDVDs } from '@/stores/storeDVDs';
+
+    const { t } = useI18n();
 
     const items = useStoreDVDs();
 
@@ -70,25 +73,28 @@
         <div
             class="mb-9 flex flex-col items-center justify-between sm:flex-row"
         >
-            <div v-if="searchQuery">
-                Filtered
-                <span class="font-bold">{{ filteredDVDs.length }}</span> out of
-                <span class="font-bold">{{ items.DVDs.length }}</span> results
-            </div>
-            <div v-else>
-                Currently there are a total of
-                <span class="font-bold">{{ items.DVDs.length }}</span> titles in
-                the database.
-            </div>
+            <div
+                v-if="searchQuery"
+                v-html="
+                    t('common.searchResults', {
+                        filterLength: filteredDVDs.length,
+                        totalLength: items.DVDs.length,
+                    })
+                "
+            ></div>
+            <div
+                v-else
+                v-html="t('common.totalTitles', { count: items.DVDs.length })"
+            ></div>
 
             <div class="mt-6 flex w-full justify-end sm:mt-0">
                 <select
                     v-model="sortOrder"
                     class="w-full rounded-sm bg-white p-3 font-bold text-black sm:w-auto"
                 >
-                    <option value="asc" selected>A-Z</option>
-                    <option value="des">Z-A</option>
-                    <option value="rating">Rating High - Low</option>
+                    <option value="asc" selected>{{ t('sort.asc') }}</option>
+                    <option value="des">{{ t('sort.desc') }}</option>
+                    <option value="rating">{{ t('sort.ratingAsc') }}</option>
                 </select>
             </div>
         </div>
@@ -104,7 +110,9 @@
         </div>
 
         <div v-if="!filteredDVDs.length">
-            <h1>No DVDs found...</h1>
+            <h1>
+                {{ t('errors.noResults') }}
+            </h1>
         </div>
     </template>
 </template>
