@@ -1,10 +1,12 @@
 <script setup lang="ts">
-    import { reactive } from 'vue';
+    import { reactive, ref } from 'vue';
+    import { useI18n } from 'vue-i18n';
 
     import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
     import { useStoreAuth } from '@/stores/storeAuth';
 
+    const { t } = useI18n();
     const storeAuth = useStoreAuth();
 
     const credentials = reactive({
@@ -12,10 +14,15 @@
         password: '',
     });
 
+    const errorMessage = ref('');
+
     const submitForm = () => {
-        if (!credentials.email || !credentials.password) {
-            alert('Please enter a email address and password');
+        if (!credentials.email) {
+            errorMessage.value = t('errors.emailError');
+        } else if (!credentials.password) {
+            errorMessage.value = t('errors.passwordError');
         } else {
+            errorMessage.value = '';
             storeAuth.loginUser(credentials);
         }
     };
@@ -27,10 +34,13 @@
             <div
                 class="mx-auto max-w-[500px] rounded-sm bg-white p-6 shadow-sm"
             >
-                <h1>Login</h1>
+                <h1>{{ t('common.login') }}</h1>
+
                 <form @submit.prevent="submitForm">
                     <fieldset class="mb-3">
-                        <label class="block font-bold">Email:</label>
+                        <label class="block font-bold"
+                            >{{ t('common.email') }}:</label
+                        >
                         <input
                             v-model="credentials.email"
                             class="h-12 w-full rounded-sm border p-3 shadow-sm"
@@ -39,7 +49,9 @@
                     </fieldset>
 
                     <fieldset class="mb-3">
-                        <label class="block font-bold">Password:</label>
+                        <label class="block font-bold"
+                            >{{ t('common.password') }}:</label
+                        >
                         <input
                             v-model="credentials.password"
                             class="h-12 w-full rounded-sm border p-3 shadow-sm"
@@ -47,8 +59,17 @@
                         />
                     </fieldset>
 
+                    <div
+                        v-if="errorMessage"
+                        class="mb-4 rounded border border-red-400 bg-red-100 p-3 text-red-700"
+                    >
+                        {{ errorMessage }}
+                    </div>
+
                     <div class="mt-6 text-right">
-                        <button class="button" type="submit">Login</button>
+                        <button class="button" type="submit">
+                            {{ t('common.login') }}
+                        </button>
                     </div>
                 </form>
             </div>

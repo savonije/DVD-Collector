@@ -5,6 +5,8 @@ import { createPinia } from 'pinia';
 import { createApp, markRaw } from 'vue';
 import type { Router } from 'vue-router';
 
+import i18n from '@/config/i18n';
+
 import App from './App.vue';
 
 declare module 'pinia' {
@@ -23,5 +25,6 @@ pinia.use(({ store }) => {
 
 app.use(router);
 app.use(pinia);
+app.use(i18n);
 
 app.mount('#app');
