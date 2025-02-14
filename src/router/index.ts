@@ -1,9 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import AuthView from '@/views/AuthView.vue';
-import DetailView from '@/views/DetailView.vue';
-import HomeView from '@/views/HomeView.vue';
-
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     scrollBehavior(to, from, savedPosition) {
@@ -17,17 +13,17 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: HomeView,
+            component: () => import('@/views/HomeView.vue'),
         },
         {
             path: '/movie/:name/:id',
             name: 'detail',
-            component: DetailView,
+            component: () => import('@/views/DetailView.vue'),
         },
         {
             path: '/login',
             name: 'auth',
-            component: AuthView,
+            component: () => import('@/views/AuthView.vue'),
         },
     ],
 });

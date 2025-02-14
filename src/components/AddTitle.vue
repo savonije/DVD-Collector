@@ -1,12 +1,15 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { defineAsyncComponent, ref } from 'vue';
+
+    import isLoading from '@/components/isLoading.vue';
 
     import { useStoreAuth } from '@/stores/storeAuth';
 
-    import ModalAddTitle from './ModalAddTitle.vue';
+    const ModalAddTitle = defineAsyncComponent(
+        () => import('./ModalAddTitle.vue'),
+    );
 
     const storeAuth = useStoreAuth();
-
     const isModalVisible = ref(false);
 </script>
 
@@ -20,5 +23,12 @@
         Add movie
     </button>
 
-    <ModalAddTitle v-model="isModalVisible" />
+    <Suspense>
+        <template #default>
+            <ModalAddTitle v-if="isModalVisible" v-model="isModalVisible" />
+        </template>
+        <template #fallback>
+            <isLoading />
+        </template>
+    </Suspense>
 </template>

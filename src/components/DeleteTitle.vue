@@ -1,9 +1,13 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { defineAsyncComponent, ref } from 'vue';
+
+    import isLoading from '@/components/isLoading.vue';
 
     import type { Movie } from '@/types';
 
-    import ModalDeleteTitle from './ModalDeleteTitle.vue';
+    const ModalDeleteTitle = defineAsyncComponent(
+        () => import('./ModalDeleteTitle.vue'),
+    );
 
     const isModalVisible = ref(false);
 
@@ -19,10 +23,18 @@
         Delete
     </button>
 
-    <ModalDeleteTitle
-        :id="props.id"
-        v-model="isModalVisible"
-        :name="props.name"
-        :rating="props.rating"
-    />
+    <Suspense>
+        <template #default>
+            <ModalDeleteTitle
+                v-if="isModalVisible"
+                :id="props.id"
+                v-model="isModalVisible"
+                :name="props.name"
+                :rating="props.rating"
+            />
+        </template>
+        <template #fallback>
+            <isLoading />
+        </template>
+    </Suspense>
 </template>
