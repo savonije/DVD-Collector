@@ -7,7 +7,7 @@
     import { useStoreAuth } from '@/stores/storeAuth';
 
     const ModalAddTitle = defineAsyncComponent(
-        () => import('./ModalAddTitle.vue'),
+        () => import('@/components/ModalAddTitle.vue'),
     );
 
     const { t } = useI18n();
