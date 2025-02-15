@@ -56,7 +56,7 @@
         <FilterTitles v-model="searchQuery" />
 
         <div
-            class="mb-9 flex flex-col items-center justify-between sm:flex-row"
+            class="mb-12 flex flex-col items-center justify-between sm:flex-row"
         >
             <div
                 v-if="searchQuery"

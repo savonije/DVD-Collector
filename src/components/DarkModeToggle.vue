@@ -2,6 +2,9 @@
     import { onMounted, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
+    import DarkModeIcon from '@/images/icons/darkmode.svg';
+    import LightModeIcon from '@/images/icons/lightmode.svg';
+
     const { t } = useI18n();
     const isDarkMode = ref(false);
     const loading = ref(true);
@@ -54,16 +57,16 @@
     >
         <transition name="fade" mode="out-in">
             <div v-if="!loading">
-                <img
+                <DarkModeIcon
                     v-if="!isDarkMode"
                     key="dark"
-                    src="/images/icons/darkmode.svg"
+                    class="h-6 w-6 text-white"
                     :alt="t('common.darkMode')"
                 />
-                <img
+                <LightModeIcon
                     v-if="isDarkMode"
                     key="light"
-                    src="/images/icons/lightmode.svg"
+                    class="h-6 w-6 text-white"
                     :alt="t('common.lightMode')"
                 />
             </div>
