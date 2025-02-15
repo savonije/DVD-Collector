@@ -36,7 +36,7 @@
             <h1>{{ t('common.login') }}</h1>
 
             <form @submit.prevent="submitForm">
-                <fieldset class="mb-3">
+                <fieldset class="mb-6">
                     <label class="block font-bold"
                         >{{ t('common.email') }}:</label
                     >
@@ -47,7 +47,7 @@
                     />
                 </fieldset>
 
-                <fieldset class="mb-3">
+                <fieldset class="mb-6">
                     <label class="block font-bold"
                         >{{ t('common.password') }}:</label
                     >
