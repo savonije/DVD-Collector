@@ -6,6 +6,7 @@ export default {
     email: 'Email',
     loading: 'Loading',
     login: 'Login',
+    logout: 'Logout',
     password: 'Password',
     save: 'Save',
     searchResults: `Filtered <span class="font-bold">{filterLength}</span> out of <span class="font-bold">{totalLength}</span> results`,

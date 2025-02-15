@@ -33,7 +33,7 @@
                     aria-label="Logout user"
                     @click="storeAuth.logoutUser"
                 >
-                    Logout
+                    {{ t('common.logout') }}
                 </button>
                 <RouterLink v-else class="button text-white" to="/login">
                     {{ t('common.login') }}
