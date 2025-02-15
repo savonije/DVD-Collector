@@ -2,6 +2,7 @@
     import { computed, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
+    import FilterMovies from '@/components/FilterMovies.vue';
     import isLoading from '@/components/isLoading.vue';
     import MovieCard from '@/components/MovieCard.vue';
 
@@ -52,23 +53,7 @@
         <isLoading />
     </template>
     <template v-else>
-        <div class="mb-3 flex justify-center">
-            <div class="relative w-full max-w-[450px]">
-                <input
-                    v-model="searchQuery"
-                    class="mb-3 w-full rounded-sm bg-white p-6"
-                    type="text"
-                    placeholder="Search for a DVD..."
-                />
-                <button
-                    v-if="searchQuery"
-                    class="absolute top-0 right-0 p-6 text-xl leading-none"
-                    @click="searchQuery = ''"
-                >
-                    &times;
-                </button>
-            </div>
-        </div>
+        <FilterMovies v-model="searchQuery" />
 
         <div
             class="mb-9 flex flex-col items-center justify-between sm:flex-row"
