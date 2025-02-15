@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { defineAsyncComponent, ref } from 'vue';
+    import { defineAsyncComponent, defineEmits, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
     import isLoading from '@/components/isLoading.vue';
@@ -11,9 +11,15 @@
     );
 
     const { t } = useI18n();
-
     const storeAuth = useStoreAuth();
     const isModalVisible = ref(false);
+
+    const emit = defineEmits(['open-modal']);
+
+    const openModal = () => {
+        isModalVisible.value = true;
+        emit('open-modal');
+    };
 </script>
 
 <template>
@@ -21,7 +27,7 @@
         v-if="storeAuth.user?.id"
         class="button"
         type="button"
-        @click="isModalVisible = true"
+        @click="openModal"
     >
         {{ t('titles.addMovie') }}
     </button>
