@@ -50,7 +50,7 @@
         <form>
             <div class="mb-6">
                 <h2 class="mb-3 text-center">{{ t('common.areYouSure') }}</h2>
-                {{ t('dvd.deleteWarning', { name: props.name }) }}
+                {{ t('titles.deleteWarning', { name: props.name }) }}
             </div>
             <div class="flex justify-between gap-3">
                 <button

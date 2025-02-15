@@ -1,5 +1,6 @@
 export default {
     areYouSure: 'Are you sure?',
+    backToOverview: 'Back to overview',
     cancel: 'Cancel',
     delete: 'Delete',
     email: 'Email',

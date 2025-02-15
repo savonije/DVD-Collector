@@ -23,7 +23,7 @@
         type="button"
         @click="isModalVisible = true"
     >
-        {{ t('dvd.addMovie') }}
+        {{ t('titles.addMovie') }}
     </button>
 
     <Suspense>

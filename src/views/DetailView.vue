@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import axios from 'axios';
     import { nextTick, onMounted, ref, type Ref } from 'vue';
+    import { useI18n } from 'vue-i18n';
     import { useRoute } from 'vue-router';
 
     import DeleteTitle from '@/components/DeleteTitle.vue';
@@ -11,6 +12,8 @@
     import { useStoreAuth } from '@/stores/storeAuth';
     import { useStoreDVDs } from '@/stores/storeDVDs';
     import type { MovieDetails } from '@/types';
+
+    const { t } = useI18n();
 
     const route = useRoute();
     const StoreDVD = useStoreDVDs();
@@ -132,7 +135,7 @@
                                 <div
                                     class="font-heading text-xs font-bold uppercase"
                                 >
-                                    Summary
+                                    {{ t('titles.summary') }}
                                 </div>
                                 <div class="text-black-700 text-sm">
                                     {{ movieDetails.Plot }}
@@ -150,18 +153,18 @@
                                     <div class="score">
                                         {{ movieDetails.Metascore }}
                                     </div>
-                                    <span class="text-black-700 text-xs"
-                                        >Metascore</span
-                                    >
+                                    <span class="text-black-700 text-xs">
+                                        {{ t('titles.metascore') }}
+                                    </span>
                                 </div>
 
                                 <div class="flex items-center gap-3">
                                     <div class="score">
                                         {{ movieDetails.imdbRating }}
                                     </div>
-                                    <span class="text-black-700 text-xs"
-                                        >IMDB</span
-                                    >
+                                    <span class="text-black-700 text-xs">
+                                        {{ t('titles.imdb') }}
+                                    </span>
                                 </div>
                             </div>
 
@@ -171,7 +174,7 @@
                                     :href="`https://www.imdb.com/title/${movieDetails.imdbID}`"
                                     target="_blank"
                                 >
-                                    See IMDB page
+                                    {{ t('titles.imdbLink') }}
                                 </a>
                             </div>
                         </div>
@@ -182,7 +185,7 @@
                     </div>
 
                     <div v-else>
-                        <p>No movie information found in database...</p>
+                        <p>{{ t('titles.noResult') }}...</p>
                     </div>
                 </div>
             </div>
@@ -195,7 +198,7 @@
                         class="button button-neutral cursor-pointer"
                         @click="$router.back()"
                     >
-                        Back to overview
+                        {{ t('common.backToOverview') }}
                     </span>
                 </div>
                 <div v-if="storeAuth.user?.id">

@@ -56,12 +56,12 @@
 <template>
     <ModalLayout :showModal="model" @close="closeModal">
         <h2 class="mb-0">
-            {{ t('dvd.addNewDvd') }}
+            {{ t('titles.addNewDvd') }}
         </h2>
         <form @submit.prevent="submitForm">
             <div class="mb-3">
                 <label class="block font-bold" for="name">
-                    {{ t('dvd.title') }}:
+                    {{ t('titles.title') }}:
                 </label>
                 <input
                     id="name"
@@ -73,7 +73,7 @@
 
             <div class="mb-3">
                 <label class="block font-bold" for="rating">
-                    {{ t('dvd.rating') }}:
+                    {{ t('titles.rating') }}:
                 </label>
                 <select id="rating" v-model="rating" class="border px-6 py-3">
                     <option value="1">1</option>
