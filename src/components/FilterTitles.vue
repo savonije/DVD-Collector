@@ -7,7 +7,7 @@
     <div class="mb-3 flex justify-center">
         <div class="relative w-full max-w-[450px]">
             <input
-                class="mb-3 w-full rounded-sm bg-white p-6"
+                class="mb-3 w-full rounded-sm bg-white p-6 text-gray-600"
                 :value="modelValue"
                 type="text"
                 placeholder="Search for a DVD..."

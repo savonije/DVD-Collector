@@ -1,5 +1,7 @@
 <template>
-    <footer class="text-shark-500 bg-black py-3">
+    <footer
+        class="text-shark-500 dark:text-shark-200 bg-black py-3 dark:bg-gray-950"
+    >
         <div class="container flex justify-between text-xs">
             <div>Movie database</div>
             <div class="text-right">

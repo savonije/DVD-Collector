@@ -59,33 +59,35 @@
             </figure>
         </div>
         <div class="w-2/3">
-            <div class="mb-1 text-xs font-bold text-gray-400">
+            <div
+                class="mb-1 text-xs font-bold text-gray-400 dark:text-gray-200"
+            >
                 {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
             </div>
-            <div class="text-xs text-gray-400">
+            <div class="text-xs text-gray-400 dark:text-gray-200">
                 <span>{{ movieDetails.Awards }}</span>
             </div>
             <div class="mt-6">
                 <div class="font-heading text-xs font-bold uppercase">
                     {{ t('titles.summary') }}
                 </div>
-                <div class="text-black-700 text-sm">
+                <div class="text-black-700 text-sm dark:text-gray-200">
                     {{ movieDetails.Plot }}
                 </div>
             </div>
-            <div class="text-black-700 mt-3 text-xs italic">
+            <div class="text-black-700 mt-3 text-xs italic dark:text-gray-200">
                 {{ movieDetails.Actors }}
             </div>
             <div class="mt-6 flex flex-col justify-center gap-3">
                 <div class="flex items-center gap-3">
                     <div class="score">{{ movieDetails.Metascore }}</div>
-                    <span class="text-black-700 text-xs">{{
+                    <span class="text-black-700 text-xs dark:text-gray-200">{{
                         t('titles.metascore')
                     }}</span>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="score">{{ movieDetails.imdbRating }}</div>
-                    <span class="text-black-700 text-xs">{{
+                    <span class="text-black-700 text-xs dark:text-gray-200">{{
                         t('titles.imdb')
                     }}</span>
                 </div>
@@ -107,7 +109,7 @@
                         @blur="updateRating"
                         @keyup.enter="updateRating"
                     />
-                    <span class="text-black-700 text-xs">{{
+                    <span class="text-black-700 text-xs dark:text-gray-200">{{
                         t('titles.personalRating')
                     }}</span>
                 </div>
@@ -135,6 +137,6 @@
     @reference "@/assets/main.css";
 
     .score {
-        @apply flex h-8 w-8 items-center justify-center bg-gray-800 text-lg font-bold text-white;
+        @apply flex h-8 w-8 items-center justify-center bg-gray-800 text-lg font-bold text-white dark:bg-gray-100 dark:text-black;
     }
 </style>

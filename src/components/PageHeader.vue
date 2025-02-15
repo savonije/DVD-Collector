@@ -2,13 +2,12 @@
     import { useI18n } from 'vue-i18n';
 
     import AddTitle from '@/components/AddTitle.vue';
+    import DarkModeToggle from '@/components/DarkModeToggle.vue'; // Import DarkModeToggle component
 
     import { useStoreAuth } from '@/stores/storeAuth';
 
     const storeAuth = useStoreAuth();
-
     const username = import.meta.env.VITE_USERNAME;
-
     const { t } = useI18n();
 </script>
 
@@ -25,6 +24,8 @@
 
             <div class="flex justify-end gap-3">
                 <AddTitle />
+
+                <DarkModeToggle />
 
                 <button
                     v-if="storeAuth.user?.id"

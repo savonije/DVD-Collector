@@ -58,7 +58,9 @@
                     {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
                 </div>
 
-                <div class="text-black-600 text-sm leading-loose">
+                <div
+                    class="text-black-600 text-sm leading-loose dark:text-gray-200"
+                >
                     {{ plot }}
                 </div>
             </div>
@@ -84,7 +86,7 @@
     @reference "@/assets/main.css";
 
     .movie-card {
-        @apply relative flex flex-row gap-3 rounded-lg bg-white shadow transition-shadow hover:shadow-md;
+        @apply relative flex flex-row gap-3 rounded-lg bg-white shadow transition-shadow hover:shadow-md dark:bg-gray-950 dark:text-white;
 
         &:hover img {
             @apply scale-[110%];
