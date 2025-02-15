@@ -11,6 +11,7 @@ export default {
     loading: 'Loading',
     login: 'Login',
     logout: 'Logout',
+    logoutUser: 'Logout user',
     password: 'Password',
     save: 'Save',
     searchResults: `Filtered <span class="font-bold">{filterLength}</span> out of <span class="font-bold">{totalLength}</span> results`,

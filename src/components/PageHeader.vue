@@ -31,7 +31,7 @@
                     v-if="storeAuth.user?.id"
                     class="button button-transparent text-white"
                     type="button"
-                    aria-label="Logout user"
+                    :aria-label="t('common.logoutUser')"
                     @click="storeAuth.logoutUser"
                 >
                     {{ t('common.logout') }}
