@@ -75,7 +75,7 @@
             <div class="mt-6 flex w-full justify-end sm:mt-0">
                 <select
                     v-model="sortOrder"
-                    class="w-full rounded-sm bg-white p-3 font-bold text-black sm:w-auto"
+                    class="w-full rounded-sm bg-white p-3 font-bold text-black sm:w-auto dark:bg-gray-950 dark:text-white"
                 >
                     <option value="asc" selected>{{ t('sort.asc') }}</option>
                     <option value="des">{{ t('sort.desc') }}</option>

@@ -65,14 +65,14 @@
 
                 <button
                     class="text-white"
-                    aria-label="Toggle dark mode"
-                    @click="toggleDarkMode"
-                >
-                    {{
+                    :aria-label="
                         isDarkMode
                             ? t('common.lightMode')
                             : t('common.darkMode')
-                    }}
+                    "
+                    @click="toggleDarkMode"
+                >
+                    {{ isDarkMode ? t('common.light') : t('common.dark') }}
                 </button>
 
                 <button

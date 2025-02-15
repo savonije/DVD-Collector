@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { nextTick, ref } from 'vue';
+    import { useI18n } from 'vue-i18n';
     import { useRoute } from 'vue-router';
 
     import DeleteTitle from '@/components/DeleteTitle.vue';
@@ -12,6 +13,8 @@
     const route = useRoute();
     const StoreDVD = useStoreDVDs();
     const storeAuth = useStoreAuth();
+
+    const { t } = useI18n();
 
     const id = route.params.id as string;
     const name = route.params.name as string;
@@ -40,7 +43,7 @@
 <template>
     <DefaultLayout>
         <div class="mx-auto max-w-[800px]">
-            <div class="bg-white shadow-sm">
+            <div class="bg-white shadow-sm dark:bg-gray-950">
                 <div class="bg-teal p-6">
                     <div class="flex justify-end">
                         <h2
@@ -72,7 +75,7 @@
                         class="button button-neutral cursor-pointer"
                         @click="$router.back()"
                     >
-                        Back to Overview
+                        {{ t('common.backToOverview') }}
                     </span>
                 </div>
                 <div v-if="storeAuth.user?.id">
