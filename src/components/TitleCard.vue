@@ -84,7 +84,7 @@
     @reference "@/assets/main.css";
 
     .movie-card {
-        @apply relative flex flex-row gap-3 rounded-lg bg-white shadow transition-shadow hover:shadow-md;
+        @apply relative flex flex-row gap-3 rounded-lg bg-white shadow transition-shadow hover:shadow-md dark:bg-gray-800 dark:text-white;
 
         &:hover img {
             @apply scale-[110%];
