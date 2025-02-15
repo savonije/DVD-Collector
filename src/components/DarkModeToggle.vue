@@ -4,6 +4,7 @@
 
     const { t } = useI18n();
     const isDarkMode = ref(false);
+    const loading = ref(true);
 
     const applyTheme = () => {
         const storedTheme = localStorage.getItem('theme');
@@ -24,6 +25,8 @@
                 prefersDarkScheme,
             );
         }
+
+        loading.value = false;
     };
 
     const toggleDarkMode = () => {
@@ -45,9 +48,37 @@
 <template>
     <button
         class="text-white"
+        type="button"
         :aria-label="isDarkMode ? t('common.lightMode') : t('common.darkMode')"
         @click="toggleDarkMode"
     >
-        {{ isDarkMode ? t('common.light') : t('common.dark') }}
+        <transition name="fade" mode="out-in">
+            <div v-if="!loading">
+                <img
+                    v-if="!isDarkMode"
+                    key="dark"
+                    src="/images/icons/darkmode.svg"
+                    :alt="t('common.darkMode')"
+                />
+                <img
+                    v-if="isDarkMode"
+                    key="light"
+                    src="/images/icons/lightmode.svg"
+                    :alt="t('common.lightMode')"
+                />
+            </div>
+        </transition>
     </button>
 </template>
+
+<style scoped>
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .fade-enter,
+    .fade-leave-to {
+        opacity: 0;
+    }
+</style>
