@@ -47,7 +47,7 @@
 
 <template>
     <button
-        class="text-white"
+        class="px-3"
         type="button"
         :aria-label="isDarkMode ? t('common.lightMode') : t('common.darkMode')"
         @click="toggleDarkMode"
