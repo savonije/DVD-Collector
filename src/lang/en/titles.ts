@@ -8,6 +8,7 @@ export default {
     name: 'Name',
     noResult: 'No movie information found in database',
     metascore: 'Metascore',
+    personalRating: 'Personal Rating',
     rating: 'Rating',
     summary: 'Summary',
     title: 'Title',

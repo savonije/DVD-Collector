@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import axios from 'axios';
-    import { nextTick, onMounted, ref, type Ref } from 'vue';
+    import { computed, nextTick, onMounted, ref, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { useRoute } from 'vue-router';
 
@@ -30,6 +30,13 @@
     const titleInput = ref(name);
     const inputRef = ref<HTMLInputElement | null>(null);
 
+    const personalRating = computed(() => {
+        return StoreDVD.DVDs.find((dvd) => dvd.id === id)?.rating || 'N/A';
+    });
+
+    const editableRating = ref(+personalRating.value);
+    const isEditingRating = ref(false);
+
     const getInfo = () => {
         axios
             .get(
@@ -56,6 +63,13 @@
         if (showEdit.value && inputRef.value) {
             inputRef.value.focus();
         }
+    };
+
+    const updateRating = () => {
+        if (editableRating.value !== personalRating.value) {
+            StoreDVD.updateDVD(id, name, editableRating.value);
+        }
+        isEditingRating.value = false;
     };
 
     const submitForm = () => {
@@ -164,6 +178,29 @@
                                     </div>
                                     <span class="text-black-700 text-xs">
                                         {{ t('titles.imdb') }}
+                                    </span>
+                                </div>
+
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        v-if="!isEditingRating"
+                                        class="score"
+                                        @click="isEditingRating = true"
+                                    >
+                                        {{ personalRating }}
+                                    </div>
+                                    <input
+                                        v-else
+                                        v-model="editableRating"
+                                        class="w-12 rounded border text-center"
+                                        type="number"
+                                        min="0"
+                                        max="10"
+                                        @blur="updateRating"
+                                        @keyup.enter="updateRating"
+                                    />
+                                    <span class="text-black-700 text-xs">
+                                        {{ t('titles.personalRating') }}
                                     </span>
                                 </div>
                             </div>

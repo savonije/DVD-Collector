@@ -43,10 +43,15 @@ export const useStoreDVDs = defineStore('storeDVDs', {
         deleteDVD(id: string) {
             deleteDoc(doc(collectionRef, id));
         },
-        updateDVD(id: string, name: string) {
-            updateDoc(doc(db, import.meta.env.VITE_FIREBASE_DB_NAME, id), {
-                name: name,
-            });
+        updateDVD(id: string, name: string, rating?: number) {
+            const updateData: { name: string; rating?: number } = { name };
+            if (rating !== undefined) {
+                updateData.rating = rating;
+            }
+            updateDoc(
+                doc(db, import.meta.env.VITE_FIREBASE_DB_NAME, id),
+                updateData,
+            );
         },
     },
 });
