@@ -1,15 +1,22 @@
 <script setup lang="ts">
+    import { defineAsyncComponent } from 'vue';
     import { useI18n } from 'vue-i18n';
-
-    import AddTitle from '@/components/AddTitle.vue';
-    import DarkModeToggle from '@/components/DarkModeToggle.vue';
-    import MobileMenu from '@/components/MobileMenu.vue';
 
     import { useStoreAuth } from '@/stores/storeAuth';
 
     const storeAuth = useStoreAuth();
     const username = import.meta.env.VITE_USERNAME;
     const { t } = useI18n();
+
+    const AddTitle = defineAsyncComponent(
+        () => import('@/components/AddTitle.vue'),
+    );
+    const DarkModeToggle = defineAsyncComponent(
+        () => import('@/components/DarkModeToggle.vue'),
+    );
+    const MobileMenu = defineAsyncComponent(
+        () => import('@/components/MobileMenu.vue'),
+    );
 </script>
 
 <template>

@@ -1,13 +1,19 @@
 <script lang="ts" setup>
     import { onClickOutside } from '@vueuse/core';
-    import { onBeforeUnmount, onMounted, ref } from 'vue';
+    import { defineAsyncComponent, onBeforeUnmount, onMounted, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
-    import AddTitle from '@/components/AddTitle.vue';
-    import DarkModeToggle from '@/components/DarkModeToggle.vue';
-
-    import MenuIcon from '@/images/icons/menu.svg';
     import { useStoreAuth } from '@/stores/storeAuth';
+
+    const AddTitle = defineAsyncComponent(
+        () => import('@/components/AddTitle.vue'),
+    );
+    const DarkModeToggle = defineAsyncComponent(
+        () => import('@/components/DarkModeToggle.vue'),
+    );
+    const MenuIcon = defineAsyncComponent(
+        () => import('@/images/icons/menu.svg'),
+    );
 
     const storeAuth = useStoreAuth();
     const { t } = useI18n();
