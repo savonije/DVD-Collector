@@ -1,11 +1,11 @@
 import common from './common';
-import dvd from './dvd';
 import errors from './errors';
 import sort from './sort';
+import titles from './titles';
 
 export default {
     common,
-    dvd,
+    titles,
     errors,
     sort,
 };

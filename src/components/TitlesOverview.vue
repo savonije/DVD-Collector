@@ -2,9 +2,9 @@
     import { computed, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
-    import FilterMovies from '@/components/FilterMovies.vue';
+    import FilterTitles from '@/components/FilterTitles.vue';
     import isLoading from '@/components/isLoading.vue';
-    import MovieCard from '@/components/MovieCard.vue';
+    import TitleCard from '@/components/TitleCard.vue';
 
     import { useDebounce } from '@/composables/useDebounce';
     import { useStoreDVDs } from '@/stores/storeDVDs';
@@ -53,7 +53,7 @@
         <isLoading />
     </template>
     <template v-else>
-        <FilterMovies v-model="searchQuery" />
+        <FilterTitles v-model="searchQuery" />
 
         <div
             class="mb-9 flex flex-col items-center justify-between sm:flex-row"
@@ -85,7 +85,7 @@
         </div>
 
         <div class="mb-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            <MovieCard
+            <TitleCard
                 v-for="item in filteredDVDs"
                 :id="item.id"
                 :key="item.id"

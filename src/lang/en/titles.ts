@@ -1,8 +1,8 @@
 export default {
-    addMovie: 'Add Movie',
+    addMovie: 'Add DVD',
     addNewDvd: 'Add New DVD',
     deleteWarning:
-        'This will delete the movie {name} from the database. This action cannot be undone.',
+        'This will delete the DVD {name} from the database. This action cannot be undone.',
     name: 'Name',
     rating: 'Rating',
     title: 'Title',
