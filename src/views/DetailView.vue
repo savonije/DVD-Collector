@@ -71,13 +71,15 @@
         <div class="mx-auto max-w-[800px] py-6">
             <div class="flex justify-between">
                 <div>
-                    <span
+                    <button
                         class="button button-neutral cursor-pointer"
+                        type="button"
                         @click="$router.back()"
                     >
                         {{ t('common.backToOverview') }}
-                    </span>
+                    </button>
                 </div>
+
                 <div v-if="storeAuth.user?.id">
                     <DeleteTitle :id="id" :name="name" />
                 </div>
