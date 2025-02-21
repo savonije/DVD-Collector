@@ -22,9 +22,14 @@
     onMounted(() => {
         window.addEventListener('keydown', handleEscape);
     });
+
     onBeforeUnmount(() => {
         window.removeEventListener('keydown', handleEscape);
     });
+
+    defineSlots<{
+        default: () => unknown;
+    }>();
 </script>
 
 <template>
