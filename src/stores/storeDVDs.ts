@@ -6,6 +6,7 @@ import {
     onSnapshot,
     orderBy,
     query,
+    setDoc,
     updateDoc,
 } from 'firebase/firestore';
 import { defineStore } from 'pinia';
@@ -25,14 +26,12 @@ export const useStoreDVDs = defineStore('storeDVDs', {
             onSnapshot(collectionQuery, (querySnapshot) => {
                 this.DVDsLoaded = false;
 
-                this.DVDs = querySnapshot.docs.map((doc) => {
-                    return {
-                        id: doc.id,
-                        name: doc.data().name,
-                        rating: doc.data().rating,
-                        dateAdded: doc.data().dateAdded,
-                    };
-                });
+                this.DVDs = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    name: doc.data().name,
+                    rating: doc.data().rating,
+                    poster: doc.data().poster || '',
+                }));
 
                 this.DVDsLoaded = true;
             });
@@ -41,8 +40,13 @@ export const useStoreDVDs = defineStore('storeDVDs', {
             addDoc(collectionRef, {
                 name: name,
                 rating: rating,
-                dateAdded: new Date().toISOString(),
             });
+        },
+        setDVD(movie: Movie) {
+            setDoc(
+                doc(db, import.meta.env.VITE_FIREBASE_DB_NAME, movie.id),
+                movie,
+            );
         },
         deleteDVD(id: string) {
             deleteDoc(doc(collectionRef, id));

@@ -3,6 +3,10 @@ export interface Movie {
     name: string;
     rating?: number;
     dateAdded?: Date;
+    poster: string;
+    year?: string;
+    director?: string;
+    plot?: string;
 }
 
 export interface MovieDetails {

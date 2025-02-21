@@ -4,14 +4,16 @@
 
     import PersonalRating from '@/components/PersonalRating.vue';
 
+    import { useStoreDVDs } from '@/stores/storeDVDs'; // Import the store
+
     import type { Movie, MovieDetails } from '@/types';
 
     const props = defineProps<Movie>();
+    const storeDVDs = useStoreDVDs(); // Use the store
 
     const queryName = props.name.split(' ').join('+');
 
     const movieDetails: Ref<MovieDetails | null> = ref(null);
-
     const plot = ref('');
 
     const getMovieData = () => {
@@ -22,17 +24,21 @@
             .then((response) => {
                 if (response.data.Error === undefined) {
                     movieDetails.value = response.data;
-                }
-            })
-            .then(() => {
-                if (!movieDetails.value?.Plot) {
-                    return;
-                }
 
-                plot.value = movieDetails.value?.Plot;
+                    // Prepare movie data to be stored in Firebase
+                    const movieData: Movie = {
+                        id: props.id,
+                        name: response.data.Title,
+                        rating: parseFloat(response.data.imdbRating) || 0,
+                        dateAdded: new Date(),
+                        poster: response.data.Poster,
+                        year: response.data.Year,
+                        director: response.data.Director,
+                        plot: response.data.Plot,
+                    };
 
-                if (plot.value.length > 100) {
-                    plot.value = plot.value.substring(0, 100) + '...';
+                    // Add movie data to Firebase
+                    storeDVDs.setDVD(movieData);
                 }
             })
             .catch((error) => {
