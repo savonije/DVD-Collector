@@ -25,11 +25,14 @@ export const useStoreDVDs = defineStore('storeDVDs', {
             onSnapshot(collectionQuery, (querySnapshot) => {
                 this.DVDsLoaded = false;
 
-                this.DVDs = querySnapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    name: doc.data().name,
-                    rating: doc.data().rating,
-                }));
+                this.DVDs = querySnapshot.docs.map((doc) => {
+                    return {
+                        id: doc.id,
+                        name: doc.data().name,
+                        rating: doc.data().rating,
+                        dateAdded: doc.data().dateAdded,
+                    };
+                });
 
                 this.DVDsLoaded = true;
             });
@@ -38,6 +41,7 @@ export const useStoreDVDs = defineStore('storeDVDs', {
             addDoc(collectionRef, {
                 name: name,
                 rating: rating,
+                dateAdded: new Date().toISOString(),
             });
         },
         deleteDVD(id: string) {

@@ -37,8 +37,21 @@
             if (sortOrder.value === 'rating') {
                 const ratingA = a.rating ?? 0;
                 const ratingB = b.rating ?? 0;
-
                 return ratingB - ratingA;
+            }
+
+            if (sortOrder.value === 'dateAsc') {
+                return (
+                    new Date(a.dateAdded ?? 0).getTime() -
+                    new Date(b.dateAdded ?? 0).getTime()
+                );
+            }
+
+            if (sortOrder.value === 'dateDesc') {
+                return (
+                    new Date(b.dateAdded ?? 0).getTime() -
+                    new Date(a.dateAdded ?? 0).getTime()
+                );
             }
 
             return 0;
@@ -77,9 +90,11 @@
                     v-model="sortOrder"
                     class="w-full rounded-sm bg-white p-3 font-bold text-black sm:w-auto dark:bg-gray-950 dark:text-white"
                 >
-                    <option value="asc" selected>{{ t('sort.asc') }}</option>
+                    <option value="asc">{{ t('sort.asc') }}</option>
                     <option value="des">{{ t('sort.desc') }}</option>
                     <option value="rating">{{ t('sort.ratingAsc') }}</option>
+                    <option value="dateAsc">{{ t('sort.dateAsc') }}</option>
+                    <option value="dateDesc">{{ t('sort.dateDesc') }}</option>
                 </select>
             </div>
         </div>

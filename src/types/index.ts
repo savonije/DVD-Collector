@@ -2,6 +2,7 @@ export interface Movie {
     id: string;
     name: string;
     rating?: number;
+    dateAdded?: Date;
 }
 
 export interface MovieDetails {
