@@ -1,5 +1,4 @@
 import {
-    addDoc,
     collection,
     deleteDoc,
     doc,
@@ -31,15 +30,12 @@ export const useStoreDVDs = defineStore('storeDVDs', {
                     name: doc.data().name,
                     rating: doc.data().rating,
                     poster: doc.data().poster || '',
+                    year: doc.data().year,
+                    director: doc.data().director,
+                    plot: doc.data().plot,
                 }));
 
                 this.DVDsLoaded = true;
-            });
-        },
-        addDVD(name: string, rating: number) {
-            addDoc(collectionRef, {
-                name: name,
-                rating: rating,
             });
         },
         setDVD(movie: Movie) {

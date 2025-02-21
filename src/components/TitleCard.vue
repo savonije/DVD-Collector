@@ -1,79 +1,36 @@
 <script lang="ts" setup>
-    import axios from 'axios';
-    import { onMounted, ref, type Ref } from 'vue';
-
     import PersonalRating from '@/components/PersonalRating.vue';
 
-    import { useStoreDVDs } from '@/stores/storeDVDs'; // Import the store
+    import type { Movie } from '@/types';
 
-    import type { Movie, MovieDetails } from '@/types';
-
-    const props = defineProps<Movie>();
-    const storeDVDs = useStoreDVDs(); // Use the store
-
-    const queryName = props.name.split(' ').join('+');
-
-    const movieDetails: Ref<MovieDetails | null> = ref(null);
-    const plot = ref('');
-
-    const getMovieData = () => {
-        axios
-            .get(
-                `https://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
-            )
-            .then((response) => {
-                if (response.data.Error === undefined) {
-                    movieDetails.value = response.data;
-
-                    // Prepare movie data to be stored in Firebase
-                    const movieData: Movie = {
-                        id: props.id,
-                        name: response.data.Title,
-                        rating: parseFloat(response.data.imdbRating) || 0,
-                        dateAdded: new Date(),
-                        poster: response.data.Poster,
-                        year: response.data.Year,
-                        director: response.data.Director,
-                        plot: response.data.Plot,
-                    };
-
-                    // Add movie data to Firebase
-                    storeDVDs.setDVD(movieData);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    };
-
-    onMounted(() => {
-        getMovieData();
-    });
+    defineProps<{
+        item: Movie;
+    }>();
 </script>
 
 <template>
-    <RouterLink :to="`/movie/${name}/${id}`">
+    <RouterLink :to="`/movie/${item.name}/${item.id}`">
         <div class="movie-card">
             <div class="relative grow p-4">
-                <h3 class="mb-0 font-bold capitalize">{{ props.name }}</h3>
+                <h3 class="mb-0 font-bold capitalize">{{ item.name }}</h3>
 
                 <div
-                    v-if="movieDetails?.Year || movieDetails?.Director"
+                    v-if="item.year || item.director"
                     class="mb-3 text-xs text-gray-400"
                 >
-                    {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
+                    {{ item.year }} | {{ item.director }}
                 </div>
 
                 <div
                     class="text-black-600 text-sm leading-loose dark:text-gray-200"
                 >
-                    {{ plot }}
+                    {{ item.plot }}
                 </div>
             </div>
 
             <div class="movie-poster shrink-0 rounded-r">
-                <div v-if="movieDetails?.Poster" class="h-full">
-                    <img :src="movieDetails?.Poster" />
+                <div v-if="item?.poster" class="h-full">
+                    <img :src="item?.poster" />
                 </div>
                 <div
                     v-else
@@ -82,7 +39,7 @@
                     ?
                 </div>
 
-                <PersonalRating :rating="props.rating" />
+                <PersonalRating :rating="item.rating" />
             </div>
         </div>
     </RouterLink>

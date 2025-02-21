@@ -1,5 +1,6 @@
 <script setup lang="ts">
-    import { ref, watch } from 'vue';
+    import axios from 'axios';
+    import { ref, watch, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
 
@@ -9,14 +10,17 @@
 
     import 'vue3-toastify/dist/index.css';
 
+    import type { Movie, MovieDetails } from '@/types';
+
     const { t } = useI18n();
+    const storeDVD = useStoreDVDs();
+
+    const movieDetails: Ref<MovieDetails | null> = ref(null);
 
     const props = defineProps({
         modelValue: Boolean,
     });
     const emit = defineEmits(['update:modelValue']);
-
-    const StoreDVD = useStoreDVDs();
 
     const model = ref(props.modelValue);
 
@@ -28,16 +32,44 @@
     );
 
     const title = ref('');
-    const rating = ref('1');
+    const rating = ref(1);
 
     const closeModal = () => {
         model.value = false;
         emit('update:modelValue', false);
     };
 
+    const getMovieData = () => {
+        axios
+            .get(
+                `https://www.omdbapi.com/?t=${title.value}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
+            )
+            .then((response) => {
+                if (response.data.Error === undefined) {
+                    movieDetails.value = response.data;
+
+                    const movieData: Movie = {
+                        id: response.data.imdbID,
+                        name: response.data.Title,
+                        rating: rating.value,
+                        dateAdded: new Date(),
+                        poster: response.data.Poster,
+                        year: response.data.Year,
+                        director: response.data.Director,
+                        plot: response.data.Plot,
+                    };
+
+                    storeDVD.setDVD(movieData);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
     const submitForm = () => {
         if (title.value !== '') {
-            StoreDVD.addDVD(title.value, +rating.value);
+            getMovieData();
 
             toast.success(`<strong>${title.value}</strong> has been added!`, {
                 autoClose: 3000,
@@ -46,7 +78,7 @@
             } as ToastOptions);
 
             title.value = '';
-            rating.value = '1';
+            rating.value = 1;
 
             closeModal();
         }
