@@ -1,8 +1,10 @@
 <script lang="ts" setup>
     import axios from 'axios';
-    import { ref, type Ref } from 'vue';
+    import { computed, ref, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
+
+    import 'vue3-toastify/dist/index.css';
 
     import { useStoreDVDs } from '@/stores/storeDVDs';
     import type { Movie, MovieID } from '@/types';
@@ -14,7 +16,11 @@
 
     const props = defineProps<MovieID>();
 
-    const getMovieData = (title: string, rating: number) => {
+    const personalRating = computed(
+        () => storeDVD.DVDs.find((dvd) => dvd.id === props.id)?.rating || 0,
+    );
+
+    const getMovieData = (title: string) => {
         axios
             .get(
                 `https://www.omdbapi.com/?t=${title}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
@@ -35,7 +41,8 @@
                         name: props.name,
                         plot: response.data.Plot,
                         poster: response.data.Poster,
-                        rating: rating,
+                        rating: personalRating.value,
+                        runtime: response.data.Runtime,
                         year: response.data.Year,
                     };
 
@@ -58,7 +65,7 @@
     <button
         class="font-bold underline-offset-2 opacity-50 hover:underline"
         type="button"
-        @click="getMovieData(name, 0)"
+        @click="getMovieData(name)"
     >
         {{ t('common.update') }}
     </button>
