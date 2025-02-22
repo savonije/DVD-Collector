@@ -63,7 +63,21 @@
                         plot: response.data.Plot,
                     };
 
-                    storeDVD.setDVD(movieData);
+                    storeDVD.addDVD(movieData);
+                } else {
+                    const movieData: Movie = {
+                        id: uniqueId,
+                        imdbID: '',
+                        name: title,
+                        rating: rating,
+                        dateAdded: new Date(),
+                        poster: '',
+                        year: '',
+                        director: '',
+                        plot: '',
+                    };
+
+                    storeDVD.addDVD(movieData);
                 }
             })
             .catch((error) => {

@@ -27,6 +27,7 @@ export const useStoreDVDs = defineStore('storeDVDs', {
 
                 this.DVDs = querySnapshot.docs.map((doc) => ({
                     id: doc.id,
+                    imdbID: doc.data().imdbID,
                     name: doc.data().name,
                     rating: doc.data().rating,
                     poster: doc.data().poster || '',
@@ -38,7 +39,7 @@ export const useStoreDVDs = defineStore('storeDVDs', {
                 this.DVDsLoaded = true;
             });
         },
-        setDVD(movie: Movie) {
+        addDVD(movie: Movie) {
             setDoc(
                 doc(db, import.meta.env.VITE_FIREBASE_DB_NAME, movie.id),
                 movie,
