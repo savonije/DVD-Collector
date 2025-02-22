@@ -17,5 +17,6 @@ export default {
     searchResults: `Filtered <span class="font-bold">{filterLength}</span> out of <span class="font-bold">{totalLength}</span> results`,
     siteTitle: `{name}'s DVD Collection`,
     totalTitles: `Currently there are a total of <span class="font-bold">{ count }</span> titles in the database.`,
+    update: 'Update',
     submit: 'Submit',
 };

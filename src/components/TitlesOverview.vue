@@ -8,6 +8,7 @@
 
     import { useDebounce } from '@/composables/useDebounce';
     import { useStoreDVDs } from '@/stores/storeDVDs';
+    import type { Movie } from '@/types';
 
     const { t } = useI18n();
 
@@ -18,7 +19,7 @@
 
     const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
-    const filteredDVDs = computed(() => {
+    const filteredDVDs = computed<Movie[]>(() => {
         const filtered = items.DVDs.filter((dvd) =>
             dvd.name
                 .toLowerCase()
@@ -102,10 +103,8 @@
         <div class="mb-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             <TitleCard
                 v-for="item in filteredDVDs"
-                :id="item.id"
                 :key="item.id"
-                :name="item.name"
-                :rating="item.rating"
+                :item="item"
             />
         </div>
 

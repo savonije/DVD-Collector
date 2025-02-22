@@ -7,14 +7,14 @@
 
     import router from '@/router';
     import { useStoreDVDs } from '@/stores/storeDVDs';
-    import type { Movie } from '@/types';
+    import type { MovieID } from '@/types';
 
     import 'vue3-toastify/dist/index.css';
 
     const { t } = useI18n();
 
     const props = defineProps<
-        Movie & {
+        MovieID & {
             modelValue: boolean;
         }
     >();

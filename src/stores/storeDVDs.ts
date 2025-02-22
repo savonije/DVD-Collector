@@ -1,11 +1,11 @@
 import {
-    addDoc,
     collection,
     deleteDoc,
     doc,
     onSnapshot,
     orderBy,
     query,
+    setDoc,
     updateDoc,
 } from 'firebase/firestore';
 import { defineStore } from 'pinia';
@@ -25,24 +25,32 @@ export const useStoreDVDs = defineStore('storeDVDs', {
             onSnapshot(collectionQuery, (querySnapshot) => {
                 this.DVDsLoaded = false;
 
-                this.DVDs = querySnapshot.docs.map((doc) => {
-                    return {
-                        id: doc.id,
-                        name: doc.data().name,
-                        rating: doc.data().rating,
-                        dateAdded: doc.data().dateAdded,
-                    };
-                });
+                this.DVDs = querySnapshot.docs.map((doc) => ({
+                    actors: doc.data().actors,
+                    awards: doc.data().awards,
+                    director: doc.data().director,
+                    genre: doc.data().genre,
+                    id: doc.id,
+                    imdbID: doc.data().imdbID,
+                    imdbRating: doc.data().imdbRating,
+                    metascore: doc.data().metascore,
+                    name: doc.data().name,
+                    plot: doc.data().plot,
+                    poster: doc.data().poster || '',
+                    rated: doc.data().rated,
+                    rating: Number(doc.data().rating) || 0,
+                    runtime: doc.data().runtime,
+                    year: doc.data().year,
+                }));
 
                 this.DVDsLoaded = true;
             });
         },
-        addDVD(name: string, rating: number) {
-            addDoc(collectionRef, {
-                name: name,
-                rating: rating,
-                dateAdded: new Date().toISOString(),
-            });
+        addDVD(movie: Movie) {
+            setDoc(
+                doc(db, import.meta.env.VITE_FIREBASE_DB_NAME, movie.id),
+                movie,
+            );
         },
         deleteDVD(id: string) {
             deleteDoc(doc(collectionRef, id));

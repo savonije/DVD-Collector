@@ -1,22 +1,20 @@
-export interface Movie {
+export interface MovieID {
     id: string;
     name: string;
-    rating?: number;
-    dateAdded?: Date;
 }
 
-export interface MovieDetails {
-    Poster: string;
-    Title: string;
-    Year: string;
-    Genre: string;
-    Awards: string;
-    Actors: string;
-    Director: string;
-    Metascore: string;
-    Plot: string;
-    Rated: string;
-    Runtime: string;
-    imdbRating: string;
-    imdbID: string;
+export interface Movie extends MovieID {
+    actors?: string;
+    awards?: string;
+    dateAdded?: Date;
+    director?: string;
+    genre?: string;
+    imdbID?: string;
+    imdbRating?: string;
+    metascore?: string;
+    plot?: string;
+    poster?: string;
+    rating: number;
+    runtime?: string;
+    year?: string;
 }

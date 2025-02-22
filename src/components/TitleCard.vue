@@ -1,73 +1,36 @@
 <script lang="ts" setup>
-    import axios from 'axios';
-    import { onMounted, ref, type Ref } from 'vue';
-
     import PersonalRating from '@/components/PersonalRating.vue';
 
-    import type { Movie, MovieDetails } from '@/types';
+    import type { Movie } from '@/types';
 
-    const props = defineProps<Movie>();
-
-    const queryName = props.name.split(' ').join('+');
-
-    const movieDetails: Ref<MovieDetails | null> = ref(null);
-
-    const plot = ref('');
-
-    const getMovieData = () => {
-        axios
-            .get(
-                `https://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
-            )
-            .then((response) => {
-                if (response.data.Error === undefined) {
-                    movieDetails.value = response.data;
-                }
-            })
-            .then(() => {
-                if (!movieDetails.value?.Plot) {
-                    return;
-                }
-
-                plot.value = movieDetails.value?.Plot;
-
-                if (plot.value.length > 100) {
-                    plot.value = plot.value.substring(0, 100) + '...';
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    };
-
-    onMounted(() => {
-        getMovieData();
-    });
+    defineProps<{
+        item: Movie;
+    }>();
 </script>
 
 <template>
-    <RouterLink :to="`/movie/${name}/${id}`">
+    <RouterLink :to="`/movie/${item.name}/${item.id}`">
         <div class="movie-card">
             <div class="relative grow p-4">
-                <h3 class="mb-0 font-bold capitalize">{{ props.name }}</h3>
+                <h3 class="mb-0 font-bold capitalize">{{ item.name }}</h3>
 
                 <div
-                    v-if="movieDetails?.Year || movieDetails?.Director"
+                    v-if="item.year || item.director"
                     class="mb-3 text-xs text-gray-400"
                 >
-                    {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
+                    {{ item.year }} | {{ item.director }}
                 </div>
 
                 <div
                     class="text-black-600 text-sm leading-loose dark:text-gray-200"
                 >
-                    {{ plot }}
+                    {{ item.plot }}
                 </div>
             </div>
 
             <div class="movie-poster shrink-0 rounded-r">
-                <div v-if="movieDetails?.Poster" class="h-full">
-                    <img :src="movieDetails?.Poster" />
+                <div v-if="item?.poster" class="h-full">
+                    <img :src="item?.poster" />
                 </div>
                 <div
                     v-else
@@ -76,7 +39,7 @@
                     ?
                 </div>
 
-                <PersonalRating :rating="props.rating" />
+                <PersonalRating :rating="item.rating" />
             </div>
         </div>
     </RouterLink>

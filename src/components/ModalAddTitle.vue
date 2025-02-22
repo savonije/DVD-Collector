@@ -1,5 +1,7 @@
 <script setup lang="ts">
-    import { ref, watch } from 'vue';
+    import axios from 'axios';
+    import { nanoid } from 'nanoid';
+    import { ref, watch, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
 
@@ -9,14 +11,19 @@
 
     import 'vue3-toastify/dist/index.css';
 
+    import type { Movie } from '@/types';
+
     const { t } = useI18n();
+    const storeDVD = useStoreDVDs();
+
+    const movieDetails: Ref<Movie | null> = ref(null);
+
+    const uniqueId = nanoid(14);
 
     const props = defineProps({
         modelValue: Boolean,
     });
     const emit = defineEmits(['update:modelValue']);
-
-    const StoreDVD = useStoreDVDs();
 
     const model = ref(props.modelValue);
 
@@ -28,16 +35,67 @@
     );
 
     const title = ref('');
-    const rating = ref('1');
+    const rating = ref(1);
 
     const closeModal = () => {
         model.value = false;
         emit('update:modelValue', false);
     };
 
+    const getMovieData = (title: string, rating: number) => {
+        axios
+            .get(
+                `https://www.omdbapi.com/?t=${title}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
+            )
+            .then((response) => {
+                if (response.data.Error === undefined) {
+                    movieDetails.value = response.data;
+
+                    const movieData: Movie = {
+                        awards: response.data.Awards,
+                        dateAdded: new Date(),
+                        director: response.data.Director,
+                        genre: response.data.Genre,
+                        id: uniqueId,
+                        imdbID: response.data.imdbID,
+                        imdbRating: response.data.imdbRating,
+                        metascore: response.data.Metascore,
+                        name: title,
+                        plot: response.data.Plot,
+                        poster: response.data.Poster,
+                        rating: rating,
+                        year: response.data.Year,
+                    };
+
+                    storeDVD.addDVD(movieData);
+                } else {
+                    const movieData: Movie = {
+                        awards: '',
+                        dateAdded: new Date(),
+                        director: '',
+                        genre: '',
+                        id: uniqueId,
+                        imdbID: '',
+                        imdbRating: '',
+                        metascore: '',
+                        name: title,
+                        plot: '',
+                        poster: '',
+                        rating: rating,
+                        year: '',
+                    };
+
+                    storeDVD.addDVD(movieData);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
     const submitForm = () => {
         if (title.value !== '') {
-            StoreDVD.addDVD(title.value, +rating.value);
+            getMovieData(title.value, rating.value);
 
             toast.success(`<strong>${title.value}</strong> has been added!`, {
                 autoClose: 3000,
@@ -46,7 +104,7 @@
             } as ToastOptions);
 
             title.value = '';
-            rating.value = '1';
+            rating.value = 1;
 
             closeModal();
         }
