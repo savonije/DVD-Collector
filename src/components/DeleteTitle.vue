@@ -7,7 +7,7 @@
     import type { Movie } from '@/types';
 
     const ModalDeleteTitle = defineAsyncComponent(
-        () => import('./ModalDeleteTitle.vue'),
+        () => import('@/components/ModalDeleteTitle.vue'),
     );
 
     const { t } = useI18n();
