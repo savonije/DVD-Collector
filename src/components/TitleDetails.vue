@@ -28,7 +28,13 @@
             )
             .then((response) => {
                 if (response.data.Error === undefined) {
-                    movieDetails.value = response.data;
+                    movieDetails.value = {
+                        ...response.data,
+                        director: response.data.Director,
+                        plot: response.data.Plot,
+                        poster: response.data.Poster,
+                        year: response.data.Year,
+                    };
                 }
             })
             .catch((error) => console.error(error))
