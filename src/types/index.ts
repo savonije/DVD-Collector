@@ -1,5 +1,6 @@
 export interface Movie {
     id: string;
+    imdbID: string;
     name: string;
     rating?: number;
     dateAdded?: Date;

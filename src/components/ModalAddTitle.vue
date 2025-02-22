@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import axios from 'axios';
+    import { nanoid } from 'nanoid';
     import { ref, watch, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
@@ -16,6 +17,8 @@
     const storeDVD = useStoreDVDs();
 
     const movieDetails: Ref<MovieDetails | null> = ref(null);
+
+    const uniqueId = nanoid(8);
 
     const props = defineProps({
         modelValue: Boolean,
@@ -39,19 +42,20 @@
         emit('update:modelValue', false);
     };
 
-    const getMovieData = () => {
+    const getMovieData = (title: string, rating: number) => {
         axios
             .get(
-                `https://www.omdbapi.com/?t=${title.value}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
+                `https://www.omdbapi.com/?t=${title}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
             )
             .then((response) => {
                 if (response.data.Error === undefined) {
                     movieDetails.value = response.data;
 
                     const movieData: Movie = {
-                        id: response.data.imdbID,
-                        name: response.data.Title,
-                        rating: rating.value,
+                        id: uniqueId,
+                        imdbID: response.data.imdbID,
+                        name: title,
+                        rating: rating,
                         dateAdded: new Date(),
                         poster: response.data.Poster,
                         year: response.data.Year,
@@ -69,7 +73,7 @@
 
     const submitForm = () => {
         if (title.value !== '') {
-            getMovieData();
+            getMovieData(title.value, rating.value);
 
             toast.success(`<strong>${title.value}</strong> has been added!`, {
                 autoClose: 3000,
