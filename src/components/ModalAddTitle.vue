@@ -11,12 +11,12 @@
 
     import 'vue3-toastify/dist/index.css';
 
-    import type { Movie, MovieDetails } from '@/types';
+    import type { Movie } from '@/types';
 
     const { t } = useI18n();
     const storeDVD = useStoreDVDs();
 
-    const movieDetails: Ref<MovieDetails | null> = ref(null);
+    const movieDetails: Ref<Movie | null> = ref(null);
 
     const uniqueId = nanoid(14);
 

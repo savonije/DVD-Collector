@@ -18,8 +18,3 @@ export interface Movie extends MovieID {
     runtime?: string;
     year?: string;
 }
-
-export interface MovieDetails extends Movie {
-    Metascore: string;
-    imdbRating: string;
-}
