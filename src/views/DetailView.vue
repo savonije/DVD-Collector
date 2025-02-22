@@ -4,6 +4,7 @@
 
     import DeleteTitle from '@/components/DeleteTitle.vue';
     import TitleDetails from '@/components/TitleDetails.vue';
+    import UpdateTitle from '@/components/UpdateTitle.vue';
     import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
     import { useStoreAuth } from '@/stores/storeAuth';
@@ -47,7 +48,8 @@
                     </button>
                 </div>
 
-                <div v-if="storeAuth.user?.id">
+                <div v-if="storeAuth.user?.id" class="flex gap-9">
+                    <UpdateTitle :id="id" :name="name" />
                     <DeleteTitle :id="id" :name="name" />
                 </div>
             </div>
