@@ -48,9 +48,9 @@
 <template>
     <div v-if="!isDataLoading && movieDetails" class="flex gap-6">
         <div class="w-1/3">
-            <figure v-if="movieDetails.Poster" class="-mt-12 shrink-0 border-2">
+            <figure v-if="movieDetails.poster" class="-mt-12 shrink-0 border-2">
                 <img
-                    :src="movieDetails.Poster"
+                    :src="movieDetails.poster"
                     :alt="props.name"
                     width="300"
                     height="441"
@@ -61,7 +61,7 @@
             <div
                 class="mb-1 text-xs font-bold text-gray-400 dark:text-gray-200"
             >
-                {{ movieDetails?.Year }} | {{ movieDetails?.Director }}
+                {{ movieDetails?.year }} | {{ movieDetails?.director }}
             </div>
             <div class="text-xs text-gray-400 dark:text-gray-200">
                 <span>{{ movieDetails.Awards }}</span>
@@ -71,7 +71,7 @@
                     {{ t('titles.summary') }}
                 </div>
                 <div class="text-black-700 text-sm dark:text-gray-200">
-                    {{ movieDetails.Plot }}
+                    {{ movieDetails.plot }}
                 </div>
             </div>
             <div class="text-black-700 mt-3 text-xs italic dark:text-gray-200">
