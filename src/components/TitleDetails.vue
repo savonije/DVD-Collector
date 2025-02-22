@@ -1,45 +1,27 @@
 <script setup lang="ts">
-    import axios from 'axios';
-    import { computed, onMounted, ref, type Ref } from 'vue';
+    import { computed, onMounted, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
     import isLoading from '@/components/isLoading.vue';
 
     import { useStoreDVDs } from '@/stores/storeDVDs';
-    import type { MovieDetails } from '@/types';
 
     const props = defineProps<{ id: string; name: string }>();
     const { t } = useI18n();
     const StoreDVD = useStoreDVDs();
-    const queryName = props.name.split(' ').join('+');
 
-    const movieDetails: Ref<MovieDetails | null> = ref(null);
     const isDataLoading = ref(true);
+
+    const movieDetails = computed(
+        () => StoreDVD.DVDs.find((dvd) => dvd.id === props.id) || null,
+    );
+
     const personalRating = computed(
         () => StoreDVD.DVDs.find((dvd) => dvd.id === props.id)?.rating || 'N/A',
     );
+
     const editableRating = ref(+personalRating.value);
     const isEditingRating = ref(false);
-
-    const getInfo = () => {
-        axios
-            .get(
-                `https://www.omdbapi.com/?t=${queryName}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
-            )
-            .then((response) => {
-                if (response.data.Error === undefined) {
-                    movieDetails.value = {
-                        ...response.data,
-                        director: response.data.Director,
-                        plot: response.data.Plot,
-                        poster: response.data.Poster,
-                        year: response.data.Year,
-                    };
-                }
-            })
-            .catch((error) => console.error(error))
-            .finally(() => (isDataLoading.value = false));
-    };
 
     const updateRating = () => {
         if (editableRating.value !== personalRating.value) {
@@ -48,7 +30,11 @@
         isEditingRating.value = false;
     };
 
-    onMounted(getInfo);
+    onMounted(() => {
+        if (StoreDVD.DVDs.length) {
+            isDataLoading.value = false;
+        }
+    });
 </script>
 
 <template>
@@ -70,7 +56,7 @@
                 {{ movieDetails?.year }} | {{ movieDetails?.director }}
             </div>
             <div class="text-xs text-gray-400 dark:text-gray-200">
-                <span>{{ movieDetails.Awards }}</span>
+                <span>{{ movieDetails.awards }}</span>
             </div>
             <div class="mt-6">
                 <div class="font-heading text-xs font-bold uppercase">
@@ -81,16 +67,22 @@
                 </div>
             </div>
             <div class="text-black-700 mt-3 text-xs italic dark:text-gray-200">
-                {{ movieDetails.Actors }}
+                {{ movieDetails.actors }}
             </div>
             <div class="mt-6 flex flex-col justify-center gap-3">
-                <div class="flex items-center gap-3">
-                    <div class="score">{{ movieDetails.Metascore }}</div>
+                <div
+                    v-if="movieDetails.metascore"
+                    class="flex items-center gap-3"
+                >
+                    <div class="score">{{ movieDetails.metascore }}</div>
                     <span class="text-black-700 text-xs dark:text-gray-200">{{
                         t('titles.metascore')
                     }}</span>
                 </div>
-                <div class="flex items-center gap-3">
+                <div
+                    v-if="movieDetails.imdbRating"
+                    class="flex items-center gap-3"
+                >
                     <div class="score">{{ movieDetails.imdbRating }}</div>
                     <span class="text-black-700 text-xs dark:text-gray-200">{{
                         t('titles.imdb')

@@ -52,29 +52,37 @@
                     movieDetails.value = response.data;
 
                     const movieData: Movie = {
+                        awards: response.data.Awards,
+                        dateAdded: new Date(),
+                        director: response.data.Director,
+                        genre: response.data.Genre,
                         id: uniqueId,
                         imdbID: response.data.imdbID,
+                        imdbRating: response.data.imdbRating,
+                        metascore: response.data.Metascore,
                         name: title,
-                        rating: rating,
-                        dateAdded: new Date(),
-                        poster: response.data.Poster,
-                        year: response.data.Year,
-                        director: response.data.Director,
                         plot: response.data.Plot,
+                        poster: response.data.Poster,
+                        rating: rating,
+                        year: response.data.Year,
                     };
 
                     storeDVD.addDVD(movieData);
                 } else {
                     const movieData: Movie = {
+                        awards: '',
+                        dateAdded: new Date(),
+                        director: '',
+                        genre: '',
                         id: uniqueId,
                         imdbID: '',
+                        imdbRating: '',
+                        metascore: '',
                         name: title,
-                        rating: rating,
-                        dateAdded: new Date(),
-                        poster: '',
-                        year: '',
-                        director: '',
                         plot: '',
+                        poster: '',
+                        rating: rating,
+                        year: '',
                     };
 
                     storeDVD.addDVD(movieData);

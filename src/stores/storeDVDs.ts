@@ -26,14 +26,21 @@ export const useStoreDVDs = defineStore('storeDVDs', {
                 this.DVDsLoaded = false;
 
                 this.DVDs = querySnapshot.docs.map((doc) => ({
+                    actors: doc.data().actors,
+                    awards: doc.data().awards,
+                    director: doc.data().director,
+                    genre: doc.data().genre,
                     id: doc.id,
                     imdbID: doc.data().imdbID,
+                    imdbRating: doc.data().imdbRating,
+                    metascore: doc.data().metascore,
                     name: doc.data().name,
-                    rating: Number(doc.data().rating) || 0,
-                    poster: doc.data().poster || '',
-                    year: doc.data().year,
-                    director: doc.data().director,
                     plot: doc.data().plot,
+                    poster: doc.data().poster || '',
+                    rated: doc.data().rated,
+                    rating: Number(doc.data().rating) || 0,
+                    runtime: doc.data().runtime,
+                    year: doc.data().year,
                 }));
 
                 this.DVDsLoaded = true;
