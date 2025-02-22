@@ -108,9 +108,9 @@
                         @blur="updateRating"
                         @keyup.enter="updateRating"
                     />
-                    <span class="text-black-700 text-xs dark:text-gray-200">{{
-                        t('titles.personalRating')
-                    }}</span>
+                    <span class="text-black-700 text-xs dark:text-gray-200">
+                        {{ t('titles.personalRating') }}
+                    </span>
                 </div>
             </div>
             <div v-if="movieDetails.imdbID" class="mt-3">
