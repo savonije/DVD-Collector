@@ -4,7 +4,7 @@
 
     import isLoading from '@/components/isLoading.vue';
 
-    import type { Movie } from '@/types';
+    import type { MovieID } from '@/types';
 
     const ModalDeleteTitle = defineAsyncComponent(
         () => import('@/components/ModalDeleteTitle.vue'),
@@ -14,7 +14,7 @@
 
     const isModalVisible = ref(false);
 
-    const props = defineProps<Movie>();
+    const props = defineProps<MovieID>();
 </script>
 
 <template>
@@ -33,7 +33,6 @@
                 :id="props.id"
                 v-model="isModalVisible"
                 :name="props.name"
-                :rating="props.rating"
             />
         </template>
         <template #fallback>

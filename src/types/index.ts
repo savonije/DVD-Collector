@@ -1,3 +1,8 @@
+export interface MovieID {
+    id: string;
+    name: string;
+}
+
 export interface Movie {
     id: string;
     imdbID: string;
