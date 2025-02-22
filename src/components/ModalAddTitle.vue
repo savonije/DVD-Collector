@@ -18,7 +18,7 @@
 
     const movieDetails: Ref<MovieDetails | null> = ref(null);
 
-    const uniqueId = nanoid(8);
+    const uniqueId = nanoid(14);
 
     const props = defineProps({
         modelValue: Boolean,
