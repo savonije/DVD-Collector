@@ -5,7 +5,7 @@ export interface MovieID {
 
 export interface Movie extends MovieID {
     imdbID: string;
-    rating?: number;
+    rating: number;
     dateAdded?: Date;
     poster: string;
     year?: string;

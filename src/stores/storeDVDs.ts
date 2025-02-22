@@ -29,7 +29,7 @@ export const useStoreDVDs = defineStore('storeDVDs', {
                     id: doc.id,
                     imdbID: doc.data().imdbID,
                     name: doc.data().name,
-                    rating: doc.data().rating,
+                    rating: Number(doc.data().rating) || 0,
                     poster: doc.data().poster || '',
                     year: doc.data().year,
                     director: doc.data().director,
