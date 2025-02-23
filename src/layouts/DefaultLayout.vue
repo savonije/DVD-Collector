@@ -5,7 +5,7 @@
 
 <template>
     <PageHeader />
-    <main class="container grow">
+    <main class="container flex grow flex-col">
         <slot />
     </main>
     <PageFooter />

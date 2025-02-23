@@ -5,7 +5,7 @@
 </script>
 
 <template>
-    <div class="flex h-full w-full items-center justify-center" role="status">
+    <div class="flex w-full grow items-center justify-center" role="status">
         <svg
             class="h-16 w-16 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
             aria-hidden="true"
