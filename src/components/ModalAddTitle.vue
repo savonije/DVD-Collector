@@ -79,39 +79,49 @@
 
 <template>
     <ModalLayout :showModal="model" @close="closeModal">
-        <h2 class="mb-0">
+        <h2>
             {{ t('titles.addNewDvd') }}
         </h2>
-        <form @submit.prevent="submitForm">
-            <div class="mb-3">
-                <label class="block font-bold" for="name">
-                    {{ t('titles.title') }}:
-                </label>
-                <input
-                    id="name"
-                    v-model="title"
-                    class="w-full border px-6 py-3 sm:min-w-[400px]"
-                    type="text"
-                />
-            </div>
 
-            <div class="mb-3">
-                <label class="block font-bold" for="rating">
-                    {{ t('titles.rating') }}:
-                </label>
-                <select id="rating" v-model="rating" class="border px-6 py-3">
-                    <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
-                </select>
+        <form @submit.prevent="submitForm">
+            <div class="mb-12 flex gap-3">
+                <div class="flex-1">
+                    <label class="mb-2 block font-bold" for="name">
+                        {{ t('titles.title') }}:
+                    </label>
+                    <input
+                        id="name"
+                        v-model="title"
+                        class="h-12 w-full rounded border px-6 py-3"
+                        type="text"
+                    />
+                </div>
+
+                <div>
+                    <label class="mb-2 block font-bold" for="rating">
+                        {{ t('titles.rating') }}:
+                    </label>
+                    <select
+                        id="rating"
+                        v-model="rating"
+                        class="h-12 rounded border px-6 py-3"
+                    >
+                        <option v-for="n in 10" :key="n" :value="n">
+                            {{ n }}
+                        </option>
+                    </select>
+                </div>
             </div>
 
             <div class="flex justify-between">
                 <button
-                    class="button button-neutral"
+                    class="font-bold underline-offset-2 opacity-50 hover:underline"
                     type="button"
                     @click="closeModal"
                 >
                     {{ t('common.cancel') }}
                 </button>
+
                 <button class="button" type="submit">
                     {{ t('common.save') }}
                 </button>
