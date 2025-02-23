@@ -20,7 +20,7 @@
 
 <template>
     <DefaultLayout>
-        <div class="mx-auto max-w-[800px]">
+        <div class="mx-auto w-full md:w-[800px]">
             <div>
                 <div class="bg-white shadow-sm dark:bg-gray-950">
                     <div class="bg-teal p-6">

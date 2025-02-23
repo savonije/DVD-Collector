@@ -33,50 +33,30 @@
             .get(
                 `https://www.omdbapi.com/?t=${title}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
             )
-            .then((response) => {
-                if (!response.data.Error) {
-                    movieDetails.value = response.data;
+            .then(({ data }) => {
+                const isValid = !data.Error;
 
-                    const movieData: Movie = {
-                        awards: response.data.Awards,
-                        dateAdded: new Date(),
-                        director: response.data.Director,
-                        genre: response.data.Genre,
-                        id: uniqueId,
-                        imdbID: response.data.imdbID,
-                        imdbRating: response.data.imdbRating,
-                        metascore: response.data.Metascore,
-                        name: title,
-                        plot: response.data.Plot,
-                        poster: response.data.Poster,
-                        rating: rating,
-                        year: response.data.Year,
-                    };
+                movieDetails.value = isValid ? data : {};
 
-                    storeDVD.addDVD(movieData);
-                } else {
-                    const movieData: Movie = {
-                        awards: '',
-                        dateAdded: new Date(),
-                        director: '',
-                        genre: '',
-                        id: uniqueId,
-                        imdbID: '',
-                        imdbRating: '',
-                        metascore: '',
-                        name: title,
-                        plot: '',
-                        poster: '',
-                        rating: rating,
-                        year: '',
-                    };
+                const movieData: Movie = {
+                    awards: isValid ? data.Awards : '',
+                    dateAdded: new Date(),
+                    director: isValid ? data.Director : '',
+                    genre: isValid ? data.Genre : '',
+                    id: uniqueId,
+                    imdbID: isValid ? data.imdbID : '',
+                    imdbRating: isValid ? data.imdbRating : '',
+                    metascore: isValid ? data.Metascore : '',
+                    name: title,
+                    plot: isValid ? data.Plot : '',
+                    poster: isValid ? data.Poster : '',
+                    rating,
+                    year: isValid ? data.Year : '',
+                };
 
-                    storeDVD.addDVD(movieData);
-                }
+                storeDVD.addDVD(movieData);
             })
-            .catch((error) => {
-                console.error(error);
-            });
+            .catch(console.error);
     };
 
     const submitForm = () => {
