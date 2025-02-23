@@ -64,7 +64,7 @@
 </script>
 
 <template>
-    <template v-if="items.DVDsLoaded">
+    <template v-if="!items.DVDsLoaded">
         <isLoading />
     </template>
     <template v-else>
