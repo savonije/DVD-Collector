@@ -4,6 +4,7 @@
 
     import FilterTitles from '@/components/FilterTitles.vue';
     import isLoading from '@/components/isLoading.vue';
+    import SortOrder from '@/components/SortOrder.vue';
     import TitleCard from '@/components/TitleCard.vue';
 
     import { useDebounce } from '@/composables/useDebounce';
@@ -87,16 +88,7 @@
             ></div>
 
             <div class="mt-6 flex w-full justify-end sm:mt-0">
-                <select
-                    v-model="sortOrder"
-                    class="w-full rounded-sm bg-white p-3 font-bold text-black sm:w-auto dark:bg-gray-950 dark:text-white"
-                >
-                    <option value="asc">{{ t('sort.asc') }}</option>
-                    <option value="des">{{ t('sort.desc') }}</option>
-                    <option value="rating">{{ t('sort.ratingAsc') }}</option>
-                    <option value="dateAsc">{{ t('sort.dateAsc') }}</option>
-                    <option value="dateDesc">{{ t('sort.dateDesc') }}</option>
-                </select>
+                <SortOrder v-model="sortOrder" />
             </div>
         </div>
 
