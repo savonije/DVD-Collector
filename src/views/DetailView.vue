@@ -21,36 +21,39 @@
 <template>
     <DefaultLayout>
         <div class="mx-auto max-w-[800px]">
-            <div class="bg-white shadow-sm dark:bg-gray-950">
-                <div class="bg-teal p-6">
-                    <div class="flex justify-end">
-                        <h2
-                            class="text-shark mb-0 text-3xl font-bold capitalize"
-                        >
-                            {{ name }}
-                        </h2>
+            <div>
+                <div class="bg-white shadow-sm dark:bg-gray-950">
+                    <div class="bg-teal p-6">
+                        <div class="flex justify-end">
+                            <h2
+                                class="text-shark mb-0 text-3xl font-bold capitalize"
+                            >
+                                {{ name }}
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <TitleDetails :id="id" :name="name" />
                     </div>
                 </div>
-                <div class="p-6">
-                    <TitleDetails :id="id" :name="name" />
-                </div>
             </div>
-        </div>
-        <div class="mx-auto max-w-[800px] py-6">
-            <div class="flex justify-between">
-                <div>
-                    <button
-                        class="button button-neutral cursor-pointer"
-                        type="button"
-                        @click="$router.back()"
-                    >
-                        {{ t('common.backToOverview') }}
-                    </button>
-                </div>
 
-                <div v-if="storeAuth.user?.id" class="flex gap-9">
-                    <UpdateTitle :id="id" :name="name" />
-                    <DeleteTitle :id="id" :name="name" />
+            <div class="mt-6">
+                <div class="flex justify-between">
+                    <div>
+                        <button
+                            class="button button-neutral cursor-pointer"
+                            type="button"
+                            @click="$router.back()"
+                        >
+                            {{ t('common.backToOverview') }}
+                        </button>
+                    </div>
+
+                    <div v-if="storeAuth.user?.id" class="flex gap-9">
+                        <UpdateTitle :id="id" :name="name" />
+                        <DeleteTitle :id="id" :name="name" />
+                    </div>
                 </div>
             </div>
         </div>
