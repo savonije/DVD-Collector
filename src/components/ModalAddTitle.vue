@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import axios from 'axios';
     import { nanoid } from 'nanoid';
-    import { ref, type Ref } from 'vue';
+    import { nextTick, onMounted, ref, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
 
@@ -20,6 +20,7 @@
     const uniqueId = nanoid(14);
 
     const model = defineModel<boolean>();
+    const titleInput = ref<HTMLInputElement | null>(null);
 
     const title = ref('');
     const rating = ref(1);
@@ -75,6 +76,14 @@
             closeModal();
         }
     };
+
+    onMounted(() => {
+        nextTick(() => {
+            if (titleInput.value) {
+                titleInput.value.focus();
+            }
+        });
+    });
 </script>
 
 <template>
@@ -91,6 +100,7 @@
                     </label>
                     <input
                         id="name"
+                        ref="titleInput"
                         v-model="title"
                         class="h-12 w-full rounded border px-6 py-3"
                         type="text"
