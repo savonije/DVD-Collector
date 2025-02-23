@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import axios from 'axios';
     import { nanoid } from 'nanoid';
-    import { ref, watch, type Ref } from 'vue';
+    import { ref, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
 
@@ -17,29 +17,15 @@
     const storeDVD = useStoreDVDs();
 
     const movieDetails: Ref<Movie | null> = ref(null);
-
     const uniqueId = nanoid(14);
 
-    const props = defineProps({
-        modelValue: Boolean,
-    });
-    const emit = defineEmits(['update:modelValue']);
-
-    const model = ref(props.modelValue);
-
-    watch(
-        () => props.modelValue,
-        (newValue) => {
-            model.value = newValue;
-        },
-    );
+    const model = defineModel<boolean>();
 
     const title = ref('');
     const rating = ref(1);
 
     const closeModal = () => {
         model.value = false;
-        emit('update:modelValue', false);
     };
 
     const getMovieData = (title: string, rating: number) => {
@@ -48,7 +34,7 @@
                 `https://www.omdbapi.com/?t=${title}&apikey=${import.meta.env.VITE_OMDB_APIKEY}`,
             )
             .then((response) => {
-                if (response.data.Error === undefined) {
+                if (!response.data.Error) {
                     movieDetails.value = response.data;
 
                     const movieData: Movie = {
@@ -134,16 +120,7 @@
                     {{ t('titles.rating') }}:
                 </label>
                 <select id="rating" v-model="rating" class="border px-6 py-3">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                    <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
                 </select>
             </div>
 

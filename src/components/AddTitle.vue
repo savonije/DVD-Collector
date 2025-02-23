@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { defineAsyncComponent, ref } from 'vue';
+    import { defineAsyncComponent, defineModel } from 'vue';
     import { useI18n } from 'vue-i18n';
 
     import isLoading from '@/components/isLoading.vue';
@@ -12,13 +12,11 @@
 
     const { t } = useI18n();
     const storeAuth = useStoreAuth();
-    const isModalVisible = ref(false);
 
-    const emit = defineEmits(['open-modal']);
+    const isModalVisible = defineModel<boolean>();
 
     const openModal = () => {
         isModalVisible.value = true;
-        emit('open-modal');
     };
 </script>
 

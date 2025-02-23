@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { defineAsyncComponent, ref } from 'vue';
+    import { defineAsyncComponent, defineModel } from 'vue';
     import { useI18n } from 'vue-i18n';
 
     import isLoading from '@/components/isLoading.vue';
@@ -12,9 +12,9 @@
 
     const { t } = useI18n();
 
-    const isModalVisible = ref(false);
+    defineProps<MovieID>();
 
-    const props = defineProps<MovieID>();
+    const isModalVisible = defineModel<boolean>();
 </script>
 
 <template>
@@ -30,9 +30,9 @@
         <template #default>
             <ModalDeleteTitle
                 v-if="isModalVisible"
-                :id="props.id"
+                :id="id"
                 v-model="isModalVisible"
-                :name="props.name"
+                :name="name"
             />
         </template>
         <template #fallback>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { nextTick } from 'vue';
+    import { defineModel, nextTick } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
 
@@ -12,27 +12,22 @@
     import 'vue3-toastify/dist/index.css';
 
     const { t } = useI18n();
+    const storeDVD = useStoreDVDs();
 
-    const props = defineProps<
-        MovieID & {
-            modelValue: boolean;
-        }
-    >();
+    const props = defineProps<MovieID>();
 
-    const emit = defineEmits(['update:modelValue']);
-
-    const StoreDVD = useStoreDVDs();
+    const model = defineModel<boolean>();
 
     const closeModal = () => {
-        emit('update:modelValue', false);
+        model.value = false;
     };
 
     const deleteTitle = async () => {
         if (!props.id) return;
-        StoreDVD.deleteDVD(props.id);
+
+        storeDVD.deleteDVD(props.id);
 
         await router.push({ path: '/' });
-
         await nextTick();
 
         toast.success(`<strong>${props.name}</strong> has been deleted!`, {
@@ -46,7 +41,7 @@
 </script>
 
 <template>
-    <ModalLayout :showModal="props.modelValue" @close="closeModal">
+    <ModalLayout :showModal="model" @close="closeModal">
         <form>
             <div class="mb-6">
                 <h2 class="mb-3 text-center">{{ t('common.areYouSure') }}</h2>
