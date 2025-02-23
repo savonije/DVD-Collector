@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { defineModel, nextTick } from 'vue';
+    import { nextTick } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
 

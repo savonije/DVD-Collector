@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { defineAsyncComponent, defineModel } from 'vue';
+    import { defineAsyncComponent } from 'vue';
     import { useI18n } from 'vue-i18n';
 
     import isLoading from '@/components/isLoading.vue';
