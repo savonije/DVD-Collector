@@ -36,7 +36,13 @@
                 return b.name.localeCompare(a.name);
             }
 
-            if (sortOrder.value === 'rating') {
+            if (sortOrder.value === 'ratingDesc') {
+                const ratingA = a.rating ?? 0;
+                const ratingB = b.rating ?? 0;
+                return ratingA - ratingB;
+            }
+
+            if (sortOrder.value === 'ratingAsc') {
                 const ratingA = a.rating ?? 0;
                 const ratingB = b.rating ?? 0;
                 return ratingB - ratingA;

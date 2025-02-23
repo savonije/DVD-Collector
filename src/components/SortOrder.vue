@@ -12,7 +12,8 @@
     >
         <option value="asc">{{ t('sort.asc') }}</option>
         <option value="des">{{ t('sort.desc') }}</option>
-        <option value="rating">{{ t('sort.ratingAsc') }}</option>
+        <option value="ratingAsc">{{ t('sort.ratingAsc') }}</option>
+        <option value="ratingDesc">{{ t('sort.ratingDesc') }}</option>
         <option value="dateAsc">{{ t('sort.dateAsc') }}</option>
         <option value="dateDesc">{{ t('sort.dateDesc') }}</option>
     </select>
