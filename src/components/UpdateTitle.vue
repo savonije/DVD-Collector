@@ -67,6 +67,6 @@
         type="button"
         @click="getMovieData(name)"
     >
-        {{ t('common.update') }}
+        {{ t('common.fetchImdbData') }}
     </button>
 </template>
