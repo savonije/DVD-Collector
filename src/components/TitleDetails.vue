@@ -4,11 +4,13 @@
 
     import isLoading from '@/components/isLoading.vue';
 
+    import { useStoreAuth } from '@/stores/storeAuth';
     import { useStoreDVDs } from '@/stores/storeDVDs';
 
     const props = defineProps<{ id: string; name: string }>();
     const { t } = useI18n();
     const StoreDVD = useStoreDVDs();
+    const storeAuth = useStoreAuth();
 
     const isDataLoading = ref(true);
 
@@ -22,6 +24,12 @@
 
     const editableRating = ref(+personalRating.value);
     const isEditingRating = ref(false);
+
+    const handleRatingClick = () => {
+        if (!storeAuth.user?.id) return;
+
+        isEditingRating.value = true;
+    };
 
     const updateRating = () => {
         if (editableRating.value !== personalRating.value) {
@@ -92,7 +100,7 @@
                     <div
                         v-if="!isEditingRating"
                         class="score"
-                        @click="isEditingRating = true"
+                        @click="handleRatingClick"
                     >
                         {{ personalRating }}
                     </div>
