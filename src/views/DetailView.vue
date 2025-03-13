@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import { computed } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { useRoute } from 'vue-router';
 
@@ -11,49 +12,38 @@
 
     const route = useRoute();
     const storeAuth = useStoreAuth();
-
     const { t } = useI18n();
 
-    const id = route.params.id as string;
-    const name = route.params.name as string;
+    const id = computed(() => route.params.id as string);
+    const name = computed(() => route.params.name as string);
 </script>
 
 <template>
     <DefaultLayout>
         <div class="mx-auto w-full md:w-[800px]">
-            <div>
-                <div class="bg-white shadow-sm dark:bg-gray-950">
-                    <div class="bg-teal p-6">
-                        <div class="flex justify-end">
-                            <h2
-                                class="text-shark mb-0 text-3xl font-bold capitalize"
-                            >
-                                {{ name }}
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <TitleDetails :id="id" :name="name" />
-                    </div>
+            <div class="bg-white shadow-sm dark:bg-gray-950">
+                <div class="bg-teal flex justify-between p-6">
+                    <h2 class="text-shark text-3xl font-bold capitalize">
+                        {{ name }}
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <TitleDetails :id="id" :name="name" />
                 </div>
             </div>
 
-            <div class="mt-6">
-                <div class="flex justify-between">
-                    <div>
-                        <button
-                            class="button button-neutral cursor-pointer"
-                            type="button"
-                            @click="$router.back()"
-                        >
-                            {{ t('common.backToOverview') }}
-                        </button>
-                    </div>
+            <div class="mt-6 flex justify-between">
+                <button
+                    class="button button-neutral cursor-pointer"
+                    type="button"
+                    @click="$router.back()"
+                >
+                    {{ t('common.backToOverview') }}
+                </button>
 
-                    <div v-if="storeAuth.user?.id" class="flex gap-9">
-                        <UpdateTitle :id="id" :name="name" />
-                        <DeleteTitle :id="id" :name="name" />
-                    </div>
+                <div v-if="storeAuth.user?.id" class="flex gap-9">
+                    <UpdateTitle :id="id" :name="name" />
+                    <DeleteTitle :id="id" :name="name" />
                 </div>
             </div>
         </div>

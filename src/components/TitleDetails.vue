@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { computed, onMounted, ref } from 'vue';
+    import { computed, onMounted, ref, watch } from 'vue';
     import { useI18n } from 'vue-i18n';
 
     import isLoading from '@/components/isLoading.vue';
@@ -8,6 +8,7 @@
     import { useStoreDVDs } from '@/stores/storeDVDs';
 
     const props = defineProps<{ id: string; name: string }>();
+
     const { t } = useI18n();
     const StoreDVD = useStoreDVDs();
     const storeAuth = useStoreAuth();
@@ -17,21 +18,18 @@
     const movieDetails = computed(
         () => StoreDVD.DVDs.find((dvd) => dvd.id === props.id) || null,
     );
-
-    const personalRating = computed(
-        () => StoreDVD.DVDs.find((dvd) => dvd.id === props.id)?.rating || 'N/A',
-    );
+    const personalRating = computed(() => movieDetails.value?.rating || 'N/A');
 
     const editableRating = ref(+personalRating.value);
     const isEditingRating = ref(false);
 
-    const handleRatingClick = () => {
-        if (!storeAuth.user?.id) return;
-
-        isEditingRating.value = true;
+    const enableRatingEdit = () => {
+        if (storeAuth.user?.id) {
+            isEditingRating.value = true;
+        }
     };
 
-    const updateRating = () => {
+    const saveRating = () => {
         if (editableRating.value !== personalRating.value) {
             StoreDVD.updateDVD(props.id, props.name, editableRating.value);
         }
@@ -39,10 +37,21 @@
     };
 
     onMounted(() => {
-        if (StoreDVD.DVDs.length) {
-            isDataLoading.value = false;
+        isDataLoading.value = !StoreDVD.DVDs.length;
+
+        if (!StoreDVD.DVDs.length) {
+            StoreDVD.getDVDs();
         }
     });
+
+    watch(
+        () => StoreDVD.DVDs,
+        (newDVDs) => {
+            if (newDVDs.length) {
+                isDataLoading.value = false;
+            }
+        },
+    );
 </script>
 
 <template>
@@ -57,15 +66,17 @@
                 />
             </figure>
         </div>
+
         <div class="w-2/3">
             <div
                 class="mb-1 text-xs font-bold text-gray-400 dark:text-gray-200"
             >
-                {{ movieDetails?.year }} | {{ movieDetails?.director }}
+                {{ movieDetails.year }} | {{ movieDetails.director }}
             </div>
             <div class="text-xs text-gray-400 dark:text-gray-200">
                 <span>{{ movieDetails.awards }}</span>
             </div>
+
             <div class="mt-6">
                 <div class="font-heading text-xs font-bold uppercase">
                     {{ t('titles.summary') }}
@@ -74,9 +85,11 @@
                     {{ movieDetails.plot }}
                 </div>
             </div>
+
             <div class="text-black-700 mt-3 text-xs italic dark:text-gray-200">
                 {{ movieDetails.actors }}
             </div>
+
             <div class="mt-6 flex flex-col justify-center gap-3">
                 <div
                     v-if="movieDetails.metascore"
@@ -87,6 +100,7 @@
                         t('titles.metascore')
                     }}</span>
                 </div>
+
                 <div
                     v-if="movieDetails.imdbRating"
                     class="flex items-center gap-3"
@@ -96,11 +110,12 @@
                         t('titles.imdb')
                     }}</span>
                 </div>
+
                 <div class="flex items-center gap-3">
                     <div
                         v-if="!isEditingRating"
                         class="score"
-                        @click="handleRatingClick"
+                        @click="enableRatingEdit"
                     >
                         {{ personalRating }}
                     </div>
@@ -111,14 +126,15 @@
                         type="number"
                         min="0"
                         max="10"
-                        @blur="updateRating"
-                        @keyup.enter="updateRating"
+                        @blur="saveRating"
+                        @keyup.enter="saveRating"
                     />
                     <span class="text-black-700 text-xs dark:text-gray-200">
                         {{ t('titles.personalRating') }}
                     </span>
                 </div>
             </div>
+
             <div v-if="movieDetails.imdbID" class="mt-3">
                 <a
                     class="text-xs text-gray-200"
@@ -130,9 +146,11 @@
             </div>
         </div>
     </div>
+
     <div v-else-if="isDataLoading">
         <isLoading />
     </div>
+
     <div v-else>
         <p>{{ t('titles.noResult') }}...</p>
     </div>
