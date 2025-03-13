@@ -87,13 +87,17 @@
                         totalLength: items.DVDs.length,
                     })
                 "
-            ></div>
+            />
+
             <div
                 v-else
                 v-html="t('common.totalTitles', { count: items.DVDs.length })"
-            ></div>
+            />
 
-            <div class="mt-6 flex w-full justify-end sm:mt-0">
+            <div
+                class="mt-6 flex w-full items-center justify-end gap-3 sm:mt-0"
+            >
+                <span class="font-bold">{{ t('common.sort') }}:</span>
                 <SortOrder v-model="sortOrder" />
             </div>
         </div>
