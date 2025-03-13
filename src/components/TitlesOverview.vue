@@ -77,22 +77,19 @@
         <FilterTitles v-model="searchQuery" />
 
         <div
-            class="mb-12 flex flex-col items-center justify-between sm:flex-row"
+            class="mb-6 flex flex-col items-center justify-between sm:flex-row"
         >
             <div
-                v-if="searchQuery"
-                v-html="
-                    t('common.searchResults', {
-                        filterLength: filteredDVDs.length,
-                        totalLength: items.DVDs.length,
-                    })
-                "
-            />
-
-            <div
-                v-else
-                v-html="t('common.totalTitles', { count: items.DVDs.length })"
-            />
+                class="rounded bg-gray-200 px-3 py-2 text-xs font-bold whitespace-nowrap text-gray-800"
+            >
+                <span v-if="debouncedSearchQuery">
+                    {{ filteredDVDs.length }} / {{ items.DVDs.length }}
+                    {{ t('common.DVDs') }}
+                </span>
+                <span v-else>
+                    {{ items.DVDs.length }} {{ t('common.DVDs') }}
+                </span>
+            </div>
 
             <div
                 class="mt-6 flex w-full items-center justify-end gap-3 sm:mt-0"
