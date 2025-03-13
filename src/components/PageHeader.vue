@@ -47,11 +47,7 @@
                     {{ t('common.logout') }}
                 </button>
 
-                <RouterLink
-                    v-else
-                    class="button hover:text-shark text-white"
-                    to="/login"
-                >
+                <RouterLink v-else class="button hover:text-shark" to="/login">
                     {{ t('common.login') }}
                 </RouterLink>
             </div>
