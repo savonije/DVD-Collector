@@ -22,7 +22,7 @@
                 </div>
 
                 <div
-                    class="text-black-600 text-sm leading-loose dark:text-gray-200"
+                    class="text-black-600 line-clamp-5 text-sm leading-loose dark:text-gray-200"
                 >
                     {{ item.plot }}
                 </div>
@@ -60,7 +60,7 @@
         @apply relative overflow-hidden;
 
         img {
-            @apply relative h-full w-[150px] max-w-full transform object-cover transition duration-500 sm:h-[300px] sm:w-[200px];
+            @apply relative h-full w-[150px] max-w-full transform object-cover transition duration-500 md:h-[300px] md:w-[200px];
 
             &:after {
                 @apply absolute top-0 left-0 z-10 h-full w-full bg-linear-to-r from-white content-[''];
