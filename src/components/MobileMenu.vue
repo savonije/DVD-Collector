@@ -53,7 +53,7 @@
         <div
             v-if="isMenuOpen"
             ref="menuRef"
-            class="bg-teal fixed inset-y-0 right-0 z-10 flex w-[90%] transform flex-col items-center justify-center gap-6 p-3 shadow-lg transition-transform"
+            class="bg-shark-800 fixed inset-y-0 right-0 z-10 flex w-2/3 transform flex-col items-center justify-center gap-6 p-3 shadow-lg transition-transform sm:w-1/3"
         >
             <button
                 class="absolute top-3 right-6 text-3xl text-white"
