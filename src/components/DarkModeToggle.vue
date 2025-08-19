@@ -15,19 +15,22 @@
         if (storedTheme === 'dark') {
             isDarkMode.value = true;
             document.documentElement.classList.add('dark');
-        } else if (storedTheme === 'light') {
+            loading.value = false;
+            return;
+        }
+
+        if (storedTheme === 'light') {
             isDarkMode.value = false;
             document.documentElement.classList.remove('dark');
-        } else {
-            const prefersDarkScheme = window.matchMedia(
-                '(prefers-color-scheme: dark)',
-            ).matches;
-            isDarkMode.value = prefersDarkScheme;
-            document.documentElement.classList.toggle(
-                'dark',
-                prefersDarkScheme,
-            );
+            loading.value = false;
+            return;
         }
+
+        const prefersDarkScheme = window.matchMedia(
+            '(prefers-color-scheme: dark)',
+        ).matches;
+        isDarkMode.value = prefersDarkScheme;
+        document.documentElement.classList.toggle('dark', prefersDarkScheme);
 
         loading.value = false;
     };
