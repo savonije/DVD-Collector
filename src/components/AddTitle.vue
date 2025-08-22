@@ -11,6 +11,10 @@
         () => import('@/components/ModalAddTitle.vue'),
     );
 
+    const props = defineProps<{
+        fluidButton?: boolean;
+    }>();
+
     const { t } = useI18n();
     const storeAuth = useStoreAuth();
 
@@ -19,6 +23,8 @@
     const openModal = () => {
         isModalVisible.value = true;
     };
+
+    console.log(props.fluidButton);
 </script>
 
 <template>
@@ -26,7 +32,7 @@
         v-if="storeAuth.user?.id"
         @click="openModal"
         :label="t('titles.addMovie')"
-        fluid
+        :fluid="props.fluidButton"
     />
 
     <Suspense>

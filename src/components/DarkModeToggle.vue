@@ -51,7 +51,6 @@
 
 <template>
     <Button
-        class="flex items-center justify-center px-3"
         :aria-label="isDarkMode ? t('common.lightMode') : t('common.darkMode')"
         @click="toggleDarkMode"
         severity="secondary"

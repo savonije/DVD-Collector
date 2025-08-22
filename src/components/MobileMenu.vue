@@ -72,7 +72,10 @@
 
                 <ul class="flex flex-col gap-3 pt-24">
                     <li>
-                        <AddTitle @open-modal="state.isMenuOpen = false" />
+                        <AddTitle
+                            @open-modal="state.isMenuOpen = false"
+                            fluid-button
+                        />
                     </li>
                     <li>
                         <Button
@@ -99,7 +102,7 @@
                     </li>
                 </ul>
 
-                <ul>
+                <ul class="flex justify-center">
                     <li @click="closeMenu">
                         <DarkModeToggle />
                     </li>
