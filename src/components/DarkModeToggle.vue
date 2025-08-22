@@ -15,19 +15,22 @@
         if (storedTheme === 'dark') {
             isDarkMode.value = true;
             document.documentElement.classList.add('dark');
-        } else if (storedTheme === 'light') {
+            loading.value = false;
+            return;
+        }
+
+        if (storedTheme === 'light') {
             isDarkMode.value = false;
             document.documentElement.classList.remove('dark');
-        } else {
-            const prefersDarkScheme = window.matchMedia(
-                '(prefers-color-scheme: dark)',
-            ).matches;
-            isDarkMode.value = prefersDarkScheme;
-            document.documentElement.classList.toggle(
-                'dark',
-                prefersDarkScheme,
-            );
+            loading.value = false;
+            return;
         }
+
+        const prefersDarkScheme = window.matchMedia(
+            '(prefers-color-scheme: dark)',
+        ).matches;
+        isDarkMode.value = prefersDarkScheme;
+        document.documentElement.classList.toggle('dark', prefersDarkScheme);
 
         loading.value = false;
     };
@@ -55,22 +58,21 @@
         :aria-label="isDarkMode ? t('common.lightMode') : t('common.darkMode')"
         @click="toggleDarkMode"
     >
-        <transition name="fade" mode="out-in">
-            <div v-if="!loading">
-                <DarkModeIcon
-                    v-if="!isDarkMode"
-                    key="dark"
-                    class="h-6 w-6 text-white"
-                    :alt="t('common.darkMode')"
+        <div v-if="!loading">
+            <Transition name="fade" mode="out-in">
+                <component
+                    :is="isDarkMode ? LightModeIcon : DarkModeIcon"
+                    v-if="!loading"
+                    :key="isDarkMode ? 'light' : 'dark'"
+                    class="size-6 text-white"
+                    :alt="
+                        isDarkMode
+                            ? t('common.lightMode')
+                            : t('common.darkMode')
+                    "
                 />
-                <LightModeIcon
-                    v-if="isDarkMode"
-                    key="light"
-                    class="h-6 w-6 text-white"
-                    :alt="t('common.lightMode')"
-                />
-            </div>
-        </transition>
+            </Transition>
+        </div>
     </button>
 </template>
 
