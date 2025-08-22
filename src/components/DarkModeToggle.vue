@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import Button from 'primevue/button';
     import { onMounted, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -52,11 +53,11 @@
 </script>
 
 <template>
-    <button
+    <Button
         class="px-3"
-        type="button"
         :aria-label="isDarkMode ? t('common.lightMode') : t('common.darkMode')"
         @click="toggleDarkMode"
+        severity="secondary"
     >
         <div v-if="!loading">
             <Transition name="fade" mode="out-in">
@@ -64,7 +65,7 @@
                     :is="isDarkMode ? LightModeIcon : DarkModeIcon"
                     v-if="!loading"
                     :key="isDarkMode ? 'light' : 'dark'"
-                    class="size-6 text-white"
+                    class="size-6"
                     :alt="
                         isDarkMode
                             ? t('common.lightMode')
@@ -73,7 +74,7 @@
                 />
             </Transition>
         </div>
-    </button>
+    </Button>
 </template>
 
 <style scoped>

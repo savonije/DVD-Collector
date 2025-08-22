@@ -1,21 +1,27 @@
 <script setup lang="ts">
+    import { Button, InputGroup, InputGroupAddon, InputText } from 'primevue';
+    import { useI18n } from 'vue-i18n';
+
     import SearchIcon from '@/images/icons/search.svg';
 
     defineProps({ modelValue: String });
+
     const emit = defineEmits(['update:modelValue']);
+
+    const { t } = useI18n();
 </script>
 
 <template>
     <div class="mb-9 flex justify-center">
-        <div class="relative w-full max-w-[450px] text-gray-600">
-            <SearchIcon
-                class="absolute top-1/2 left-4 h-6 w-6 -translate-y-1/2 transform text-gray-600"
-            />
-            <input
-                class="w-full rounded-sm bg-white p-6 pl-12"
+        <InputGroup class="relative w-full max-w-[450px] text-gray-600">
+            <InputGroupAddon>
+                <SearchIcon />
+            </InputGroupAddon>
+
+            <InputText
                 :value="modelValue"
-                type="text"
-                placeholder="Search for a DVD..."
+                :placeholder="`${t('common.searchDvd')}...`"
+                class="h-16"
                 @input="
                     emit(
                         'update:modelValue',
@@ -23,13 +29,14 @@
                     )
                 "
             />
-            <button
-                v-if="modelValue"
-                class="absolute top-0 right-0 p-6 text-xl leading-none"
-                @click="emit('update:modelValue', '')"
-            >
-                &times;
-            </button>
-        </div>
+
+            <InputGroupAddon v-if="modelValue">
+                <Button
+                    label="&times;"
+                    variant="text"
+                    @click="emit('update:modelValue', '')"
+                />
+            </InputGroupAddon>
+        </InputGroup>
     </div>
 </template>

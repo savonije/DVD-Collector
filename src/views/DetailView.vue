@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import Button from 'primevue/button';
     import { computed } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { useRoute } from 'vue-router';
@@ -33,13 +34,11 @@
             </div>
 
             <div class="mt-6 flex justify-between">
-                <button
-                    class="button button-neutral cursor-pointer"
-                    type="button"
+                <Button
                     @click="$router.back()"
-                >
-                    {{ t('common.backToOverview') }}
-                </button>
+                    :label="t('common.backToOverview')"
+                    severity="secondary"
+                />
 
                 <div v-if="storeAuth.user?.id" class="flex gap-9">
                     <UpdateTitle :id="id" :name="name" />

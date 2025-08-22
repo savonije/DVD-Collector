@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import InputNumber from 'primevue/inputnumber';
     import { computed, onMounted, ref, watch } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -95,7 +96,9 @@
                     v-if="movieDetails.metascore"
                     class="flex items-center gap-3"
                 >
-                    <div class="score">{{ movieDetails.metascore }}</div>
+                    <div class="score">
+                        {{ movieDetails.metascore }}
+                    </div>
                     <span class="text-black-700 text-xs dark:text-gray-200">{{
                         t('titles.metascore')
                     }}</span>
@@ -119,13 +122,12 @@
                     >
                         {{ personalRating }}
                     </div>
-                    <input
+                    <InputNumber
                         v-else
                         v-model="editableRating"
-                        class="w-12 rounded border text-center"
-                        type="number"
-                        min="0"
-                        max="10"
+                        class="w-12"
+                        :min="0"
+                        :max="10"
                         @blur="saveRating"
                         @keyup.enter="saveRating"
                     />

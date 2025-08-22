@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import { Button } from 'primevue';
     import { defineAsyncComponent } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -18,13 +19,11 @@
 </script>
 
 <template>
-    <button
-        class="text-red font-bold underline-offset-2 opacity-50 hover:underline"
-        type="button"
+    <Button
         @click="isModalVisible = true"
-    >
-        {{ t('common.delete') }}
-    </button>
+        severity="danger"
+        :label="t('common.delete')"
+    />
 
     <Suspense>
         <template #default>

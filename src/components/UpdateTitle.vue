@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import axios from 'axios';
+    import Button from 'primevue/button';
     import { computed, ref, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
@@ -62,11 +63,9 @@
 </script>
 
 <template>
-    <button
-        class="font-bold underline-offset-2 opacity-50 hover:underline"
-        type="button"
+    <Button
+        :label="t('common.fetchImdbData')"
         @click="getMovieData(name)"
-    >
-        {{ t('common.fetchImdbData') }}
-    </button>
+        variant="link"
+    />
 </template>

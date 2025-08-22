@@ -1,20 +1,27 @@
 <script setup lang="ts">
+    import Select from 'primevue/select';
     import { useI18n } from 'vue-i18n';
 
     const { t } = useI18n();
     const sortOrder = defineModel<string>();
+
+    const sortOptions = [
+        { label: t('sort.asc'), value: 'asc' },
+        { label: t('sort.desc'), value: 'desc' },
+        { label: t('sort.ratingAsc'), value: 'ratingAsc' },
+        { label: t('sort.ratingDesc'), value: 'ratingDesc' },
+        { label: t('sort.dateAsc'), value: 'dateAsc' },
+        { label: t('sort.dateDesc'), value: 'dateDesc' },
+    ];
 </script>
 
 <template>
-    <select
+    <Select
         v-model="sortOrder"
-        class="w-full rounded-sm bg-white p-3 font-bold text-black sm:w-auto dark:bg-gray-950 dark:text-white"
-    >
-        <option value="asc">{{ t('sort.asc') }}</option>
-        <option value="des">{{ t('sort.desc') }}</option>
-        <option value="ratingAsc">{{ t('sort.ratingAsc') }}</option>
-        <option value="ratingDesc">{{ t('sort.ratingDesc') }}</option>
-        <option value="dateAsc">{{ t('sort.dateAsc') }}</option>
-        <option value="dateDesc">{{ t('sort.dateDesc') }}</option>
-    </select>
+        :options="sortOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select sort order"
+        checkmark
+    />
 </template>

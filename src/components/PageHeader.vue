@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import Button from 'primevue/button';
     import { defineAsyncComponent } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -37,15 +38,14 @@
 
                 <DarkModeToggle />
 
-                <button
+                <Button
                     v-if="storeAuth.user?.id"
-                    class="button button-transparent hover:text-shark text-white"
-                    type="button"
                     :aria-label="t('common.logoutUser')"
                     @click="storeAuth.logoutUser"
+                    severity="contrast"
                 >
                     {{ t('common.logout') }}
-                </button>
+                </Button>
 
                 <RouterLink v-else class="button hover:text-shark" to="/login">
                     {{ t('common.login') }}

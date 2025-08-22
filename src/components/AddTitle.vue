@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import Button from 'primevue/button';
     import { defineAsyncComponent } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -21,14 +22,11 @@
 </script>
 
 <template>
-    <button
+    <Button
         v-if="storeAuth.user?.id"
-        class="button"
-        type="button"
         @click="openModal"
-    >
-        {{ t('titles.addMovie') }}
-    </button>
+        :label="t('titles.addMovie')"
+    />
 
     <Suspense>
         <template #default>

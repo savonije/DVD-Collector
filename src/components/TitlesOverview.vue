@@ -1,12 +1,12 @@
 <script setup lang="ts">
-    import Button from 'primevue/button';
+    import Tag from 'primevue/tag';
     import { computed, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
+    import TitleCard from '@/components/Card.vue';
     import FilterTitles from '@/components/FilterTitles.vue';
     import isLoading from '@/components/isLoading.vue';
     import SortOrder from '@/components/SortOrder.vue';
-    import TitleCard from '@/components/TitleCard.vue';
 
     import { useDebounce } from '@/composables/useDebounce';
     import { useStoreDVDs } from '@/stores/storeDVDs';
@@ -71,8 +71,6 @@
 </script>
 
 <template>
-    <Button label="test" />
-
     <template v-if="!items.DVDsLoaded">
         <isLoading />
     </template>
@@ -82,17 +80,15 @@
         <div
             class="mb-6 flex flex-col items-center justify-between sm:flex-row"
         >
-            <div
-                class="rounded bg-gray-200 px-3 py-2 text-xs font-bold whitespace-nowrap text-gray-800"
-            >
-                <span v-if="debouncedSearchQuery">
+            <Tag>
+                <template v-if="debouncedSearchQuery">
                     {{ filteredDVDs.length }} / {{ items.DVDs.length }}
                     {{ t('common.DVDs') }}
-                </span>
-                <span v-else>
+                </template>
+                <template v-else>
                     {{ items.DVDs.length }} {{ t('common.DVDs') }}
-                </span>
-            </div>
+                </template>
+            </Tag>
 
             <div
                 class="mt-6 flex w-full items-center justify-end gap-3 sm:mt-0"

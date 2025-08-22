@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import { onClickOutside } from '@vueuse/core';
+    import Button from 'primevue/button';
     import { defineAsyncComponent, onBeforeUnmount, onMounted, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -45,9 +46,9 @@
 </script>
 
 <template>
-    <button type="button" aria-label="Toggle Menu" @click="toggleMenu">
+    <Button aria-label="Toggle Menu" @click="toggleMenu">
         <MenuIcon />
-    </button>
+    </Button>
 
     <transition name="slide">
         <div
@@ -55,32 +56,28 @@
             ref="menuRef"
             class="bg-shark-800 fixed inset-y-0 right-0 z-10 flex w-2/3 transform flex-col items-center justify-center gap-6 p-3 shadow-lg transition-transform sm:w-1/3"
         >
-            <button
+            <Button
                 class="absolute top-3 right-6 text-3xl text-white"
-                type="button"
                 aria-label="Close menu"
                 @click="isMenuOpen = false"
-            >
-                &times;
-            </button>
+                label="&times;"
+            />
 
             <ul>
                 <li>
                     <AddTitle @open-modal="isMenuOpen = false" />
                 </li>
                 <li>
-                    <button
+                    <Button
                         v-if="storeAuth.user?.id"
                         class="button button-transparent hover:text-shark text-lg text-white"
-                        type="button"
                         :aria-label="t('common.logoutUser')"
                         @click="
                             storeAuth.logoutUser();
                             isMenuOpen = false;
                         "
-                    >
-                        {{ t('common.logout') }}
-                    </button>
+                        :label="t('common.logout')"
+                    />
                 </li>
                 <li>
                     <RouterLink

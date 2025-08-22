@@ -1,11 +1,10 @@
 <script setup lang="ts">
     import axios from 'axios';
     import { nanoid } from 'nanoid';
+    import { Button, Dialog, InputText, Select } from 'primevue';
     import { nextTick, onMounted, ref, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
-
-    import ModalLayout from '@/layouts/ModalLayout.vue';
 
     import { useStoreDVDs } from '@/stores/storeDVDs';
 
@@ -19,15 +18,20 @@
     const movieDetails: Ref<Movie | null> = ref(null);
     const uniqueId = nanoid(14);
 
-    const model = defineModel<boolean>();
+    const isModelVisible = defineModel<boolean>();
     const titleInput = ref<HTMLInputElement | null>(null);
 
     const title = ref('');
     const rating = ref(1);
 
     const closeModal = () => {
-        model.value = false;
+        isModelVisible.value = false;
     };
+
+    const ratingOptions = Array.from({ length: 10 }, (_, i) => ({
+        label: String(i + 1),
+        value: i + 1,
+    }));
 
     const getMovieData = (title: string, rating: number) => {
         axios
@@ -87,23 +91,21 @@
 </script>
 
 <template>
-    <ModalLayout :showModal="model" @close="closeModal">
-        <h2>
-            {{ t('titles.addNewDvd') }}
-        </h2>
-
+    <Dialog
+        v-model:visible="isModelVisible"
+        modal
+        :header="t('titles.addNewDvd')"
+    >
         <form @submit.prevent="submitForm">
             <div class="mb-12 flex gap-3">
                 <div class="flex-1">
                     <label class="mb-2 block font-bold" for="name">
                         {{ t('titles.title') }}:
                     </label>
-                    <input
+                    <InputText
                         id="name"
-                        ref="titleInput"
+                        inputRef="titleInput"
                         v-model="title"
-                        class="h-12 w-full rounded border px-6 py-3"
-                        type="text"
                     />
                 </div>
 
@@ -111,31 +113,26 @@
                     <label class="mb-2 block font-bold" for="rating">
                         {{ t('titles.rating') }}:
                     </label>
-                    <select
+                    <Select
                         id="rating"
                         v-model="rating"
-                        class="h-12 rounded border px-6 py-3"
-                    >
-                        <option v-for="n in 10" :key="n" :value="n">
-                            {{ n }}
-                        </option>
-                    </select>
+                        :options="ratingOptions"
+                        optionLabel="label"
+                        optionValue="value"
+                        placeholder="Select rating"
+                    />
                 </div>
             </div>
 
             <div class="flex justify-between">
-                <button
-                    class="font-bold underline-offset-2 opacity-50 hover:underline"
-                    type="button"
+                <Button
+                    :label="t('common.cancel')"
+                    severity="secondary"
                     @click="closeModal"
-                >
-                    {{ t('common.cancel') }}
-                </button>
+                />
 
-                <button class="button" type="submit">
-                    {{ t('common.save') }}
-                </button>
+                <Button type="submit" :label="t('common.save')" />
             </div>
         </form>
-    </ModalLayout>
+    </Dialog>
 </template>
