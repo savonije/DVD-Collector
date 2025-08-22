@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import Button from 'primevue/button';
     import { defineAsyncComponent } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -10,6 +11,10 @@
         () => import('@/components/ModalAddTitle.vue'),
     );
 
+    const props = defineProps<{
+        fluidButton?: boolean;
+    }>();
+
     const { t } = useI18n();
     const storeAuth = useStoreAuth();
 
@@ -18,17 +23,17 @@
     const openModal = () => {
         isModalVisible.value = true;
     };
+
+    console.log(props.fluidButton);
 </script>
 
 <template>
-    <button
+    <Button
         v-if="storeAuth.user?.id"
-        class="button"
-        type="button"
         @click="openModal"
-    >
-        {{ t('titles.addMovie') }}
-    </button>
+        :label="t('titles.addMovie')"
+        :fluid="props.fluidButton"
+    />
 
     <Suspense>
         <template #default>

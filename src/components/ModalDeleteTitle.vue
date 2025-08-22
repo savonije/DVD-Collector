@@ -1,9 +1,8 @@
 <script setup lang="ts">
+    import { Button, Dialog } from 'primevue';
     import { nextTick } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
-
-    import ModalLayout from '@/layouts/ModalLayout.vue';
 
     import router from '@/router';
     import { useStoreDVDs } from '@/stores/storeDVDs';
@@ -16,10 +15,10 @@
 
     const props = defineProps<MovieID>();
 
-    const model = defineModel<boolean>();
+    const isModelVisible = defineModel<boolean>();
 
     const closeModal = () => {
-        model.value = false;
+        isModelVisible.value = false;
     };
 
     const deleteTitle = async () => {
@@ -41,28 +40,27 @@
 </script>
 
 <template>
-    <ModalLayout :showModal="model" @close="closeModal">
+    <Dialog
+        v-model:visible="isModelVisible"
+        :header="t('common.areYouSure')"
+        modal
+        class="md:w-[25rem]"
+    >
         <form>
             <div class="mb-6">
-                <h2 class="mb-3 text-center">{{ t('common.areYouSure') }}</h2>
                 {{ t('titles.deleteWarning', { name: props.name }) }}
             </div>
             <div class="flex justify-between gap-3">
-                <button
-                    class="button button-neutral"
-                    type="button"
+                <Button
+                    :label="t('common.cancel')"
                     @click.prevent="closeModal"
-                >
-                    {{ t('common.cancel') }}
-                </button>
-                <button
-                    class="button button-danger"
-                    type="button"
+                />
+                <Button
+                    severity="danger"
                     @click.prevent="deleteTitle"
-                >
-                    {{ t('common.delete') }}
-                </button>
+                    :label="t('common.delete')"
+                />
             </div>
         </form>
-    </ModalLayout>
+    </Dialog>
 </template>

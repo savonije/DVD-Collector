@@ -3,9 +3,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@import './base.css' layer(base);
-@import './components.css';
-@import './typography.css' layer(base);
+@import 'primeicons/primeicons.css';
+@import '@/assets/base.css' layer(base);
+@import '@/assets/components.css';
+@import '@/assets/typography.css' layer(base);
 
 @theme {
     --color-black-50: #f7f7f8;
@@ -60,18 +61,18 @@
     --color-red-950: #50011e;
     --color-red: #ff2e63;
 
-    --color-teal-50: #effefc;
-    --color-teal-100: #c8fff8;
-    --color-teal-200: #92fdf2;
-    --color-teal-300: #53f5ea;
-    --color-teal-400: #20e1db;
-    --color-teal-500: #08d9d6;
-    --color-teal-600: #039c9e;
-    --color-teal-700: #077c7e;
-    --color-teal-800: #0b6264;
-    --color-teal-900: #0e5153;
-    --color-teal-950: #012e32;
-    --color-teal: #08d9d6;
+    --color-primary-50: #effefc;
+    --color-primary-100: #c8fff8;
+    --color-primary-200: #92fdf2;
+    --color-primary-300: #53f5ea;
+    --color-primary-400: #20e1db;
+    --color-primary-500: #08d9d6;
+    --color-primary-600: #039c9e;
+    --color-primary-700: #077c7e;
+    --color-primary-800: #0b6264;
+    --color-primary-900: #0e5153;
+    --color-primary-950: #012e32;
+    --color-primary: #08d9d6;
 
     --font-body: 'Roboto', sans-serif;
     --font-heading: 'Josefin Sans', sans-serif;

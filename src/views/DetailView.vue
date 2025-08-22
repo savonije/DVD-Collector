@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import Button from 'primevue/button';
     import { computed } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { useRoute } from 'vue-router';
@@ -22,7 +23,7 @@
     <DefaultLayout>
         <div class="mx-auto w-full md:w-[800px]">
             <div class="bg-white shadow-sm dark:bg-gray-950">
-                <div class="bg-teal flex justify-between p-6">
+                <div class="bg-primary flex justify-between p-6">
                     <h2 class="text-shark text-3xl font-bold capitalize">
                         {{ name }}
                     </h2>
@@ -33,13 +34,11 @@
             </div>
 
             <div class="mt-6 flex justify-between">
-                <button
-                    class="button button-neutral cursor-pointer"
-                    type="button"
+                <Button
                     @click="$router.back()"
-                >
-                    {{ t('common.backToOverview') }}
-                </button>
+                    :label="t('common.backToOverview')"
+                    severity="secondary"
+                />
 
                 <div v-if="storeAuth.user?.id" class="flex gap-9">
                     <UpdateTitle :id="id" :name="name" />

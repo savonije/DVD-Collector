@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import Button from 'primevue/button';
     import { defineAsyncComponent } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -20,7 +21,7 @@
 </script>
 
 <template>
-    <header class="bg-shark text-teal mb-6 py-6 sm:p-3">
+    <header class="bg-shark text-primary mb-6 py-6 sm:p-3">
         <div class="container flex items-center justify-between gap-6">
             <RouterLink to="/">
                 <span class="font-heading text-2xl font-bold">
@@ -32,22 +33,21 @@
                 <MobileMenu />
             </div>
 
-            <div class="hidden justify-end gap-3 lg:flex">
+            <div class="hidden justify-end gap-6 lg:flex xl:gap-9">
                 <AddTitle />
 
                 <DarkModeToggle />
 
-                <button
+                <Button
                     v-if="storeAuth.user?.id"
-                    class="button button-transparent hover:text-shark text-white"
-                    type="button"
                     :aria-label="t('common.logoutUser')"
                     @click="storeAuth.logoutUser"
+                    variant="link"
                 >
                     {{ t('common.logout') }}
-                </button>
+                </Button>
 
-                <RouterLink v-else class="button hover:text-shark" to="/login">
+                <RouterLink v-else to="/login">
                     {{ t('common.login') }}
                 </RouterLink>
             </div>
