@@ -2,8 +2,6 @@
     import { Button, InputGroup, InputGroupAddon, InputText } from 'primevue';
     import { useI18n } from 'vue-i18n';
 
-    import SearchIcon from '@/images/icons/search.svg';
-
     defineProps({ modelValue: String });
 
     const emit = defineEmits(['update:modelValue']);
@@ -15,7 +13,7 @@
     <div class="mb-9 flex justify-center">
         <InputGroup class="relative w-full max-w-[450px] text-gray-600">
             <InputGroupAddon>
-                <SearchIcon />
+                <i class="pi pi-search"></i>
             </InputGroupAddon>
 
             <InputText

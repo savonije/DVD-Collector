@@ -21,6 +21,7 @@
         "firebase": "^12",
         "nanoid": "^5.1.5",
         "pinia": "^3.0.1",
+        "primeicons": "^7.0.0",
         "primevue": "^4.3.7",
         "vue": "^3.4.15",
         "vue-i18n": "^11.1.2",

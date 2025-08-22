@@ -3,9 +3,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@import './base.css' layer(base);
-@import './components.css';
-@import './typography.css' layer(base);
+@import 'primeicons/primeicons.css';
+@import '@/assets/base.css' layer(base);
+@import '@/assets/components.css';
+@import '@/assets/typography.css' layer(base);
 
 @theme {
     --color-black-50: #f7f7f8;

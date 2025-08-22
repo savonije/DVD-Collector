@@ -2,6 +2,7 @@ export default {
     areYouSure: 'Are you sure?',
     backToOverview: 'Back to overview',
     cancel: 'Cancel',
+    closeMenu: 'Close menu',
     dark: 'Dark',
     darkMode: 'Dark mode',
     delete: 'Delete',
@@ -21,4 +22,5 @@ export default {
     siteTitle: `{name}'s DVD Collection`,
     sort: 'Sort',
     submit: 'Submit',
+    toggleMenu: 'Toggle menu',
 };

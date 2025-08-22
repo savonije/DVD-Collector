@@ -3,9 +3,6 @@
     import { onMounted, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
-    import DarkModeIcon from '@/images/icons/darkmode.svg';
-    import LightModeIcon from '@/images/icons/lightmode.svg';
-
     const { t } = useI18n();
     const isDarkMode = ref(false);
     const loading = ref(true);
@@ -54,26 +51,21 @@
 
 <template>
     <Button
-        class="px-3"
+        class="flex items-center justify-center px-3"
         :aria-label="isDarkMode ? t('common.lightMode') : t('common.darkMode')"
         @click="toggleDarkMode"
         severity="secondary"
     >
-        <div v-if="!loading">
-            <Transition name="fade" mode="out-in">
-                <component
-                    :is="isDarkMode ? LightModeIcon : DarkModeIcon"
-                    v-if="!loading"
-                    :key="isDarkMode ? 'light' : 'dark'"
-                    class="size-6"
-                    :alt="
-                        isDarkMode
-                            ? t('common.lightMode')
-                            : t('common.darkMode')
-                    "
-                />
-            </Transition>
-        </div>
+        <Transition name="fade" mode="out-in">
+            <i
+                v-if="!loading"
+                :key="isDarkMode ? 'light' : 'dark'"
+                :class="['pi', isDarkMode ? 'pi-sun' : 'pi-moon', 'text-xl']"
+                :aria-label="
+                    isDarkMode ? t('common.lightMode') : t('common.darkMode')
+                "
+            ></i>
+        </Transition>
     </Button>
 </template>
 

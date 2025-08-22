@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import Tag from 'primevue/tag';
+    import { Message, Tag } from 'primevue';
     import { computed, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -107,9 +107,13 @@
         </div>
 
         <div v-if="!filteredDVDs.length">
-            <h1>
-                {{ t('errors.noResults') }}
-            </h1>
+            <div class="flex items-center justify-center">
+                <Message size="large" icon="pi pi-info-circle" severity="info">
+                    <span class="text-lg">
+                        {{ t('errors.noResults') }}
+                    </span>
+                </Message>
+            </div>
         </div>
     </template>
 </template>
