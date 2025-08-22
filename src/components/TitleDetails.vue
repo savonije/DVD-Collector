@@ -126,7 +126,7 @@
                         v-else
                         v-model="editableRating"
                         class="w-12"
-                        :min="0"
+                        :min="1"
                         :max="10"
                         @blur="saveRating"
                         @keyup.enter="saveRating"
