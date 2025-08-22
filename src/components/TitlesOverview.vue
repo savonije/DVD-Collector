@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import Button from 'primevue/button';
     import { computed, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -70,6 +71,8 @@
 </script>
 
 <template>
+    <Button label="test" />
+
     <template v-if="!items.DVDsLoaded">
         <isLoading />
     </template>

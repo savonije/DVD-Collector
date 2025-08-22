@@ -22,7 +22,7 @@
     <DefaultLayout>
         <div class="mx-auto w-full md:w-[800px]">
             <div class="bg-white shadow-sm dark:bg-gray-950">
-                <div class="bg-teal flex justify-between p-6">
+                <div class="bg-primary flex justify-between p-6">
                     <h2 class="text-shark text-3xl font-bold capitalize">
                         {{ name }}
                     </h2>

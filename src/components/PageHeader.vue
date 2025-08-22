@@ -20,7 +20,7 @@
 </script>
 
 <template>
-    <header class="bg-shark text-teal mb-6 py-6 sm:p-3">
+    <header class="bg-shark text-primary mb-6 py-6 sm:p-3">
         <div class="container flex items-center justify-between gap-6">
             <RouterLink to="/">
                 <span class="font-heading text-2xl font-bold">
