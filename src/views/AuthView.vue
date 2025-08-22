@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import { Button, FloatLabel, InputText, Message, Password } from 'primevue';
     import { reactive, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
 
@@ -36,41 +37,48 @@
             <h1>{{ t('common.login') }}</h1>
 
             <form @submit.prevent="submitForm">
-                <fieldset class="mb-6">
-                    <label class="block font-bold"
-                        >{{ t('common.email') }}:</label
-                    >
-                    <input
+                <FloatLabel class="mb-6" variant="on">
+                    <InputText
                         v-model="credentials.email"
-                        class="h-12 w-full rounded-sm border p-3 shadow-sm"
+                        id="username"
                         type="email"
+                        fluid
                     />
-                </fieldset>
 
-                <fieldset class="mb-6">
-                    <label class="block font-bold"
-                        >{{ t('common.password') }}:</label
-                    >
-                    <input
+                    <label class="font-bold" for="username">
+                        {{ t('common.email') }}
+                    </label>
+                </FloatLabel>
+
+                <FloatLabel class="mb-6" variant="on">
+                    <Password
+                        id="password"
                         v-model="credentials.password"
-                        class="h-12 w-full rounded-sm border p-3 shadow-sm"
-                        type="password"
+                        toggle-mask
+                        fluid
                     />
-                </fieldset>
 
-                <div
-                    v-if="errorMessage"
-                    class="mb-4 rounded border border-red-400 bg-red-100 p-3 text-red-700"
-                >
+                    <label class="font-bold" for="password">
+                        {{ t('common.password') }}
+                    </label>
+                </FloatLabel>
+
+                <Message v-if="errorMessage" severity="error">
                     {{ errorMessage }}
-                </div>
+                </Message>
 
                 <div class="mt-6 text-right">
-                    <button class="button" type="submit">
-                        {{ t('common.login') }}
-                    </button>
+                    <Button type="submit" :label="t('common.login')" />
                 </div>
             </form>
         </div>
     </DefaultLayout>
 </template>
+
+<style>
+    @import '@/assets/main.css';
+
+    .p-password-input {
+        @apply w-full;
+    }
+</style>

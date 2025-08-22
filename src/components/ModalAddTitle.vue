@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import axios from 'axios';
     import { nanoid } from 'nanoid';
-    import { Button, Dialog, InputText, Select } from 'primevue';
+    import { Button, Dialog, FloatLabel, InputText, Select } from 'primevue';
     import { nextTick, onMounted, ref, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { toast, type ToastOptions } from 'vue3-toastify';
@@ -95,33 +95,38 @@
         v-model:visible="isModelVisible"
         modal
         :header="t('titles.addNewDvd')"
+        class="min-w-[30rem]"
     >
         <form @submit.prevent="submitForm">
-            <div class="mb-12 flex gap-3">
-                <div class="flex-1">
-                    <label class="mb-2 block font-bold" for="name">
-                        {{ t('titles.title') }}:
-                    </label>
+            <div class="mb-12">
+                <FloatLabel variant="in" class="mb-3">
                     <InputText
                         id="name"
                         inputRef="titleInput"
                         v-model="title"
+                        fluid
                     />
-                </div>
 
-                <div>
-                    <label class="mb-2 block font-bold" for="rating">
-                        {{ t('titles.rating') }}:
+                    <label class="font-bold" for="name">
+                        {{ t('titles.title') }}
                     </label>
+                </FloatLabel>
+
+                <FloatLabel variant="in">
                     <Select
                         id="rating"
                         v-model="rating"
                         :options="ratingOptions"
                         optionLabel="label"
                         optionValue="value"
-                        placeholder="Select rating"
+                        :placeholder="t('common.selectRating')"
+                        fluid
                     />
-                </div>
+
+                    <label class="font-bold" for="rating">
+                        {{ t('titles.rating') }}
+                    </label>
+                </FloatLabel>
             </div>
 
             <div class="flex justify-between">

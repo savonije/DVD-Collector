@@ -16,6 +16,7 @@ export default {
     logoutUser: 'Logout user',
     password: 'Password',
     save: 'Save',
+    selectRating: 'Select rating',
     searchDvd: 'Search for a DVD',
     siteTitle: `{name}'s DVD Collection`,
     sort: 'Sort',
