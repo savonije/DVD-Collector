@@ -80,7 +80,7 @@
         <div
             class="mb-6 flex flex-col items-center justify-between sm:flex-row"
         >
-            <Tag>
+            <Tag class="flex-none">
                 <template v-if="debouncedSearchQuery">
                     {{ filteredDVDs.length }} / {{ items.DVDs.length }}
                     {{ t('common.DVDs') }}
