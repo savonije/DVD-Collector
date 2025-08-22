@@ -26,6 +26,7 @@
         v-if="storeAuth.user?.id"
         @click="openModal"
         :label="t('titles.addMovie')"
+        fluid
     />
 
     <Suspense>

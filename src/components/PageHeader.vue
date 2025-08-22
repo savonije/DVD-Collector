@@ -42,12 +42,12 @@
                     v-if="storeAuth.user?.id"
                     :aria-label="t('common.logoutUser')"
                     @click="storeAuth.logoutUser"
-                    severity="contrast"
+                    variant="link"
                 >
                     {{ t('common.logout') }}
                 </Button>
 
-                <RouterLink v-else class="button hover:text-shark" to="/login">
+                <RouterLink v-else to="/login">
                     {{ t('common.login') }}
                 </RouterLink>
             </div>
