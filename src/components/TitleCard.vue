@@ -9,7 +9,7 @@
 </script>
 
 <template>
-    <RouterLink :to="`/movie/${item.name}/${item.id}`">
+    <RouterLink :to="`/movie/${encodeURIComponent(item.name)}/${item.id}`">
         <div class="movie-card">
             <div class="relative grow p-4">
                 <h3 class="mb-0 font-bold capitalize">{{ item.name }}</h3>
