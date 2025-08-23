@@ -23,8 +23,6 @@
     const openModal = () => {
         isModalVisible.value = true;
     };
-
-    console.log(props.fluidButton);
 </script>
 
 <template>
