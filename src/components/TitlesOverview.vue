@@ -3,10 +3,10 @@
     import { computed, ref, watch } from 'vue';
     import { useI18n } from 'vue-i18n';
 
-    import TitleCard from '@/components/Card.vue';
     import FilterTitles from '@/components/FilterTitles.vue';
     import isLoading from '@/components/isLoading.vue';
     import SortOrder from '@/components/SortOrder.vue';
+    import TitleCard from '@/components/TitleCard.vue';
 
     import { useDebounce } from '@/composables/useDebounce';
     import { useStoreDVDs } from '@/stores/storeDVDs';
