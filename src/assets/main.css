@@ -9,6 +9,32 @@
 @import '@/assets/typography.css' layer(base);
 
 @theme {
+    --color-primary-50: #effefc;
+    --color-primary-100: #c8fff8;
+    --color-primary-200: #92fdf2;
+    --color-primary-300: #53f5ea;
+    --color-primary-400: #20e1db;
+    --color-primary-500: #08d9d6;
+    --color-primary-600: #039c9e;
+    --color-primary-700: #077c7e;
+    --color-primary-800: #0b6264;
+    --color-primary-900: #0e5153;
+    --color-primary-950: #012e32;
+    --color-primary: #08d9d6;
+
+    --color-secondary-50: #fff0f2;
+    --color-secondary-100: #ffe2e7;
+    --color-secondary-200: #ffcad5;
+    --color-secondary-300: #ff9fb3;
+    --color-secondary-400: #ff698b;
+    --color-secondary-500: #ff2e63;
+    --color-secondary-600: #ed1153;
+    --color-secondary-700: #c80847;
+    --color-secondary-800: #a80942;
+    --color-secondary-900: #8f0c3f;
+    --color-secondary-950: #50011e;
+    --color-secondary: #ff2e63;
+
     --color-black-50: #f7f7f8;
     --color-black-100: #f0eef0;
     --color-black-200: #dcd9de;
@@ -47,32 +73,6 @@
     --color-gray-900: #3d3d3d;
     --color-gray-950: #292929;
     --color-gray: #eaeaea;
-
-    --color-red-50: #fff0f2;
-    --color-red-100: #ffe2e7;
-    --color-red-200: #ffcad5;
-    --color-red-300: #ff9fb3;
-    --color-red-400: #ff698b;
-    --color-red-500: #ff2e63;
-    --color-red-600: #ed1153;
-    --color-red-700: #c80847;
-    --color-red-800: #a80942;
-    --color-red-900: #8f0c3f;
-    --color-red-950: #50011e;
-    --color-red: #ff2e63;
-
-    --color-primary-50: #effefc;
-    --color-primary-100: #c8fff8;
-    --color-primary-200: #92fdf2;
-    --color-primary-300: #53f5ea;
-    --color-primary-400: #20e1db;
-    --color-primary-500: #08d9d6;
-    --color-primary-600: #039c9e;
-    --color-primary-700: #077c7e;
-    --color-primary-800: #0b6264;
-    --color-primary-900: #0e5153;
-    --color-primary-950: #012e32;
-    --color-primary: #08d9d6;
 
     --font-body: 'Roboto', sans-serif;
     --font-heading: 'Josefin Sans', sans-serif;

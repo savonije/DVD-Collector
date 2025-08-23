@@ -3,7 +3,7 @@
 }
 
 @utility button-danger {
-    @apply bg-red text-white hover:bg-red-600;
+    @apply bg-secondary hover:bg-secondary-600 text-white;
 }
 
 @utility button-neutral {

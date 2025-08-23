@@ -11,7 +11,7 @@
         }
 
         if (rating < 5) {
-            ratingColor.value = 'bg-red';
+            ratingColor.value = 'bg-secondary';
         } else if (rating < 7) {
             ratingColor.value = 'bg-orange-600';
         } else if (rating < 8) {
