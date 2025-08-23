@@ -67,5 +67,6 @@
         :label="t('common.fetchImdbData')"
         @click="getMovieData(name)"
         variant="link"
+        size="small"
     />
 </template>

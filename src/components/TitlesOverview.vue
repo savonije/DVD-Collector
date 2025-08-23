@@ -54,9 +54,7 @@
     <template v-else>
         <FilterTitles v-model="searchQuery" />
 
-        <div
-            class="mb-6 flex flex-col items-center justify-between sm:flex-row"
-        >
+        <div class="mb-6 flex items-center justify-between gap-3">
             <Tag class="flex-none">
                 <template v-if="debouncedSearchQuery">
                     {{ filteredDVDs.length }} / {{ items.DVDs.length }}
@@ -67,9 +65,7 @@
                 </template>
             </Tag>
 
-            <div
-                class="mt-6 flex w-full items-center justify-end gap-3 sm:mt-0"
-            >
+            <div class="flex w-full items-center justify-end gap-3">
                 <span class="font-bold">{{ t('common.sort') }}:</span>
                 <SortOrder v-model="sortOrder" />
             </div>
