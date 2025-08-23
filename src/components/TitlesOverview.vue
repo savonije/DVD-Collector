@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { Message, Tag } from 'primevue';
-    import { computed, ref } from 'vue';
+    import { computed, ref, watch } from 'vue';
     import { useI18n } from 'vue-i18n';
 
     import TitleCard from '@/components/Card.vue';
@@ -13,60 +13,37 @@
     import type { Movie } from '@/types';
 
     const { t } = useI18n();
-
     const items = useStoreDVDs();
 
     const searchQuery = ref('');
-    const sortOrder = ref('asc');
-
     const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
+    const storedSortOrder = localStorage.getItem('dvdSortOrder') ?? 'asc';
+    const sortOrder = ref(storedSortOrder);
+
     const filteredDVDs = computed<Movie[]>(() => {
-        const filtered = items.DVDs.filter((dvd) =>
-            dvd.name
-                .toLowerCase()
-                .includes(debouncedSearchQuery.value.toLowerCase()),
-        );
+        const query = debouncedSearchQuery.value.toLowerCase();
 
-        filtered.sort((a, b) => {
-            if (sortOrder.value === 'asc') {
-                return a.name.localeCompare(b.name);
-            }
+        const sorters: Record<string, (a: Movie, b: Movie) => number> = {
+            asc: (a, b) => a.name.localeCompare(b.name),
+            des: (a, b) => b.name.localeCompare(a.name),
+            ratingAsc: (a, b) => (b.rating ?? 0) - (a.rating ?? 0),
+            ratingDesc: (a, b) => (a.rating ?? 0) - (b.rating ?? 0),
+            dateAsc: (a, b) =>
+                new Date(a.dateAdded ?? 0).getTime() -
+                new Date(b.dateAdded ?? 0).getTime(),
+            dateDesc: (a, b) =>
+                new Date(b.dateAdded ?? 0).getTime() -
+                new Date(a.dateAdded ?? 0).getTime(),
+        };
 
-            if (sortOrder.value === 'des') {
-                return b.name.localeCompare(a.name);
-            }
+        return items.DVDs.filter((dvd) =>
+            dvd.name.toLowerCase().includes(query),
+        ).sort(sorters[sortOrder.value] ?? (() => 0));
+    });
 
-            if (sortOrder.value === 'ratingDesc') {
-                const ratingA = a.rating ?? 0;
-                const ratingB = b.rating ?? 0;
-                return ratingA - ratingB;
-            }
-
-            if (sortOrder.value === 'ratingAsc') {
-                const ratingA = a.rating ?? 0;
-                const ratingB = b.rating ?? 0;
-                return ratingB - ratingA;
-            }
-
-            if (sortOrder.value === 'dateAsc') {
-                return (
-                    new Date(a.dateAdded ?? 0).getTime() -
-                    new Date(b.dateAdded ?? 0).getTime()
-                );
-            }
-
-            if (sortOrder.value === 'dateDesc') {
-                return (
-                    new Date(b.dateAdded ?? 0).getTime() -
-                    new Date(a.dateAdded ?? 0).getTime()
-                );
-            }
-
-            return 0;
-        });
-
-        return filtered;
+    watch(sortOrder, (newValue) => {
+        localStorage.setItem('dvdSortOrder', newValue);
     });
 </script>
 
