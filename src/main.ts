@@ -1,6 +1,5 @@
-import './assets/main.css';
+import '@/assets/main.css';
 
-import router from './router';
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 import { createPinia } from 'pinia';
@@ -8,10 +7,11 @@ import { Config } from 'primevue';
 import { createApp, markRaw } from 'vue';
 import type { Router } from 'vue-router';
 
-import i18n from '@/config/i18n';
-import { theme } from '@/utils/tailwind';
+import App from '@/App.vue';
 
-import App from './App.vue';
+import i18n from '@/config/i18n';
+import router from '@/router';
+import { theme } from '@/utils/tailwind';
 
 declare module 'pinia' {
     export interface PiniaCustomProperties {
