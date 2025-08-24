@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import { Toast } from 'primevue';
     import { onMounted } from 'vue';
     import { RouterView } from 'vue-router';
 
@@ -13,4 +14,6 @@
 
 <template>
     <RouterView />
+
+    <Toast />
 </template>

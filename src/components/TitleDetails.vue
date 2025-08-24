@@ -4,6 +4,7 @@
     import { useI18n } from 'vue-i18n';
 
     import isLoading from '@/components/isLoading.vue';
+    import NoResults from '@/components/NoResult.vue';
 
     import { useStoreAuth } from '@/stores/storeAuth';
     import { useStoreDVDs } from '@/stores/storeDVDs';
@@ -154,12 +155,12 @@
     </div>
 
     <div v-else>
-        <p>{{ t('titles.noResult') }}...</p>
+        <NoResults />
     </div>
 </template>
 
 <style scoped>
-    @reference "@/assets/main.css";
+    @reference "@/styles/main.css";
 
     .score {
         @apply flex h-8 w-8 items-center justify-center bg-gray-800 text-lg font-bold text-white dark:bg-gray-100 dark:text-black;

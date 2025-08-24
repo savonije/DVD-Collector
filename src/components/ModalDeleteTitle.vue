@@ -1,14 +1,13 @@
 <script setup lang="ts">
-    import { Button, Dialog } from 'primevue';
+    import { Button, Dialog, useToast } from 'primevue';
     import { nextTick } from 'vue';
     import { useI18n } from 'vue-i18n';
-    import { toast, type ToastOptions } from 'vue3-toastify';
 
     import router from '@/router';
     import { useStoreDVDs } from '@/stores/storeDVDs';
     import type { MovieID } from '@/types';
 
-    import 'vue3-toastify/dist/index.css';
+    const toast = useToast();
 
     const { t } = useI18n();
     const storeDVD = useStoreDVDs();
@@ -29,11 +28,12 @@
         await router.push({ path: '/' });
         await nextTick();
 
-        toast.success(`<strong>${props.name}</strong> has been deleted!`, {
-            autoClose: 3000,
-            theme: 'dark',
-            dangerouslyHTMLString: true,
-        } as ToastOptions);
+        toast.add({
+            severity: 'success',
+            summary: t('common.deleted'),
+            detail: t('common.hasBeenDeleted', [props.name]),
+            life: 3000,
+        });
 
         closeModal();
     };

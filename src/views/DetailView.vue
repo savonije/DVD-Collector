@@ -23,8 +23,10 @@
     <DefaultLayout>
         <div class="mx-auto w-full md:w-[800px]">
             <div class="bg-white shadow-sm dark:bg-gray-950">
-                <div class="bg-primary flex justify-between p-6">
-                    <h2 class="text-shark text-3xl font-bold capitalize">
+                <div
+                    class="bg-primary flex justify-end p-6 sm:justify-start md:py-9"
+                >
+                    <h2 class="text-shark mb-0 text-3xl font-bold capitalize">
                         {{ name }}
                     </h2>
                 </div>
@@ -33,14 +35,18 @@
                 </div>
             </div>
 
-            <div class="mt-6 flex justify-between">
+            <div class="mt-6 flex flex-col justify-between gap-6 sm:flex-row">
                 <Button
                     @click="$router.back()"
                     :label="t('common.backToOverview')"
                     severity="secondary"
+                    size="small"
                 />
 
-                <div v-if="storeAuth.user?.id" class="flex gap-9">
+                <div
+                    v-if="storeAuth.user?.id"
+                    class="flex flex-col gap-6 sm:flex-row"
+                >
                     <UpdateTitle :id="id" :name="name" />
                     <DeleteTitle :id="id" :name="name" />
                 </div>

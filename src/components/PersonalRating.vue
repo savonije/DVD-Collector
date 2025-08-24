@@ -11,7 +11,7 @@
         }
 
         if (rating < 5) {
-            ratingColor.value = 'bg-red';
+            ratingColor.value = 'bg-secondary';
         } else if (rating < 7) {
             ratingColor.value = 'bg-orange-600';
         } else if (rating < 8) {
@@ -33,7 +33,7 @@
 </template>
 
 <style scoped>
-    @reference "@/assets/main.css";
+    @reference "@/styles/main.css";
 
     .rating {
         @apply flex h-9 w-9 items-center justify-center font-bold text-white shadow;

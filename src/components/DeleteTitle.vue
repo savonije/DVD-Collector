@@ -23,6 +23,7 @@
         @click="isModalVisible = true"
         severity="danger"
         :label="t('common.delete')"
+        size="small"
     />
 
     <Suspense>

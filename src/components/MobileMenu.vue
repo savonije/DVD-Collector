@@ -91,14 +91,15 @@
                         />
                     </li>
                     <li>
-                        <RouterLink
+                        <Button
                             v-if="!isLoggedIn"
                             to="/login"
                             @click="state.isMenuOpen = false"
                             fluid
+                            class="mb-3"
                         >
                             {{ t('common.login') }}
-                        </RouterLink>
+                        </Button>
                     </li>
                 </ul>
 
