@@ -51,6 +51,13 @@
             })
             .catch((error) => {
                 console.error(error);
+
+                toast.add({
+                    severity: 'danger',
+                    summary: t('common.error'),
+                    detail: t('common.somethingWentWrong'),
+                    life: 3000,
+                });
             });
 
         toast.add({
