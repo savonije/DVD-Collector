@@ -33,7 +33,7 @@
 </template>
 
 <style scoped>
-    @reference "@/assets/main.css";
+    @reference "@/styles/main.css";
 
     .rating {
         @apply flex h-9 w-9 items-center justify-center font-bold text-white shadow;

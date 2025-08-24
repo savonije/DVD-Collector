@@ -160,7 +160,7 @@
 </template>
 
 <style scoped>
-    @reference "@/assets/main.css";
+    @reference "@/styles/main.css";
 
     .score {
         @apply flex h-8 w-8 items-center justify-center bg-gray-800 text-lg font-bold text-white dark:bg-gray-100 dark:text-black;

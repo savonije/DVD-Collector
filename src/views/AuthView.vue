@@ -88,7 +88,7 @@
 </template>
 
 <style>
-    @import '@/assets/main.css';
+    @import '@/styles/main.css';
 
     .p-password-input {
         @apply w-full;

@@ -46,7 +46,7 @@
 </template>
 
 <style scoped>
-    @reference "@/assets/main.css";
+    @reference "@/styles/main.css";
 
     .movie-card {
         @apply relative flex flex-row gap-3 rounded-lg bg-white shadow transition-shadow hover:shadow-md dark:bg-gray-950 dark:text-white;

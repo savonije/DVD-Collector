@@ -4,9 +4,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @import 'primeicons/primeicons.css';
-@import '@/assets/base.css' layer(base);
-@import '@/assets/components.css';
-@import '@/assets/typography.css' layer(base);
+@import '@/styles/base.css' layer(base);
+@import '@/styles/components.css';
+@import '@/styles/typography.css' layer(base);
 
 @theme {
     --color-primary-50: #effefc;
