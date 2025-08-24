@@ -4,6 +4,7 @@
     import { useI18n } from 'vue-i18n';
 
     import isLoading from '@/components/isLoading.vue';
+    import NoResults from '@/components/NoResult.vue';
 
     import { useStoreAuth } from '@/stores/storeAuth';
     import { useStoreDVDs } from '@/stores/storeDVDs';
@@ -154,7 +155,7 @@
     </div>
 
     <div v-else>
-        <p>{{ t('titles.noResult') }}...</p>
+        <NoResults />
     </div>
 </template>
 

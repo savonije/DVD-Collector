@@ -1,10 +1,11 @@
 <script setup lang="ts">
-    import { Message, Tag } from 'primevue';
+    import { Tag } from 'primevue';
     import { computed, ref, watch } from 'vue';
     import { useI18n } from 'vue-i18n';
 
     import FilterTitles from '@/components/FilterTitles.vue';
     import isLoading from '@/components/isLoading.vue';
+    import NoResult from '@/components/NoResult.vue';
     import SortOrder from '@/components/SortOrder.vue';
     import TitleCard from '@/components/TitleCard.vue';
 
@@ -79,14 +80,11 @@
             />
         </div>
 
-        <div v-if="!filteredDVDs.length">
-            <div class="flex items-center justify-center">
-                <Message size="large" icon="pi pi-info-circle" severity="info">
-                    <span class="text-lg">
-                        {{ t('errors.noResults') }}
-                    </span>
-                </Message>
-            </div>
+        <div
+            v-if="!filteredDVDs.length"
+            class="flex items-center justify-center"
+        >
+            <NoResult />
         </div>
     </template>
 </template>
