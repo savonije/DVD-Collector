@@ -1,16 +1,15 @@
 <script lang="ts" setup>
     import axios from 'axios';
+    import { useToast } from 'primevue';
     import Button from 'primevue/button';
     import { computed, ref, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
-    import { toast, type ToastOptions } from 'vue3-toastify';
-
-    import 'vue3-toastify/dist/index.css';
 
     import { useStoreDVDs } from '@/stores/storeDVDs';
     import type { Movie, MovieID } from '@/types';
 
     const { t } = useI18n();
+    const toast = useToast();
     const storeDVD = useStoreDVDs();
 
     const movieDetails: Ref<Movie | null> = ref(null);
@@ -54,11 +53,12 @@
                 console.error(error);
             });
 
-        toast.success(`<strong>${props.name}</strong> updated successfully!`, {
-            autoClose: 3000,
-            theme: 'dark',
-            dangerouslyHTMLString: true,
-        } as ToastOptions);
+        toast.add({
+            severity: 'success',
+            summary: 'Updated',
+            detail: `${props.name} updated successfully!`,
+            life: 3000,
+        });
     };
 </script>
 

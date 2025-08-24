@@ -2,15 +2,14 @@
     import axios from 'axios';
     import { nanoid } from 'nanoid';
     import { Button, Dialog, FloatLabel, InputText, Select } from 'primevue';
+    import { useToast } from 'primevue/usetoast';
     import { nextTick, onMounted, ref, type Ref } from 'vue';
     import { useI18n } from 'vue-i18n';
-    import { toast, type ToastOptions } from 'vue3-toastify';
 
     import { useStoreDVDs } from '@/stores/storeDVDs';
-
-    import 'vue3-toastify/dist/index.css';
-
     import type { Movie } from '@/types';
+
+    const toast = useToast();
 
     const { t } = useI18n();
     const storeDVD = useStoreDVDs();
@@ -68,11 +67,12 @@
         if (title.value !== '') {
             getMovieData(title.value, rating.value);
 
-            toast.success(`<strong>${title.value}</strong> has been added!`, {
-                autoClose: 3000,
-                theme: 'dark',
-                dangerouslyHTMLString: true,
-            } as ToastOptions);
+            toast.add({
+                severity: 'success',
+                summary: t('common.success'),
+                detail: t('common.hasBeenAdded', [title.value]),
+                life: 3000,
+            });
 
             title.value = '';
             rating.value = 1;
@@ -136,7 +136,11 @@
                     @click="closeModal"
                 />
 
-                <Button type="submit" :label="t('common.save')" />
+                <Button
+                    type="submit"
+                    :label="t('common.save')"
+                    severity="success"
+                />
             </div>
         </form>
     </Dialog>

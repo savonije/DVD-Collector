@@ -4,6 +4,7 @@ import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 import { createPinia } from 'pinia';
 import { Config } from 'primevue';
+import ToastService from 'primevue/toastservice';
 import { createApp, markRaw } from 'vue';
 import type { Router } from 'vue-router';
 
@@ -53,6 +54,7 @@ app.use(Config, {
     },
 });
 
+app.use(ToastService);
 app.use(router);
 app.use(pinia);
 app.use(i18n);
