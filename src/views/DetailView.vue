@@ -23,7 +23,9 @@
     <DefaultLayout>
         <div class="mx-auto w-full md:w-[800px]">
             <div class="bg-white shadow-sm dark:bg-gray-950">
-                <div class="bg-primary flex justify-end p-6 sm:justify-start">
+                <div
+                    class="bg-primary flex justify-end p-6 sm:justify-start md:py-9"
+                >
                     <h2 class="text-shark mb-0 text-3xl font-bold capitalize">
                         {{ name }}
                     </h2>
