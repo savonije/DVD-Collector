@@ -55,8 +55,8 @@
 
         toast.add({
             severity: 'success',
-            summary: 'Updated',
-            detail: `${props.name} updated successfully!`,
+            summary: t('common.updated'),
+            detail: t('common.hasBeenUpdated', [props.name]),
             life: 3000,
         });
     };

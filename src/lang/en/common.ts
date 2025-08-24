@@ -12,6 +12,7 @@ export default {
     fetchImdbData: 'Refetch IMDB data',
     hasBeenAdded: '{0} has been added!',
     hasBeenDeleted: '{0} has been deleted!',
+    hasBeenUpdated: '{0} has been updated!',
     light: 'Light',
     lightMode: 'Light mode',
     loading: 'Loading',
@@ -27,4 +28,5 @@ export default {
     submit: 'Submit',
     success: 'Success',
     toggleMenu: 'Toggle menu',
+    updated: 'Updated',
 };
