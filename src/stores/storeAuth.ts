@@ -22,7 +22,9 @@ export const useStoreAuth = defineStore('storeAuth', {
                         email: user.email,
                     };
 
-                    this.router.push('/');
+                    if (this.router.currentRoute.value.name === 'auth') {
+                        this.router.push('/');
+                    }
                 } else {
                     this.user = null;
                 }
