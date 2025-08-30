@@ -10,6 +10,19 @@ jobs:
     build:
         runs-on: ubuntu-latest
 
+        env:
+            CI: true
+            DEBUG: pw:api
+            FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+            FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+            FIREBASE_DB_URL: ${{ secrets.FIREBASE_DB_URL }}
+            FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+            FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+            FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.FIREBASE_MESSAGE_SENDER_ID }}
+            FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+            FIREBASE_DB_NAME: ${{ secrets.FIREBASE_DB_NAME }}
+            OMDB_APIKEY: ${{ secrets.OMDB_APIKEY }}
+
         steps:
             - uses: actions/checkout@v3
 
@@ -49,17 +62,6 @@ jobs:
               run: curl -v http://localhost:5173 || echo "Server not responding"
 
             - name: Run Playwright tests
-              env:
-                  CI: true
-                  FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-                  FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
-                  FIREBASE_DB_URL: ${{ secrets.FIREBASE_DB_URL }}
-                  FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
-                  FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
-                  FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.FIREBASE_MESSAGE_SENDER_ID }}
-                  FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
-                  FIREBASE_DB_NAME: ${{ secrets.FIREBASE_DB_NAME }}
-                  OMDB_APIKEY: ${{ secrets.OMDB_APIKEY }}
               run: npx playwright test --reporter=list --trace=on
 
             - uses: actions/upload-artifact@v4

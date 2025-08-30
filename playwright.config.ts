@@ -15,6 +15,8 @@ export default defineConfig({
         baseURL: 'http://localhost:5173',
         permissions: ['clipboard-read', 'clipboard-write'],
         trace: 'on-first-retry',
+        screenshot: 'only-on-failure',
+        video: 'retain-on-failure',
     },
 
     projects: [
