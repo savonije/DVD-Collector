@@ -22,9 +22,7 @@ export default defineConfig({
         },
     ],
     webServer: {
-        command: process.env.CI
-            ? 'npx vite preview --port=5173'
-            : 'npm run dev',
+        command: process.env.CI ? 'npx serve -s dist -l 5173' : 'npm run dev',
         url: 'http://localhost:5173',
         reuseExistingServer: !process.env.CI,
     },
