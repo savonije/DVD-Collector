@@ -25,6 +25,7 @@ jobs:
             VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
             VITE_OMDB_APIKEY: ${{ secrets.VITE_OMDB_APIKEY }}
         steps:
+            - uses: actions/checkout@v3
             - name: Build
               run: npm run build-only
 
