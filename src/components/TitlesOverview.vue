@@ -27,7 +27,7 @@
 
         const sorters: Record<string, (a: Movie, b: Movie) => number> = {
             asc: (a, b) => a.name.localeCompare(b.name),
-            des: (a, b) => b.name.localeCompare(a.name),
+            desc: (a, b) => b.name.localeCompare(a.name),
             ratingAsc: (a, b) => (b.rating ?? 0) - (a.rating ?? 0),
             ratingDesc: (a, b) => (a.rating ?? 0) - (b.rating ?? 0),
             dateAsc: (a, b) =>
