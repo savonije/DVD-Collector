@@ -31,8 +31,16 @@ jobs:
             - name: Start Vite preview
               run: npx vite preview --port=5173 --host 0.0.0.0 &
 
-            - name: Wait for server
-              run: npx wait-on http://localhost:5173
+            - name: Wait for server to render login page
+              run: |
+                  for i in {1..20}; do
+                  if curl -s http://localhost:5173 | grep -q 'id="app"'; then
+                      echo "Server ready"
+                      break
+                  else
+                      sleep 3
+                  fi
+                  done
 
             - name: Install Playwright Chromium
               run: npx playwright install chromium
