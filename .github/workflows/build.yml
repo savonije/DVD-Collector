@@ -25,6 +25,9 @@ jobs:
             - name: Run TypeScript type check
               run: npm run type-check
 
+            - name: Build
+              run: npm run build-only
+
             - name: Install Playwright Chromium
               run: npx playwright install chromium
 
@@ -41,6 +44,3 @@ jobs:
                   FIREBASE_DB_NAME: ${{ secrets.FIREBASE_DB_NAME }}
                   OMDB_APIKEY: ${{ secrets.OMDB_APIKEY }}
               run: npx playwright test
-
-            - name: Build
-              run: npm run build-only
