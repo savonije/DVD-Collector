@@ -31,7 +31,7 @@ jobs:
               # Or adjust if you have a custom server start command
 
             - name: Wait for server
-              run: npx wait-on http://localhost:4173
+              run: npx wait-on http://localhost:4173 --timeout 30000
 
             - name: Install Playwright Browsers
               run: npx playwright install --with-deps
