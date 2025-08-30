@@ -43,32 +43,8 @@ jobs:
             - name: Start Vite preview
               run: npx vite preview --port=5173 --host 0.0.0.0 &
 
-            - name: Debug rendered login page
-              run: curl -s http://localhost:5173/login
-
-            - name: Wait for login page to be ready
-              run: |
-                  for i in {1..30}; do
-                  if curl -s http://localhost:5173/login | grep -q 'login-title'; then
-                      echo "Login page ready"
-                      break
-                  fi
-                  sleep 2
-                  done
-
             - name: Install Playwright Chromium
               run: npx playwright install chromium
 
-            - name: Debug server
-              run: curl -v http://localhost:5173 || echo "Server not responding"
-
-            - name: Debug Vite env
-              run: curl -s http://localhost:5173/env.js
-
             - name: Run Playwright tests
               run: npx playwright test --reporter=list --trace=on --timeout=15000
-
-            - uses: actions/upload-artifact@v4
-              with:
-                  name: trace-logs
-                  path: path/to/trace.zip
