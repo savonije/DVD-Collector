@@ -31,7 +31,7 @@ jobs:
               # Or adjust if you have a custom server start command
 
             - name: Wait for server
-              run: npx wait-on http://localhost:5173
+              run: npx wait-on http://localhost:4173
 
             - name: Install Playwright Browsers
               run: npx playwright install --with-deps
@@ -41,7 +41,7 @@ jobs:
 
             - name: Upload Playwright Test Results
               if: always()
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: playwright-results
                   path: playwright-report
