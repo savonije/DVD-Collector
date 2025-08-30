@@ -25,6 +25,9 @@ jobs:
             - name: Run TypeScript type check
               run: npm run type-check
 
+            - name: Install Playwright browsers
+              run: npx playwright install
+
             - name: Run Playwright tests
               env:
                   FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
