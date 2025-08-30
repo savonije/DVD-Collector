@@ -8,6 +8,7 @@
         "build": "run-s type-check test build-only",
         "dev": "vite",
         "format": "prettier --write src/",
+        "prettier:check": "prettier --check src/",
         "lint": "eslint . --fix",
         "preview": "vite preview",
         "test": "playwright test",
