@@ -62,8 +62,11 @@ jobs:
             - name: Debug server
               run: curl -v http://localhost:5173 || echo "Server not responding"
 
+            - name: Debug Vite env
+              run: curl -s http://localhost:5173/env.js
+
             - name: Run Playwright tests
-              run: npx playwright test --reporter=list --trace=on
+              run: npx playwright test --reporter=list --trace=on --timeout=15000
 
             - uses: actions/upload-artifact@v4
               with:
