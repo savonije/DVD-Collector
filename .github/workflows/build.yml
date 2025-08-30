@@ -1,0 +1,40 @@
+name: Build & Test
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run TypeScript type check
+              run: npm run type-check
+
+            - name: Run Playwright tests
+              env:
+                  FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+                  FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+                  FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+                  FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+                  FIREBASE_TEST_USER: ${{ secrets.FIREBASE_TEST_USER }}
+                  FIREBASE_TEST_PASSWORD: ${{ secrets.FIREBASE_TEST_PASSWORD }}
+                  BASE_URL: ${{ secrets.BASE_URL }}
+              run: npx playwright test --headless
+
+            - name: Build
+              run: npm run build-only
