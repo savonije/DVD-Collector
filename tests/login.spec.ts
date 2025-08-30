@@ -6,7 +6,7 @@ test.describe('Login Page', () => {
     });
 
     test('should render the login form', async ({ page }) => {
-        await expect(page.getByTestId('login-titlesafasdfs')).toBeVisible();
+        await expect(page.getByTestId('login-title')).toBeVisible();
         await expect(page.getByTestId('input-email')).toBeVisible();
         await expect(page.getByTestId('input-password')).toBeVisible();
         await expect(page.getByTestId('btn-submit')).toBeVisible();
