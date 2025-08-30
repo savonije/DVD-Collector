@@ -1,0 +1,55 @@
+name: Build & Test
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        env:
+            CI: true
+            VITE_FIREBASE_APIKEY: ${{ secrets.VITE_FIREBASE_APIKEY }}
+            VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+            VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+            VITE_FIREBASE_DB_NAME: ${{ secrets.VITE_FIREBASE_DB_NAME }}
+            VITE_FIREBASE_DB_URL: ${{ secrets.VITE_FIREBASE_DB_URL }}
+            VITE_FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGE_SENDER_ID }}
+            VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+            VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
+            VITE_OMDB_APIKEY: ${{ secrets.VITE_OMDB_APIKEY }}
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 22
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build
+              run: npm run build-only
+
+            - name: Start Vite preview
+              run: npx vite preview --port=5173 --host 0.0.0.0 &
+
+            - name: Cache Playwright browsers
+              uses: actions/cache@v3
+              with:
+                  path: ~/.cache/ms-playwright
+                  key: playwright-${{ runner.os }}-chromium
+                  restore-keys: |
+                      playwright-${{ runner.os }}-chromium
+
+            - name: Install Playwright Chromium
+              run: npx playwright install chromium
+
+            - name: Run Playwright tests
+              run: npx playwright test --reporter=list --trace=on --timeout=15000
