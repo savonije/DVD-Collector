@@ -12,7 +12,6 @@ jobs:
 
         env:
             CI: true
-            DEBUG: pw:api
             FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
             FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
             FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
