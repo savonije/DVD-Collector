@@ -57,9 +57,7 @@ jobs:
                   OMDB_APIKEY: ${{ secrets.OMDB_APIKEY }}
               run: npx playwright test --reporter=list --trace=on
 
-            - name: Upload Playwright traces
-              if: always() # ensures upload even if tests fail
-              uses: actions/upload-artifact@v3
+            - uses: actions/upload-artifact@v4
               with:
-                  name: playwright-traces
-                  path: test-results/**/*.zip
+                  name: trace-logs
+                  path: path/to/trace.zip
