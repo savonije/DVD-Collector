@@ -8,6 +8,8 @@ test.describe('Login Page', () => {
 
     test('should render the login form', async ({ page }) => {
         console.log(await page.content());
+        page.on('console', (msg) => console.log('BROWSER LOG:', msg.text()));
+        page.on('pageerror', (err) => console.log('PAGE ERROR:', err));
 
         await expect(page.getByTestId('login-title')).toBeVisible();
         await expect(page.getByTestId('input-email')).toBeVisible();
