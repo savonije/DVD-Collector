@@ -1,6 +1,13 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Login Page', () => {
+    test('should navigate to /login successfully', async ({ page }) => {
+        const response = await page.goto('/login');
+
+        expect(response?.ok()).toBeTruthy();
+        expect(page.url()).toContain('/login');
+    });
+
     test.beforeEach(async ({ page }) => {
         await page.goto('/login');
     });
