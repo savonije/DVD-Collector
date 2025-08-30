@@ -5,12 +5,13 @@
     "type": "module",
     "scripts": {
         "build-only": "vite build",
-        "build": "run-p type-check \"build-only {@}\" --",
+        "build": "run-s type-check test build-only",
         "dev": "vite",
         "format": "prettier --write src/",
         "lint": "eslint . --fix",
         "preview": "vite preview",
-        "test": "playwright test --ui",
+        "test": "playwright test",
+        "test:ui": "playwright test --ui",
         "type-check": "vue-tsc --build --force",
         "typecheck": "vue-tsc --noEmit --skipLibCheck --project tsconfig.app.json"
     },
