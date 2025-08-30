@@ -13,18 +13,18 @@ export default defineConfig({
     use: {
         baseURL: 'http://localhost:5173',
         permissions: ['clipboard-read', 'clipboard-write'],
-        headless: false,
-        screenshot: 'only-on-failure',
         trace: 'on-first-retry',
     },
     projects: [
         {
             name: 'chromium',
-            use: { ...devices['Desktop Chrome'] },
+            use: { ...devices['Desktop Chrome'], channel: 'chrome' },
         },
     ],
     webServer: {
-        command: process.env.CI ? 'npx serve -s dist -l 5173' : 'npm run dev',
+        command: process.env.CI
+            ? 'npx vite preview --port=5173'
+            : 'npm run dev',
         url: 'http://localhost:5173',
         reuseExistingServer: !process.env.CI,
     },
