@@ -1,9 +1,5 @@
 import process from 'node:process';
 import { defineConfig, devices } from '@playwright/test';
-import dotenv from 'dotenv';
-
-// Load your custom .env file
-dotenv.config({ path: '/.env.production' });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -16,7 +12,7 @@ export default defineConfig({
     workers: process.env.CI ? 2 : undefined,
     reporter: 'html',
     use: {
-        baseURL: process.env.BASE_URL || 'http://localhost:5173',
+        baseURL: 'http://localhost:5173',
         permissions: ['clipboard-read', 'clipboard-write'],
         trace: 'on-first-retry',
     },
@@ -32,7 +28,7 @@ export default defineConfig({
         command: process.env.CI
             ? 'npx vite preview --port=5173'
             : 'npm run dev',
-        url: process.env.BASE_URL || 'http://localhost:5173',
+        url: 'http://localhost:5173',
         reuseExistingServer: !process.env.CI,
     },
 });
