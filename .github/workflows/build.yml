@@ -55,4 +55,4 @@ jobs:
                   FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
                   FIREBASE_DB_NAME: ${{ secrets.FIREBASE_DB_NAME }}
                   OMDB_APIKEY: ${{ secrets.OMDB_APIKEY }}
-              run: npx playwright test --reporter=list
+              run: npx playwright test --reporter=list --trace=on
