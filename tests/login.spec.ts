@@ -3,7 +3,15 @@ import { expect, test } from '@playwright/test';
 test.describe('Login Page', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/login');
-        page.on('console', (msg) => console.log('BROWSER LOG:', msg.text()));
+        // Pipe console logs from the browser to the CI log
+        page.on('console', (msg) =>
+            console.log(`[BROWSER] ${msg.type()}: ${msg.text()}`),
+        );
+
+        // Pipe runtime errors
+        page.on('pageerror', (err) =>
+            console.log(`[PAGE ERROR] ${err.message}`),
+        );
     });
 
     test('should render the login form', async ({ page }) => {

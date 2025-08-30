@@ -14,13 +14,13 @@ jobs:
             CI: true
             DEBUG: pw:api
             FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+            FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
             FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+            FIREBASE_DB_NAME: ${{ secrets.FIREBASE_DB_NAME }}
             FIREBASE_DB_URL: ${{ secrets.FIREBASE_DB_URL }}
+            FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.FIREBASE_MESSAGE_SENDER_ID }}
             FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
             FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
-            FIREBASE_MESSAGE_SENDER_ID: ${{ secrets.FIREBASE_MESSAGE_SENDER_ID }}
-            FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
-            FIREBASE_DB_NAME: ${{ secrets.FIREBASE_DB_NAME }}
             OMDB_APIKEY: ${{ secrets.OMDB_APIKEY }}
 
         steps:
