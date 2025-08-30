@@ -56,3 +56,10 @@ jobs:
                   FIREBASE_DB_NAME: ${{ secrets.FIREBASE_DB_NAME }}
                   OMDB_APIKEY: ${{ secrets.OMDB_APIKEY }}
               run: npx playwright test --reporter=list --trace=on
+
+            - name: Upload Playwright traces
+              if: always() # ensures upload even if tests fail
+              uses: actions/upload-artifact@v3
+              with:
+                  name: playwright-traces
+                  path: test-results/**/*.zip
