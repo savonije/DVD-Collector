@@ -1,9 +1,9 @@
 import process from 'node:process';
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
 
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
+dotenv.config();
+
 export default defineConfig({
     testDir: './tests',
     fullyParallel: true,
@@ -25,7 +25,9 @@ export default defineConfig({
     ],
 
     webServer: {
-        command: 'npx vite preview --port=5173',
+        command: process.env.CI
+            ? 'npx vite preview --port=5173'
+            : 'npm run dev',
         url: 'http://localhost:5173',
         reuseExistingServer: !process.env.CI,
         timeout: 120000,
