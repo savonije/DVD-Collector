@@ -40,6 +40,14 @@ jobs:
             - name: Start Vite preview
               run: npx vite preview --port=5173 --host 0.0.0.0 &
 
+            - name: Cache Playwright browsers
+              uses: actions/cache@v3
+              with:
+                  path: ~/.cache/ms-playwright
+                  key: playwright-${{ runner.os }}-chromium
+                  restore-keys: |
+                      playwright-${{ runner.os }}-chromium
+
             - name: Install Playwright Chromium
               run: npx playwright install chromium
 
