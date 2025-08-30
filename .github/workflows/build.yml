@@ -28,6 +28,15 @@ jobs:
             - name: Build
               run: npm run build-only
 
+            - name: Start Vite preview
+              run: npx vite preview --port=5173 &
+
+            - name: Wait for server
+              run: |
+                  for i in {1..20}; do
+                  curl -s http://localhost:5173 && break || sleep 3
+                  done
+
             - name: Install Playwright Chromium
               run: npx playwright install chromium
 
