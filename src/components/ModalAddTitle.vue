@@ -64,21 +64,35 @@
     };
 
     const submitForm = () => {
-        if (title.value !== '') {
-            getMovieData(title.value, rating.value);
+        if (title.value.trim() === '') return;
 
+        const exists = storeDVD.DVDs.some(
+            (dvd) =>
+                dvd.name.toLowerCase() === title.value.trim().toLowerCase(),
+        );
+
+        if (exists) {
             toast.add({
-                severity: 'success',
-                summary: t('common.success'),
-                detail: t('common.hasBeenAdded', [title.value]),
+                severity: 'warn',
+                summary: t('errors.warning'),
+                detail: t('errors.movieAlreadyExists', [title.value]),
                 life: 3000,
             });
-
-            title.value = '';
-            rating.value = 1;
-
-            closeModal();
+            return;
         }
+
+        getMovieData(title.value.trim(), rating.value);
+
+        toast.add({
+            severity: 'success',
+            summary: t('common.success'),
+            detail: t('common.hasBeenAdded', [title.value]),
+            life: 3000,
+        });
+
+        title.value = '';
+        rating.value = 1;
+        closeModal();
     };
 
     onMounted(() => {
