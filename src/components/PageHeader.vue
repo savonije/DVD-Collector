@@ -33,7 +33,7 @@
                 <MobileMenu />
             </div>
 
-            <div class="hidden justify-end gap-6 lg:flex xl:gap-9">
+            <div class="hidden items-center justify-end gap-6 lg:flex xl:gap-9">
                 <AddTitle />
 
                 <DarkModeToggle />

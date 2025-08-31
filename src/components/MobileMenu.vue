@@ -53,13 +53,14 @@
         :aria-label="t('common.toggleMenu')"
         @click="toggleMenu"
         icon="pi pi-bars"
+        class="size-10"
     />
 
     <Transition name="slide">
         <div
             v-if="state.isMenuOpen"
             ref="menuRef"
-            class="bg-shark-800 fixed inset-y-0 right-0 z-10 flex w-2/3 transform flex-col items-center justify-center gap-6 p-3 shadow-lg transition-transform sm:w-1/3"
+            class="fixed inset-y-0 right-0 z-10 flex w-2/3 transform flex-col items-center justify-center gap-6 bg-white p-3 shadow-lg transition-transform sm:w-1/3"
         >
             <div class="relative h-full w-full">
                 <Button
@@ -70,7 +71,7 @@
                     @click="state.isMenuOpen = false"
                 />
 
-                <ul class="flex flex-col gap-3 pt-24">
+                <ul class="flex flex-col gap-6 pt-8">
                     <li>
                         <AddTitle
                             @open-modal="state.isMenuOpen = false"
@@ -101,10 +102,8 @@
                             {{ t('common.login') }}
                         </Button>
                     </li>
-                </ul>
 
-                <ul class="flex justify-center">
-                    <li @click="closeMenu">
+                    <li @click="closeMenu" class="flex justify-center">
                         <DarkModeToggle />
                     </li>
                 </ul>
