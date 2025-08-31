@@ -23,7 +23,7 @@
 <template>
     <header class="bg-shark text-primary mb-6 py-3 sm:p-3 sm:py-6">
         <div class="container flex items-center justify-between gap-6">
-            <RouterLink to="/">
+            <RouterLink :to="{ name: 'home' }">
                 <span class="font-heading text-2xl font-bold">
                     {{ t('common.siteTitle', { name: username }) }}
                 </span>
@@ -47,7 +47,7 @@
                     {{ t('common.logout') }}
                 </Button>
 
-                <RouterLink v-else to="/login">
+                <RouterLink v-else :to="{ name: 'auth' }">
                     {{ t('common.login') }}
                 </RouterLink>
             </div>

@@ -94,12 +94,13 @@
                     <li>
                         <Button
                             v-if="!isLoggedIn"
-                            to="/login"
                             @click="state.isMenuOpen = false"
                             fluid
                             class="mb-3"
                         >
+                            <RouterLink :to="{ name: 'auth' }">
                             {{ t('common.login') }}
+                            </RouterLink>
                         </Button>
                     </li>
 
