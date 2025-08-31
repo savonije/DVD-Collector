@@ -78,6 +78,8 @@
                 detail: t('errors.movieAlreadyExists', [title.value]),
                 life: 3000,
             });
+
+            closeModal();
             return;
         }
 
