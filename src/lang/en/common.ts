@@ -19,6 +19,7 @@ export default {
     loading: 'Loading',
     login: 'Login',
     logout: 'Logout',
+    logoutUser: 'Logout user',
     logoutMessage: 'You have been logged out',
     logoutSuccess: 'Logout successful',
     password: 'Password',
