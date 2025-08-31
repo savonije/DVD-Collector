@@ -73,10 +73,7 @@
 
                 <ul class="flex flex-col gap-6 pt-8">
                     <li>
-                        <AddTitle
-                            @open-modal="state.isMenuOpen = false"
-                            fluid-button
-                        />
+                        <AddTitle fluid-button />
                     </li>
                     <li>
                         <Button
@@ -99,7 +96,7 @@
                             class="mb-3"
                         >
                             <RouterLink :to="{ name: 'auth' }">
-                            {{ t('common.login') }}
+                                {{ t('common.login') }}
                             </RouterLink>
                         </Button>
                     </li>
