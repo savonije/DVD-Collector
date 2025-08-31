@@ -37,10 +37,18 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.meta?.title) {
-        document.title = (to.meta?.title as string) || 'DVD Collection';
+    if (to.name === 'detail') {
+        const movieName = Array.isArray(to.params.name)
+            ? to.params.name[0]
+            : to.params.name;
+        document.title = movieName
+            ? `${movieName} - DVD Collection`
+            : 'DVD Collection';
     } else {
-        document.title = 'DVD Collection';
+        document.title =
+            typeof to.meta?.title === 'string'
+                ? to.meta.title
+                : 'DVD Collection';
     }
     next();
 });
