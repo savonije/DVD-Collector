@@ -71,13 +71,12 @@
                     @click="state.isMenuOpen = false"
                 />
 
-                <ul class="flex flex-col gap-6 pt-8">
-                    <li>
+                <ul class="flex flex-col gap-6 pt-16">
+                    <li v-if="isLoggedIn">
                         <AddTitle fluid-button />
                     </li>
-                    <li>
+                    <li v-if="isLoggedIn">
                         <Button
-                            v-if="isLoggedIn"
                             :aria-label="t('common.logoutUser')"
                             @click="
                                 storeAuth.logoutUser();
@@ -88,9 +87,8 @@
                             fluid
                         />
                     </li>
-                    <li>
+                    <li v-if="!isLoggedIn">
                         <Button
-                            v-if="!isLoggedIn"
                             @click="state.isMenuOpen = false"
                             fluid
                             class="mb-3"
