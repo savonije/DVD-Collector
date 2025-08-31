@@ -4,6 +4,7 @@ import {
     signOut,
 } from 'firebase/auth';
 import { defineStore } from 'pinia';
+import type { ToastServiceMethods } from 'primevue/toastservice';
 
 import { auth } from '@/firebase';
 
@@ -44,13 +45,23 @@ export const useStoreAuth = defineStore('storeAuth', {
                     console.log(error.message);
                 });
         },
-        logoutUser() {
+        logoutUser(toast: ToastServiceMethods, t: (key: string) => string) {
             signOut(auth)
                 .then(() => {
-                    console.log('Logout user');
+                    toast.add({
+                        severity: 'success',
+                        summary: t('common.logoutSuccess'),
+                        detail: t('common.logoutMessage'),
+                        life: 3000,
+                    });
                 })
                 .catch((error) => {
-                    console.log('Logout error ' + error);
+                    toast.add({
+                        severity: 'error',
+                        summary: t('error.generic'),
+                        detail: error.message,
+                        life: 3000,
+                    });
                 });
         },
     },

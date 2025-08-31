@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import { onClickOutside } from '@vueuse/core';
+    import { useToast } from 'primevue';
     import Button from 'primevue/button';
     import {
         computed,
@@ -21,6 +22,7 @@
 
     const storeAuth = useStoreAuth();
     const { t } = useI18n();
+    const toast = useToast();
 
     const state = reactive({
         isMenuOpen: false,
@@ -79,7 +81,7 @@
                         <Button
                             :aria-label="t('common.logoutUser')"
                             @click="
-                                storeAuth.logoutUser();
+                                storeAuth.logoutUser(toast, t);
                                 state.isMenuOpen = false;
                             "
                             :label="t('common.logout')"

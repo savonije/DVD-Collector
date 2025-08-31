@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import { useToast } from 'primevue';
     import Button from 'primevue/button';
     import { defineAsyncComponent } from 'vue';
     import { useI18n } from 'vue-i18n';
@@ -8,6 +9,7 @@
     const storeAuth = useStoreAuth();
     const username = import.meta.env.VITE_USERNAME;
     const { t } = useI18n();
+    const toast = useToast();
 
     const AddTitle = defineAsyncComponent(
         () => import('@/components/AddTitle.vue'),
@@ -41,7 +43,7 @@
                 <Button
                     v-if="storeAuth.user?.id"
                     :aria-label="t('common.logoutUser')"
-                    @click="storeAuth.logoutUser"
+                    @click="storeAuth.logoutUser(toast, t)"
                     variant="link"
                 >
                     {{ t('common.logout') }}
