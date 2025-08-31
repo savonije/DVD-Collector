@@ -45,6 +45,7 @@
                         type="email"
                         fluid
                         data-testid="input-email"
+                        autocomplete="email"
                     />
 
                     <label class="font-bold" for="username">
@@ -60,6 +61,7 @@
                         fluid
                         data-testid="input-password"
                         type="password"
+                        autocomplete="current-password"
                     />
 
                     <label class="font-bold" for="password">
