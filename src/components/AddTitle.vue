@@ -7,6 +7,10 @@
 
     import { useStoreAuth } from '@/stores/storeAuth';
 
+    const emit = defineEmits<{
+        (e: 'clicked'): void;
+    }>();
+
     const ModalAddTitle = defineAsyncComponent(
         () => import('@/components/ModalAddTitle.vue'),
     );
@@ -22,6 +26,7 @@
 
     const openModal = () => {
         isModalVisible.value = true;
+        emit('clicked');
     };
 </script>
 

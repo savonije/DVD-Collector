@@ -7,6 +7,7 @@
     import { useStoreAuth } from '@/stores/storeAuth';
 
     const isMenuVisible = ref(false);
+    const isModalVisible = ref(false);
 
     const AddTitle = defineAsyncComponent(
         () => import('@/components/AddTitle.vue'),
@@ -14,12 +15,20 @@
     const DarkModeToggle = defineAsyncComponent(
         () => import('@/components/DarkModeToggle.vue'),
     );
-
-    const isLoggedIn = computed(() => !!storeAuth.user?.id);
+    const ModalAddTitle = defineAsyncComponent(
+        () => import('@/components/ModalAddTitle.vue'),
+    );
 
     const storeAuth = useStoreAuth();
     const { t } = useI18n();
     const toast = useToast();
+
+    const isLoggedIn = computed(() => !!storeAuth.user?.id);
+
+    const handleAddTitleClick = () => {
+        isMenuVisible.value = false;
+        isModalVisible.value = true;
+    };
 </script>
 
 <template>
@@ -33,7 +42,7 @@
     <Drawer v-model:visible="isMenuVisible" position="right" header="Menu">
         <ul class="grid gap-2">
             <li v-if="isLoggedIn">
-                <AddTitle fluid-button @clicked="isMenuVisible = false" />
+                <AddTitle fluid-button @clicked="handleAddTitleClick" />
             </li>
             <li v-if="isLoggedIn">
                 <Button
@@ -53,8 +62,17 @@
             </li>
 
             <li class="flex justify-center">
-                <DarkModeToggle />
+                <DarkModeToggle @click="isMenuVisible = false" />
             </li>
         </ul>
     </Drawer>
+
+    <Suspense>
+        <template #default>
+            <ModalAddTitle v-if="isModalVisible" v-model="isModalVisible" />
+        </template>
+        <template #fallback>
+            <isLoading />
+        </template>
+    </Suspense>
 </template>
