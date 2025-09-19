@@ -110,8 +110,9 @@
     <Dialog
         v-model:visible="isModelVisible"
         modal
+        :draggable="false"
         :header="t('titles.addNewDvd')"
-        class="min-w-[30rem]"
+        class="w-[30rem] max-w-full"
     >
         <form @submit.prevent="submitForm">
             <div class="mb-12">

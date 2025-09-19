@@ -28,9 +28,9 @@
 <template>
     <Button
         v-if="storeAuth.user?.id"
-        @click="openModal"
         :label="t('titles.addMovie')"
         :fluid="props.fluidButton"
+        @click="openModal"
     />
 
     <Suspense>
