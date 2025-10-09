@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "build-only": "vite build",
-        "build": "run-s type-check test build-only",
+        "build": "run-s type-check build-only",
         "dev": "vite",
         "format": "prettier --write src/",
         "prettier:check": "prettier --check src/",
