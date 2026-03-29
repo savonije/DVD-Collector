@@ -1,5 +1,4 @@
 import { fileURLToPath, URL } from 'node:url';
-import pkg from './package.json';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -15,7 +14,7 @@ export default defineConfig({
         },
     },
     define: {
-        __APP_VERSION__: JSON.stringify(pkg.version),
+        __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
     },
     build: {
         minify: true,
