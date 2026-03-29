@@ -1,6 +1,6 @@
 {
     "name": "dvd-collector",
-    "version": "2025.10",
+    "version": "2026.1",
     "private": true,
     "type": "module",
     "scripts": {
