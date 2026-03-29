@@ -18,19 +18,6 @@ export default defineConfig({
         __APP_VERSION__: JSON.stringify(pkg.version),
     },
     build: {
-        rollupOptions: {
-            output: {
-                manualChunks: {
-                    'vue-vendors': ['vue', 'vue-router'],
-                    firebase: [
-                        'firebase/app',
-                        'firebase/auth',
-                        'firebase/firestore',
-                    ],
-                    vendor: ['axios'],
-                },
-            },
-        },
-        minify: 'esbuild',
+        minify: true,
     },
 });
