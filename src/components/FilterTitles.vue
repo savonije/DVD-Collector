@@ -17,9 +17,9 @@
             </InputGroupAddon>
 
             <InputText
+                class="h-16"
                 :value="modelValue"
                 :placeholder="`${t('common.searchDvd')}...`"
-                class="h-16"
                 @input="
                     emit(
                         'update:modelValue',

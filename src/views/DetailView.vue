@@ -37,10 +37,10 @@
 
             <div class="mt-6 flex flex-col justify-between gap-6 sm:flex-row">
                 <Button
-                    @click="$router.back()"
                     :label="t('common.backToOverview')"
                     severity="secondary"
                     size="small"
+                    @click="$router.back()"
                 />
 
                 <div

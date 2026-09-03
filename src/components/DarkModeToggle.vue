@@ -52,8 +52,8 @@
 <template>
     <Button
         :aria-label="isDarkMode ? t('common.lightMode') : t('common.darkMode')"
-        @click="toggleDarkMode"
         severity="secondary"
+        @click="toggleDarkMode"
     >
         <Transition name="fade" mode="out-in">
             <i

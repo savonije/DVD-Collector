@@ -72,8 +72,8 @@
 <template>
     <Button
         :label="t('common.fetchImdbData')"
-        @click="getMovieData(name)"
         variant="link"
         size="small"
+        @click="getMovieData(name)"
     />
 </template>

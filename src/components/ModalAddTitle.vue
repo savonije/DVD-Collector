@@ -109,18 +109,18 @@
 <template>
     <Dialog
         v-model:visible="isModelVisible"
+        class="w-[30rem] max-w-full"
         modal
         :draggable="false"
         :header="t('titles.addNewDvd')"
-        class="w-[30rem] max-w-full"
     >
         <form @submit.prevent="submitForm">
             <div class="mb-12">
-                <FloatLabel variant="in" class="mb-3">
+                <FloatLabel class="mb-3" variant="in">
                     <InputText
                         id="name"
-                        inputRef="titleInput"
                         v-model="title"
+                        inputRef="titleInput"
                         fluid
                     />
 

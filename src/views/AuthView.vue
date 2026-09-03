@@ -37,15 +37,15 @@
         >
             <h1 data-testid="login-title">{{ t('common.login') }}</h1>
 
-            <form @submit.prevent="submitForm" data-testid="login-form">
+            <form data-testid="login-form" @submit.prevent="submitForm">
                 <FloatLabel class="mb-6" variant="on">
                     <InputText
-                        v-model="credentials.email"
                         id="username"
+                        v-model="credentials.email"
                         type="email"
                         fluid
-                        data-testid="input-email"
                         autocomplete="email"
+                        data-testid="input-email"
                     />
 
                     <label class="font-bold" for="username">
@@ -59,9 +59,9 @@
                         v-model="credentials.password"
                         toggle-mask
                         fluid
-                        data-testid="input-password"
                         type="password"
                         autocomplete="current-password"
+                        data-testid="input-password"
                     />
 
                     <label class="font-bold" for="password">

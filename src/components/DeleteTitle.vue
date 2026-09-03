@@ -20,10 +20,10 @@
 
 <template>
     <Button
-        @click="isModalVisible = true"
         severity="danger"
         :label="t('common.delete')"
         size="small"
+        @click="isModalVisible = true"
     />
 
     <Suspense>

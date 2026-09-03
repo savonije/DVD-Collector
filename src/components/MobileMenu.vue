@@ -33,10 +33,10 @@
 
 <template>
     <Button
-        :aria-label="t('common.toggleMenu')"
-        @click="isMenuVisible = true"
-        icon="pi pi-bars"
         class="size-10"
+        :aria-label="t('common.toggleMenu')"
+        icon="pi pi-bars"
+        @click="isMenuVisible = true"
     />
 
     <Drawer v-model:visible="isMenuVisible" position="right" header="Menu">
@@ -47,14 +47,14 @@
             <li v-if="isLoggedIn">
                 <Button
                     :aria-label="t('common.logoutUser')"
-                    @click="storeAuth.logoutUser(toast, t)"
                     :label="t('common.logout')"
                     variant="text"
                     fluid
+                    @click="storeAuth.logoutUser(toast, t)"
                 />
             </li>
             <li v-if="!isLoggedIn">
-                <Button fluid class="mb-3">
+                <Button class="mb-3" fluid>
                     <RouterLink :to="{ name: 'auth' }">
                         {{ t('common.login') }}
                     </RouterLink>

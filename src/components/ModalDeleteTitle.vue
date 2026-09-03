@@ -42,9 +42,9 @@
 <template>
     <Dialog
         v-model:visible="isModelVisible"
+        class="md:w-[25rem]"
         :header="t('common.areYouSure')"
         modal
-        class="md:w-[25rem]"
     >
         <form>
             <div class="mb-6">
@@ -57,8 +57,8 @@
                 />
                 <Button
                     severity="danger"
-                    @click.prevent="deleteTitle"
                     :label="t('common.delete')"
+                    @click.prevent="deleteTitle"
                 />
             </div>
         </form>

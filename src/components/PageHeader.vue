@@ -36,8 +36,8 @@
                 <Button
                     v-if="storeAuth.user?.id"
                     :aria-label="t('common.logoutUser')"
-                    @click="storeAuth.logoutUser(toast, t)"
                     variant="link"
+                    @click="storeAuth.logoutUser(toast, t)"
                 >
                     {{ t('common.logout') }}
                 </Button>
